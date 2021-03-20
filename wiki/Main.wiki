@@ -1,0 +1,13 @@
+#summary Welcome to our project main page!
+
+= Introduction =
+
+This will be the main page for the project.  Big updates will be here, as well as links to relevant material.
+
+
+= Details =
+
+Add your content here.  Format your content with:
+  * Text in *bold* or _italic_
+  * Headings, paragraphs, and lists
+  * Automatic links to other wiki pages
