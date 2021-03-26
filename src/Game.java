@@ -1,4 +1,4 @@
 
-public class Game {
+public abstract class Game {
 
 }

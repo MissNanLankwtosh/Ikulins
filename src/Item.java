@@ -1,4 +1,4 @@
 
-public class Item extends Mappable {
+public abstract class Item extends Mappable {
 
 }

@@ -1,4 +1,4 @@
 
-public class Mappable {
+public abstract class Mappable {
 
 }

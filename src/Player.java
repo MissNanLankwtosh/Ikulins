@@ -1,4 +1,4 @@
 
-public class Player extends Mappable {
+public abstract class Player extends Mappable {
 
 }
