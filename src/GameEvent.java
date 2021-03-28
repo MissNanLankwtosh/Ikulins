@@ -2,10 +2,15 @@ import java.util.EventObject;
 
 
 public class GameEvent extends EventObject {
-
-	public GameEvent(Object source) {
+	private Mappable m;
+	public GameEvent(Object source, Mappable m) {
 		super(source);
+		this.m = m;
+		
 		// TODO Auto-generated constructor stub
+	}
+	public Mappable getMappable(){
+		return m;
 	}
 
 }
