@@ -4,6 +4,7 @@ public abstract class Player extends Mappable {
 		super(x, y);
 		// TODO Auto-generated constructor stub
 	}
+	//check for walls within moves
 	public void moveUp(){
 		this.setY(this.getY()+1);
 	}
