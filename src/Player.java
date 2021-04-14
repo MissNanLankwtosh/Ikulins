@@ -4,17 +4,8 @@ public abstract class Player extends Mappable {
 		super(x, y);
 		// TODO Auto-generated constructor stub
 	}
-	//check for walls within moves
-	public void moveUp(){
-		this.setY(this.getY()+1);
-	}
-	public void moveDown(){
-		this.setY(this.getY()-1);
-	}
-	public void moveLeft(){
-		this.setX(this.getX()-1);
-	}
-	public void moveRight(){
-		this.setX(this.getX()+1);
-	}
+	public abstract void moveUp();
+	public abstract void moveDown();
+	public abstract void moveLeft();
+	public abstract void moveRight();
 }
