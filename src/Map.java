@@ -20,6 +20,13 @@ public class Map {
 		return false;
 	}
 	
+	public boolean addWall(int x, int y){
+		if(isEmpty(x,y)){
+			map[x][y] = -1;
+			return true;
+		}
+		return false;
+	}
 	public boolean isEmpty(int x, int y){
 		if (map[x][y] == 0){
 			return true;
