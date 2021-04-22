@@ -1,3 +1,6 @@
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
 import java.util.Hashtable;
 
 public class Map {
@@ -7,6 +10,16 @@ public class Map {
 
 	public Map(int Xsize, int Ysize){
 		map = new OnMap[Xsize][Ysize];
+	}
+	
+	public Map(String fileName){
+		try{
+			BufferedReader in = new BufferedReader(new InputStreamReader(new FileInputStream(fileName)));
+			String s = in.readLine();
+			//work in progress, will finish tomorrow
+		}catch(Exception e){
+			System.out.println("Error while reading file: " + e.getMessage());
+		}
 	}
 	
 	public boolean addMappable(Mappable m){
