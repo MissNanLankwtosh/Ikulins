@@ -30,7 +30,11 @@ public class Map {
 	}
 	
 	public boolean addMappable(Mappable m){
-		if(m.getX() > xSize || m.getY() > ySize) return false;
+		
+		if(m.getX() > xSize || m.getY() > ySize){
+			return false;
+		}
+		
 		if (isEmpty(m.getX(),m.getY())){
 			map[m.getX()][m.getY()] = OnMap.MAPPABLE;
 			mappables.put(m.toString(), m);
@@ -40,7 +44,11 @@ public class Map {
 	}
 	
 	public boolean addWall(int x, int y){
-		if(x > xSize || y > ySize) return false;
+		
+		if(x > xSize || y > ySize){
+			return false;
+		}
+		
 		if(isEmpty(x,y)){
 			map[x][y] = OnMap.WALL;
 			return true;
@@ -49,28 +57,45 @@ public class Map {
 	}
 	
 	public boolean isEmpty(int x, int y){
-		if(x > xSize || y > ySize) return false;
+		
+		if(x > xSize || y > ySize){
+			return false;
+		}
+		
 		return map[x][y] == OnMap.EMPTY;
 	}
 	
 	public boolean isWall(int x, int y){
-		if(x > xSize || y > ySize) return false;
+		
+		if(x > xSize || y > ySize) {
+			return false;
+		}
+		
 		return map[x][y] == OnMap.WALL;
 	}
 	
 	public boolean removeMappable(int x, int y){
-		if(x > xSize || y > ySize) return false;
+		
+		if(x > xSize || y > ySize){
+			return false;
+		}
 		//Checks to see if anything is in the spot
-		if(isEmpty(x,y) || isWall(x,y)) return false;
+		if(isEmpty(x,y) || isWall(x,y)){
+			return false;
+		}
 		mappables.remove((x + "," + y));
 		map[x][y] = OnMap.EMPTY;
 		return true;
 	}
 	
 	public boolean removeWall(int x, int y){
-		if(x > xSize || y > ySize) return false;
+		if(x > xSize || y > ySize){
+			return false;
+		}
 		//Checks to see if there is a wall
-		if(!isWall(x,y)) return false;
+		if(!isWall(x,y)){
+			return false;
+		}
 		map[x][y] = OnMap.EMPTY;
 		return true;
 	}
