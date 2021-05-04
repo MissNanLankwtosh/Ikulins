@@ -21,14 +21,41 @@ public class Map {
 		try{
 			BufferedReader in = new BufferedReader(new InputStreamReader(new FileInputStream(fileName)));
 			String s = in.readLine();
-			//added in xSize and ySize to make sure you don't get a NullPointer exception from the map array...
-			//set the xSize and ySize in here as well...
-			//work in progress, will finish tomorrow
+			String nums[] = s.split(",");
+			this.xSize = sToInt(nums[0]);
+			this.ySize = sToInt(nums[1]);
+			this.map = new OnMap[xSize][ySize];
+			int y = 0;
+			while( (s = in.readLine()) != null){
+				nums = s.split(",");
+				for(int x = 0; x < this.xSize; x++){
+					this.map[x][y] = (sToInt(nums[x]) > 0) ? (OnMap.WALL):(OnMap.EMPTY);
+				}
+				y++;
+				if( y >= this.ySize){
+					break;
+				}
+			}
 		}catch(Exception e){
 			System.out.println("Error while reading file: " + e.getMessage());
+			System.exit(-1);
 		}
 	}
 	
+	private int sToInt(String string) {
+		int i = -1; //some arbitrary number
+		try{
+			
+			i = Integer.parseInt(string);
+		}catch(NumberFormatException e){
+			
+			System.out.println("Invalide number: " + e.getMessage());
+			System.exit(-1);
+			
+		}
+		return i;
+	}
+
 	public boolean addMappable(Mappable m){
 		
 		if(m.getX() > xSize || m.getY() > ySize){
