@@ -49,7 +49,7 @@ public class Map {
 			i = Integer.parseInt(string);
 		}catch(NumberFormatException e){
 			
-			System.out.println("Invalide number: " + e.getMessage());
+			System.out.println("Invalid number: " + e.getMessage());
 			System.exit(-1);
 			
 		}
