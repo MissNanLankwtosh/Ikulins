@@ -25,17 +25,30 @@ public class Map {
 			this.xSize = sToInt(nums[0]);
 			this.ySize = sToInt(nums[1]);
 			this.map = new OnMap[xSize][ySize];
+			
 			int y = 0;
 			while( (s = in.readLine()) != null){
 				nums = s.split(",");
 				for(int x = 0; x < this.xSize; x++){
-					this.map[x][y] = (sToInt(nums[x]) > 0) ? (OnMap.WALL):(OnMap.EMPTY);
+					if(nums[x] == null){
+						this.map[x][y] = OnMap.EMPTY;
+					}else{
+						this.map[x][y] = (sToInt(nums[x]) > 0) ? (OnMap.WALL):(OnMap.EMPTY);
+					}
 				}
 				y++;
 				if( y >= this.ySize){
 					break;
 				}
 			}
+			if( y < this.ySize){
+				for(; y < this.ySize; y++){
+					for( int x = 0; x < this.xSize; x++){
+						this.map[x][y] = OnMap.EMPTY;
+					}
+				}
+			}
+			
 		}catch(Exception e){
 			System.out.println("Error while reading file: " + e.getMessage());
 			System.exit(-1);
