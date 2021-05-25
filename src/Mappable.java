@@ -1,5 +1,5 @@
 
-public abstract class Mappable {
+public abstract class Mappable implements GameListener {
 	private int x;
 	private int y;
 	
@@ -26,5 +26,10 @@ public abstract class Mappable {
 	@Override
 	public String toString(){
 		return (x + "," + y);
+	}
+	
+	@Override
+	public void onEvent(GameEvent e) {
+		//code here not needed, Mappable has this blank by default, if you care you must write it in your code
 	}
 }
