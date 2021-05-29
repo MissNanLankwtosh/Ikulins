@@ -1,31 +1,47 @@
 
 public class Pacman extends Player {
-
-	public Pacman(int x, int y) {
+	private int numLives, mode; //wtf is mode?
+	
+	public Pacman(int x, int y, int lives) {
 		super(x, y);
-		// TODO Auto-generated constructor stub
+		numLives = lives;
+		//need to set mode... when i know what it is...
 	}
+	
+	public void die() {
+		numLives--;
+	}
+	
+	public void spawn() {
+		//???
+	}
+	
+	
 
 	@Override
 	public void moveDown() {
+		setY(getY()-1);
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void moveLeft() {
+		setX(getX()-1);
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void moveRight() {
+		setX(getX()+1);
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void moveUp() {
+		setY(getY()+1);
 		// TODO Auto-generated method stub
 		
 	}

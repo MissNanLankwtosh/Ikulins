@@ -1,5 +1,5 @@
-
-public class World extends Map{
+//I dont think anything needs to be done here
+public class World extends Map {
 
 	public World(int Xsize, int Ysize) {
 		super(Xsize, Ysize);

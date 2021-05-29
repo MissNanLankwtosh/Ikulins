@@ -5,8 +5,8 @@ public class GameEvent extends EventObject {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
-	private Mappable m;
+	protected static final long serialVersionUID = 1L;
+	protected Mappable m;
 	public GameEvent(Object source, Mappable m) {
 		super(source);
 		this.m = m;

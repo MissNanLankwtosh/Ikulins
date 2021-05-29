@@ -2,7 +2,8 @@ import java.util.ArrayList;
 
 
 public abstract class Game {
-	ArrayList<GameListener> GameList;
+	protected ArrayList<GameListener> GameList;
+	protected Map map;
 	public Game(){
 		GameList = new ArrayList<GameListener>();
 	}
