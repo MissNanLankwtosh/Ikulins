@@ -18,30 +18,22 @@ public class Ghost extends Player {
 
 	@Override
 	public void moveDown() {
-		setY(getY()-1);
-		// TODO Auto-generated method stub
-		
+		setY(getY()-1);		
 	}
 
 	@Override
 	public void moveLeft() {
 		setX(getX()-1);
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void moveRight() {
 		setX(getX()+1);
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void moveUp() {
 		setY(getY()+1);
-		// TODO Auto-generated method stub
-		
 	}
 	
 	@Override

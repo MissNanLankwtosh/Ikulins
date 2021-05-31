@@ -3,7 +3,6 @@ public class BigPill extends Item {
 
 	public BigPill(int x, int y) {
 		super(x, y);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
