@@ -8,4 +8,5 @@ public abstract class Player extends Mappable {
 	public abstract void moveDown();
 	public abstract void moveLeft();
 	public abstract void moveRight();
+
 }

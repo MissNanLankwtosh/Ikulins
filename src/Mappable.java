@@ -7,6 +7,8 @@ public abstract class Mappable implements GameListener {
 		this.x = x;
 		this.y = y;
 	}
+	
+	public abstract void onEvent(GameEvent e);
 
 	public int getX() {
 		return x;
@@ -27,9 +29,5 @@ public abstract class Mappable implements GameListener {
 	public String toString(){
 		return (x + "," + y);
 	}
-	
-	@Override
-	public void onEvent(GameEvent e) {
-		//code here not needed, Mappable has this blank by default, if you care you must write it in your code
-	}
+
 }
