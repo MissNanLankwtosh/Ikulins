@@ -3,19 +3,34 @@ import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.util.Hashtable;
 
-public class Map {
-	private OnMap map[][];
-	private Hashtable<String,Mappable> mappables;
-	private int xSize, ySize;
+public abstract class Map {
+	protected OnMap map[][];
+	protected Hashtable<String,Mappable> mappables;
+	protected int xSize, ySize;
 	
-
+	/**
+	 * 
+	 * @param Xsize
+	 * @param Ysize
+	 * Code by Imran Iqubal, Alexander Clelland
+	 */
 	public Map(int Xsize, int Ysize){
 		this.xSize = Xsize;
 		this.ySize = Ysize;
 		this.map = new OnMap[Xsize][Ysize];
+		for (int x=0; x<xSize; x++) {
+			for (int y=0; y<ySize; y++) {
+				map[x][y] = OnMap.EMPTY;
+			}
+		}
 		this.mappables = new Hashtable<String,Mappable>();
 	}
 	
+	/**
+	 * 
+	 * @param fileName
+	 * Code by Imran Iqubal
+	 */
 	public Map(String fileName){
 		this.mappables = new Hashtable<String,Mappable>();
 		try{
@@ -55,6 +70,12 @@ public class Map {
 		}
 	}
 	
+	/**
+	 * 
+	 * @param string
+	 * @return
+	 * Code by Imran Iqubal
+	 */
 	private int sToInt(String string) {
 		int i = -1; //some arbitrary number
 		try{
@@ -140,12 +161,12 @@ public class Map {
 		return true;
 	}
 	
-	@Override
-	public String toString() {
-		String s = "spoon";
-		
-		
-		return s;
+	public int getX() {
+		return xSize;
+	}
+	
+	public int getY() {
+		return ySize;
 	}
 	
 }

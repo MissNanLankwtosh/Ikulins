@@ -1,7 +1,7 @@
 
-public class LittlePil extends Item {
+public class LittlePill extends Item {
 
-	public LittlePil(int x, int y) {
+	public LittlePill(int x, int y) {
 		super(x, y);
 	}
 
