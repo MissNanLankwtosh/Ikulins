@@ -1,4 +1,5 @@
-
+//change Map to allow multiple Mappables in same spot
+//add a delimiter to Map so we can add text after the map to allow storage of variables
 
 public class PacmanGame extends Game {
 	private int pillsLeft, score, timer;
@@ -11,9 +12,11 @@ public class PacmanGame extends Game {
 	 * @param numGhosts
 	 * Code By Alexander Clelland
 	 */
-	PacmanGame() {
+	PacmanGame(String filename) {
 		super();
 			
+		super.map = new World(filename); //create the Map to place Mappables on
+		
 		if (!setUpNewGame("filename")) end("Errors when adding Mappables to Map");
 		
 	}
@@ -32,7 +35,7 @@ public class PacmanGame extends Game {
 	}
 
 	public static void main(String args[]) {
-		new PacmanGame().start(); //4 ghosts and start the game
+		new PacmanGame("filename").start(); //4 ghosts and start the game
 	}
 	
 	
@@ -42,11 +45,10 @@ public class PacmanGame extends Game {
 	 * @return true if all Mappables added with no errors, false otherwise
 	 * Code By Alexander Clelland
 	 */
+	//might change this later so it goes into the World Class... but needs to allow addition to the GameListeners
 	private boolean setUpNewGame(String filename) {
 		//NOTE, this will have to be changed when we decide to use a file to get the coordinates of mappables
-		
-		super.map = new World(filename); //create the Map to place Mappables on
-		
+				
 		pillsLeft = 0;
 		score = 0;
 		timer = 60;		
