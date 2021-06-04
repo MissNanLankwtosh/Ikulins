@@ -7,27 +7,25 @@ public class PacmanGame extends Game {
 	private Ghost ghosts[];
 	
 	/**
-	 * NOTE: How are we going to decide where to place PacMan, BigPills, and Ghosts?
-	 * should we place coordinates for them after the map file?
+	 * 
 	 * @param numGhosts
 	 * Code By Alexander Clelland
 	 */
 	PacmanGame(String filename) {
 		super();
-			
-		super.map = new World(filename); //create the Map to place Mappables on
-		
-		if (!setUpNewGame("filename")) end("Errors when adding Mappables to Map");
+
+		if (!setUpNewGame(filename)) end("Errors when adding Mappables to Map",-1);
 		
 	}
 	
 	public void start() {
 		//game logic here
+		displayMessage(this.toString());
 	}
 	
-	public void end(String endMessage) {
+	public void end(String endMessage, int status) {
 		displayMessage(endMessage);
-		System.exit(0); //end program
+		System.exit(status); //end program
 	}
 	
 	public void moveGhosts() {
@@ -47,12 +45,13 @@ public class PacmanGame extends Game {
 	 */
 	//might change this later so it goes into the World Class... but needs to allow addition to the GameListeners
 	private boolean setUpNewGame(String filename) {
-		//NOTE, this will have to be changed when we decide to use a file to get the coordinates of mappables
+		
+		super.map = new World(filename); //create the Map to place Mappables on
 				
 		pillsLeft = 0;
 		score = 0;
 		timer = 60;		
-		ghosts = new Ghost[4]; //this will need to be changed when we use file for numghosts
+		ghosts = new Ghost[4];
 		boolean errorFlag = false;
 		
 		pacman = new Pacman(5,5,3); //add pacman to the map
@@ -62,15 +61,13 @@ public class PacmanGame extends Game {
 		}
 		addListener(pacman);
 		
-		for (int i=0; i<10; i++) { //add BigPills to the Map, NOTE the 10 will be how many pills
-			BigPill tempBigPill = new BigPill(5,5);
-			if(!map.addMappable(tempBigPill)) {
-				displayMessage("ERROR: Invalid BigPill Position -- [" + tempBigPill + "]");
-				errorFlag = true; //Position Invalid, Flag error and display message
-			}
-			addListener(tempBigPill);
+		BigPill tempBigPill = new BigPill(5,5);
+		if(!map.addMappable(tempBigPill)) {
+			displayMessage("ERROR: Invalid BigPill Position -- [" + tempBigPill + "]");
+			errorFlag = true; //Position Invalid, Flag error and display message
 		}
-		
+		addListener(tempBigPill);
+				
 		for (Ghost ghost:ghosts) { //add the ghosts to the map
 			ghost = new Ghost(5,5);
 			if (!map.addMappable(ghost)) {
@@ -82,9 +79,10 @@ public class PacmanGame extends Game {
 		
 		for (int x=0; x<map.getX(); x++) { //fill all empty spaces with Little Pills
 			for (int y=0; y<map.getY(); y++) {
-				LittlePill tempPill = new LittlePill(x,y);
-				if(map.addMappable(tempPill)) {
-					pillsLeft++; //if LittlePill added increment pillsLeft	
+				if(map.isEmpty(x, y)) { //add a pill if the spot is empty
+					LittlePill tempPill = new LittlePill(x,y);
+					map.addMappable(tempPill);
+					pillsLeft++;
 				}
 			}
 		}
@@ -102,7 +100,16 @@ public class PacmanGame extends Game {
 		System.out.println(message);
 	}
 	
-	
+	@Override
+	public String toString() {
+		String s = "";
+		for (int x=0; x<map.getX(); x++) {
+			for (int y=0; y<map.getY(); y++) {
+				//add the things to s so you can see the map
+			}
+		}
+		return s;
+	}
 	
 	
 	
