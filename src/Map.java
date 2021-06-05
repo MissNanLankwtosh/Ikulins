@@ -12,7 +12,7 @@ public abstract class Map {
 	 * 
 	 * @param Xsize
 	 * @param Ysize
-	 * Code by Imran Iqubal, Alexander Clelland
+	 * Code by Imran Iqubal
 	 */
 	public Map(int Xsize, int Ysize){
 		this.xSize = Xsize;
@@ -31,7 +31,11 @@ public abstract class Map {
 	 * @param fileName
 	 * Code by Imran Iqubal
 	 */
-	public Map(String fileName){
+	public Map(String fileName) {
+		createMap(fileName);
+	}
+	
+	public void createMap(String fileName) {
 		this.mappables = new Hashtable<String,Mappable>();
 		try{
 			BufferedReader in = new BufferedReader(new InputStreamReader(new FileInputStream(fileName)));
