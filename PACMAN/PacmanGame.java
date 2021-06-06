@@ -102,13 +102,7 @@ public class PacmanGame extends Game {
 	
 	@Override
 	public String toString() {
-		String s = "";
-		for (int x=0; x<map.getX(); x++) {
-			for (int y=0; y<map.getY(); y++) {
-				//add the things to s so you can see the map
-			}
-		}
-		return s;
+		return map.toString();
 	}
 	
 	
