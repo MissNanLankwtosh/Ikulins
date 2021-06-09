@@ -8,12 +8,6 @@ public abstract class Map {
 	protected Hashtable<String,Mappable> mappables;
 	protected int xSize, ySize;
 	
-	/**
-	 * 
-	 * @param Xsize
-	 * @param Ysize
-	 * Code by Imran Iqubal
-	 */
 	public Map(int Xsize, int Ysize){
 		this.xSize = Xsize;
 		this.ySize = Ysize;
@@ -26,16 +20,7 @@ public abstract class Map {
 		this.mappables = new Hashtable<String,Mappable>();
 	}
 	
-	/**
-	 * 
-	 * @param fileName
-	 * Code by Imran Iqubal
-	 */
 	public Map(String fileName) {
-		createMap(fileName);
-	}
-	
-	public void createMap(String fileName) {
 		this.mappables = new Hashtable<String,Mappable>();
 		try{
 			BufferedReader in = new BufferedReader(new InputStreamReader(new FileInputStream(fileName)));
@@ -74,12 +59,6 @@ public abstract class Map {
 		}
 	}
 	
-	/**
-	 * 
-	 * @param string
-	 * @return
-	 * Code by Imran Iqubal
-	 */
 	private int sToInt(String string) {
 		int i = -1; //some arbitrary number
 		try{
@@ -163,6 +142,17 @@ public abstract class Map {
 		}
 		map[x][y] = OnMap.EMPTY;
 		return true;
+	}
+	
+	/**
+	 * Returns the Mappable at the position specified
+	 * @param x
+	 * @param y
+	 * @return the Mappable, null if no Mappable
+	 */
+	public Mappable getMappable(int x, int y) {
+		if (isEmpty(x,y) && isWall(x,y)) return null;
+		return mappables.get(x + "," + y);
 	}
 	
 	public int getX() {

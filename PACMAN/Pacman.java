@@ -7,13 +7,18 @@ public class Pacman extends Player {
 		numLives = lives;
 		//need to set mode... when i know what it is...
 	}
+
+	public int getLives() {
+		return numLives;
+	}
 	
 	public void die() {
 		numLives--;
 	}
 	
-	public void spawn() {
-		//???
+	public void spawn(int x, int y) {
+		this.x = x;
+		this.y = y;
 	}
 	
 	

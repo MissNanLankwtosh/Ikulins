@@ -1,3 +1,8 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+
 //change Map to allow multiple Mappables in same spot
 //add a delimiter to Map so we can add text after the map to allow storage of variables
 
@@ -14,18 +19,57 @@ public class PacmanGame extends Game {
 	PacmanGame(String filename) {
 		super();
 
-		if (!setUpNewGame(filename)) end("Errors when adding Mappables to Map",-1);
+		if (!setUpNewGame(filename)) end("Errors when adding Mappables to Map");
 		
 	}
 	
 	public void start() {
 		//game logic here
-		displayMessage(this.toString());
+		System.out.println("WASD to move, Q to quit");
+		
+		//game start;
+		while(pillsLeft != 0) {
+						
+			displayGame();
+			turnInput();
+			
+			if(pacman.getLives() == 0) end("Out of Lives, Game Over");
+		}
+		end("You WIN");
 	}
 	
-	public void end(String endMessage, int status) {
+	public void turnInput() {
+		BufferedReader inp = new BufferedReader(new InputStreamReader(System.in));
+		String s;
+		try { s = inp.readLine();
+		} catch (IOException e) {
+			s = "";
+			e.printStackTrace();
+		}
+		
+		if(s == "w") { //move UP
+			
+		}
+		else if(s == "a") { //move LEFT
+			
+		}
+		else if(s == "s") { //move DOWN
+			
+		}
+		else if(s == "d") { //move RIGHT
+			
+		}
+		else if(s == "q") end("Q Pressed. Game Over");
+	}
+	
+	private void displayGame() {
+		displayMessage(score+"");
+		((World)map).display();
+	}
+	
+	public void end(String endMessage) {
 		displayMessage(endMessage);
-		System.exit(status); //end program
+		System.exit(0); //end program
 	}
 	
 	public void moveGhosts() {
@@ -46,7 +90,7 @@ public class PacmanGame extends Game {
 	//might change this later so it goes into the World Class... but needs to allow addition to the GameListeners
 	private boolean setUpNewGame(String filename) {
 		
-		super.map = new World(filename); //create the Map to place Mappables on
+		super.map = new World(10,10); //create the Map to place Mappables on
 				
 		pillsLeft = 0;
 		score = 0;
@@ -54,14 +98,14 @@ public class PacmanGame extends Game {
 		ghosts = new Ghost[4];
 		boolean errorFlag = false;
 		
-		pacman = new Pacman(5,5,3); //add pacman to the map
+		pacman = new Pacman(1,1,3); //add pacman to the map
 		if (!map.addMappable(pacman)) {
 			displayMessage("ERROR: Invalid Pacman Position -- [" + pacman + "]");
 			errorFlag = true; //Position Invalid, Flag error and display message
 		}
 		addListener(pacman);
 		
-		BigPill tempBigPill = new BigPill(5,5);
+		BigPill tempBigPill = new BigPill(1,2);
 		if(!map.addMappable(tempBigPill)) {
 			displayMessage("ERROR: Invalid BigPill Position -- [" + tempBigPill + "]");
 			errorFlag = true; //Position Invalid, Flag error and display message
@@ -69,7 +113,7 @@ public class PacmanGame extends Game {
 		addListener(tempBigPill);
 				
 		for (Ghost ghost:ghosts) { //add the ghosts to the map
-			ghost = new Ghost(5,5);
+			ghost = new Ghost(1,3);
 			if (!map.addMappable(ghost)) {
 				displayMessage("ERROR: Invalid Ghost Position -- [" + ghost + "]");
 				errorFlag = true; //Position Invalid, Flag error and display message
@@ -99,12 +143,7 @@ public class PacmanGame extends Game {
 		//easy to change this later for when we need GUI
 		System.out.println(message);
 	}
-	
-	@Override
-	public String toString() {
-		return map.toString();
-	}
-	
+
 	
 	
 }
