@@ -4,34 +4,40 @@ import java.io.InputStreamReader;
 
 
 //change Map to allow multiple Mappables in same spot
-//add a delimiter to Map so we can add text after the map to allow storage of variables
+//change GameEvent to pass something that allows passing the Game/Map/Mappable not just Mappable
 
 public class PacmanGame extends Game {
 	private int pillsLeft, score, timer;
-	private Pacman pacman;
-	private Ghost ghosts[];
+	private World map;
 	
-	/**
-	 * 
-	 * @param numGhosts
-	 * Code By Alexander Clelland
-	 */
 	PacmanGame(String filename) {
 		super();
-		if (!setUpNewGame(filename)) end("Errors when adding Mappables to Map");
+		map = new World(10,10,this); //change the 10,10 to filename eventually
+	}
+	
+	public int getPillsLeft() {
+		return pillsLeft;
+	}
+	public void setPillsLeft(int pillsLeft) {
+		this.pillsLeft = pillsLeft;
 	}
 	
 	public void start() {
 		//game logic here
 		System.out.println("WASD to move, Q to quit");
 		
+		pillsLeft = map.getPills();
+		score = 0;
+		timer = 60;
+		
 		//game start;
 		while(pillsLeft != 0) {
-						
+
 			displayGame();
-			turnInput();
+			turnInput(); //do a '-' on timer after the input is found to be good
 			
-			if(pacman.getLives() == 0) end("Out of Lives, Game Over");
+			if(map.getPacman().getLives() == 0) end("Out of Lives, Game Over");
+			
 		}
 		end("You WIN");
 	}
@@ -47,23 +53,23 @@ public class PacmanGame extends Game {
 		System.out.println(s);
 		
 		if(s.equals("w")) { //move UP
-			notify(new GameEvent("pUP",pacman));
+			notify(new GameEvent("pUP",map.getPacman()));
 		}
 		else if(s.equals("a")) { //move LEFT
-			notify(new GameEvent("pLEFT",pacman));
+			notify(new GameEvent("pLEFT",map.getPacman()));
 		}
 		else if(s.equals("s")) { //move DOWN
-			notify(new GameEvent("pDOWN",pacman));
+			notify(new GameEvent("pDOWN",map.getPacman()));
 		}
 		else if(s.equals("d")) { //move RIGHT
-			notify(new GameEvent("pRIGHT",pacman));
+			notify(new GameEvent("pRIGHT",map.getPacman()));
 		}
 		else if(s.equals("q")) end("Q Pressed. Game Over");
 	}
 	
 	private void displayGame() {
-		displayMessage(score+"");
-		((World)map).display();
+		displayMessage("SCORE: " + score + "  --  TIMER: " + timer);
+		map.display();
 	}
 	
 	public void end(String endMessage) {
@@ -71,76 +77,14 @@ public class PacmanGame extends Game {
 		System.exit(0); //end program
 	}
 	
-	public void moveGhosts() {
-		
-	}
-
-	public static void main(String args[]) {
-		new PacmanGame("filename").start(); //start the game
-	}
-	
-	/**
-	 * Sets up the map that will be used for the game.
-	 * @return true if all Mappables added with no errors, false otherwise
-	 * Code By Alexander Clelland
-	 */
-	//might change this later so it goes into the World Class... but needs to allow addition to the GameListeners
-	private boolean setUpNewGame(String filename) {
-		
-		super.map = new World(10,10); //create the Map to place Mappables on
-		addListener((World)map);
-				
-		pillsLeft = 0;
-		score = 0;
-		timer = 60;		
-		ghosts = new Ghost[1];
-		boolean errorFlag = false;
-		
-		pacman = new Pacman(1,1,3); //add pacman to the map
-		if (!map.addMappable(pacman)) {
-			displayMessage("ERROR: Invalid Pacman Position -- [" + pacman + "]");
-			errorFlag = true; //Position Invalid, Flag error and display message
-		}
-		addListener(pacman);
-		
-		BigPill tempBigPill = new BigPill(1,2);
-		if(!map.addMappable(tempBigPill)) {
-			displayMessage("ERROR: Invalid BigPill Position -- [" + tempBigPill + "]");
-			errorFlag = true; //Position Invalid, Flag error and display message
-		}
-		addListener(tempBigPill);
-				
-		for (Ghost ghost:ghosts) { //add the ghosts to the map
-			ghost = new Ghost(1,3);
-			if (!map.addMappable(ghost)) {
-				displayMessage("ERROR: Invalid Ghost Position -- [" + ghost + "]");
-				errorFlag = true; //Position Invalid, Flag error and display message
-			}
-			addListener(ghost);
-		}
-		
-		for (int x=0; x<map.getX(); x++) { //fill all empty spaces with Little Pills
-			for (int y=0; y<map.getY(); y++) {
-				if(map.isEmpty(x, y)) { //add a pill if the spot is empty
-					LittlePill tempPill = new LittlePill(x,y);
-					map.addMappable(tempPill);
-					pillsLeft++;
-				}
-			}
-		}
-		if(errorFlag) return false;
-		//map created successfully
-		return true;
-	}
-	
-	/**
-	 * Display a String to the terminal
-	 * @param message the String to be displayed
-	 */
 	private void displayMessage(String message) {
 		//easy to change this later for when we need GUI
 		System.out.println(message);
 	}
 
-		
+	
+	
+	public static void main(String args[]) {
+		new PacmanGame("filename").start(); //start the game
+	}
 }

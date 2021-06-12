@@ -8,7 +8,7 @@ public abstract class Map {
 	protected Hashtable<String,Mappable> mappables;
 	protected int xSize, ySize;
 	
-	public Map(int Xsize, int Ysize){
+	public Map(int Xsize, int Ysize, Game game){
 		this.xSize = Xsize;
 		this.ySize = Ysize;
 		this.map = new OnMap[Xsize][Ysize];
@@ -20,7 +20,7 @@ public abstract class Map {
 		this.mappables = new Hashtable<String,Mappable>();
 	}
 	
-	public Map(String fileName) {
+	public Map(String fileName, Game game) {
 		this.mappables = new Hashtable<String,Mappable>();
 		try{
 			BufferedReader in = new BufferedReader(new InputStreamReader(new FileInputStream(fileName)));
