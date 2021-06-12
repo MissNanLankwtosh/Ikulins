@@ -1,5 +1,5 @@
 
-public class World extends Map {
+public class World extends Map implements GameListener {
 
 	public World(int Xsize, int Ysize) {
 		super(Xsize, Ysize);
@@ -23,6 +23,24 @@ public class World extends Map {
 				else if(getMappable(x,y) instanceof LittlePill) s = s + ".";
 			}
 			System.out.println(s);
+		}
+	}
+
+	@Override
+	public void onEvent(GameEvent e) {
+		if(e.getMappable() instanceof Pacman) { //PACMAN MOVEMENT
+			if(e.getSource().equals("pUP")) {
+				
+			}
+			if(e.getSource().equals("pLEFT")) {
+				
+			}
+			if(e.getSource().equals("pDOWN")) {
+				
+			}
+			if(e.getSource().equals("pRIGHT")) {
+				
+			}
 		}
 	}
 	

@@ -144,12 +144,6 @@ public abstract class Map {
 		return true;
 	}
 	
-	/**
-	 * Returns the Mappable at the position specified
-	 * @param x
-	 * @param y
-	 * @return the Mappable, null if no Mappable
-	 */
 	public Mappable getMappable(int x, int y) {
 		if (isEmpty(x,y) && isWall(x,y)) return null;
 		return mappables.get(x + "," + y);

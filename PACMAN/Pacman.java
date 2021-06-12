@@ -45,7 +45,12 @@ public class Pacman extends Player {
 	
 	@Override
 	public void onEvent(GameEvent e) {
-		// TODO Auto-generated method stub
+		if(e.getMappable() instanceof Pacman) { //PACMAN MOVEMENT
+			if(e.getSource().equals("pUP")) moveUp();
+			if(e.getSource().equals("pLEFT")) moveLeft();
+			if(e.getSource().equals("pDOWN")) moveDown();
+			if(e.getSource().equals("pRIGHT")) moveRight(); 
+		}
 	}
 
 }

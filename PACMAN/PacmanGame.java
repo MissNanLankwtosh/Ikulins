@@ -18,9 +18,7 @@ public class PacmanGame extends Game {
 	 */
 	PacmanGame(String filename) {
 		super();
-
 		if (!setUpNewGame(filename)) end("Errors when adding Mappables to Map");
-		
 	}
 	
 	public void start() {
@@ -46,20 +44,21 @@ public class PacmanGame extends Game {
 			s = "";
 			e.printStackTrace();
 		}
+		System.out.println(s);
 		
-		if(s == "w") { //move UP
-			
+		if(s.equals("w")) { //move UP
+			notify(new GameEvent("pUP",pacman));
 		}
-		else if(s == "a") { //move LEFT
-			
+		else if(s.equals("a")) { //move LEFT
+			notify(new GameEvent("pLEFT",pacman));
 		}
-		else if(s == "s") { //move DOWN
-			
+		else if(s.equals("s")) { //move DOWN
+			notify(new GameEvent("pDOWN",pacman));
 		}
-		else if(s == "d") { //move RIGHT
-			
+		else if(s.equals("d")) { //move RIGHT
+			notify(new GameEvent("pRIGHT",pacman));
 		}
-		else if(s == "q") end("Q Pressed. Game Over");
+		else if(s.equals("q")) end("Q Pressed. Game Over");
 	}
 	
 	private void displayGame() {
@@ -77,10 +76,8 @@ public class PacmanGame extends Game {
 	}
 
 	public static void main(String args[]) {
-		new PacmanGame("filename").start(); //4 ghosts and start the game
+		new PacmanGame("filename").start(); //start the game
 	}
-	
-	
 	
 	/**
 	 * Sets up the map that will be used for the game.
@@ -91,11 +88,12 @@ public class PacmanGame extends Game {
 	private boolean setUpNewGame(String filename) {
 		
 		super.map = new World(10,10); //create the Map to place Mappables on
+		addListener((World)map);
 				
 		pillsLeft = 0;
 		score = 0;
 		timer = 60;		
-		ghosts = new Ghost[4];
+		ghosts = new Ghost[1];
 		boolean errorFlag = false;
 		
 		pacman = new Pacman(1,1,3); //add pacman to the map
@@ -144,6 +142,5 @@ public class PacmanGame extends Game {
 		System.out.println(message);
 	}
 
-	
-	
+		
 }
