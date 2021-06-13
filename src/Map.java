@@ -4,6 +4,7 @@ import java.io.InputStreamReader;
 import java.util.Hashtable;
 
 public abstract class Map {
+	protected Game game;
 	protected OnMap map[][];
 	protected Hashtable<String,Mappable> mappables;
 	protected int xSize, ySize;
