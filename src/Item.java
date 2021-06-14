@@ -5,5 +5,7 @@ public abstract class Item extends Mappable {
 		super(x, y);
 		// TODO Auto-generated constructor stub
 	}
-	public abstract void action();
+	public abstract void action(Object obj);
+	public abstract void onEvent(GameEvent e);
+	
 }

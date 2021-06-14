@@ -6,7 +6,7 @@ public class BigPill extends Item {
 	}
 
 	@Override
-	public void action() {
+	public void action(Object obj) {
 		// TODO Auto-generated method stub
 		
 	}

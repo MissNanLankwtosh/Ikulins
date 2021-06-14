@@ -1,11 +1,11 @@
 
 public class Pacman extends Player {
-	private int numLives, mode; //wtf is mode?
+	private int numLives, mode;
 	
 	public Pacman(int x, int y, int lives) {
 		super(x, y);
 		numLives = lives;
-		//need to set mode... when i know what it is...
+		mode = 0;
 	}
 
 	public int getLives() {
@@ -45,7 +45,7 @@ public class Pacman extends Player {
 	
 	@Override
 	public void onEvent(GameEvent e) {
-		if(e.getMappable() instanceof Pacman) { //PACMAN MOVEMENT
+		if(e.getGameValue() instanceof Pacman) { //PACMAN MOVEMENT
 			if(e.getSource().equals("pUP")) moveUp();
 			if(e.getSource().equals("pLEFT")) moveLeft();
 			if(e.getSource().equals("pDOWN")) moveDown();

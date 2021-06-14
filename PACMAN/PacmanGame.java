@@ -21,6 +21,12 @@ public class PacmanGame extends Game {
 	public void setPillsLeft(int pillsLeft) {
 		this.pillsLeft = pillsLeft;
 	}
+	public int getScore() {
+		return score;
+	}
+	public void setScore(int score) {
+		this.score = score;
+	}
 	
 	public void start() {
 		//game logic here
@@ -42,6 +48,7 @@ public class PacmanGame extends Game {
 		end("You WIN");
 	}
 	
+	//note this will probably all be changed in a bit... just leave for testing movement atm
 	public void turnInput() {
 		BufferedReader inp = new BufferedReader(new InputStreamReader(System.in));
 		String s;

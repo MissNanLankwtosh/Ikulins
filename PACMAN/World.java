@@ -88,28 +88,18 @@ public class World extends Map implements GameListener {
 	
 	public Pacman getPacman() {
 		return pacman;
-	}
-	
+	}	
 	public int getPills() {
 		return totalPills;
 	}
-
+	public Ghost[] getGhosts() {
+		return ghosts;
+	}
+	
+	
 	@Override
 	public void onEvent(GameEvent e) {
-		if(e.getMappable() instanceof Pacman) { //PACMAN MOVEMENT
-			if(e.getSource().equals("pUP")) {
-				
-			}
-			if(e.getSource().equals("pLEFT")) {
-				
-			}
-			if(e.getSource().equals("pDOWN")) {
-				
-			}
-			if(e.getSource().equals("pRIGHT")) {
-				
-			}
-		}
+		
 	}
 	
 	

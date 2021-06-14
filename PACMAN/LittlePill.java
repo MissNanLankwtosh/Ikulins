@@ -6,14 +6,16 @@ public class LittlePill extends Item {
 	}
 
 	@Override
-	public void action() {
-		// TODO Auto-generated method stub
-		
+	public void action(Object obj) {
+		PacmanGame game = (PacmanGame)obj;
+		game.setScore(game.getScore()+1);
 	}
 	
 	@Override
 	public void onEvent(GameEvent e) {
-		// TODO Auto-generated method stub
+		if(e.getGameValue() instanceof PacmanGame) {
+			if(e.getSource().equals("littlepill")) action(e.getGameValue());
+		}
 	}
 
 }
