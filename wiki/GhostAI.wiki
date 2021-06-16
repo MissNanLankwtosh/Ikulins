@@ -1,0 +1,58 @@
+#summary Sudo code describing the rule set to apply in order to direct ghost movement
+
+= Introduction =
+
+This section outlines how to program the AI that the ghosts will follow in order to decide how to best move.  The section will be explained, and then programmed in sudo code that will likely look a lot like java anyways.
+
+
+= Details =
+
+In order to decide where each ghost should move to, there are four checks that must be accomplished.  First, the ghost will attempt to move in a direction, and if the direction is valid (no wall), then the spot where the ghost would move to is recorded, and saved as an (x,y) point.  Then pacman's position is accessed, and through some trigonometry magic, we find the straight line distance between them.
+
+* The Trigonometry Magic:
+
+We form a triangle between pacman and the ghost, and then we find the hypotenuse.
+
+absolute value of pacman.x - ghost.x = DeltaX
+absolute value of pacman.y - ghost.y = DeltaY
+
+Distance = root (DeltaX^2 + DeltaY^2)
+
+In order to find which direction to move the ghost, we loop through four times to check each direction, check the distance if it is a valid move, and then after checking each distance, move in the direction that would cause the distance to be the lowest.
+
+* Sudo Code:
+
+moveGhost( ghost g){
+
+upDist = 1000
+rightDist = 1000
+downDist = 1000
+leftDist = 1000
+
+for(i = 0 to 3){
+   if(canMove(i)) then { // integer i represents a direction to the proposed method, where say 0 = up, 1 = right, 2 = down, 3 = left
+      dist = root((abs(pacman.y-ghost.y))^2 + (abs(pacman.x-ghost.x))^2)
+      if(i = 0) then
+         {upDist = dist}
+      else if(i = 1) then
+         {rightDist = dist}
+      else if(i = 2) then
+         {downDist = dist}
+      else if(i = 3) then
+         {leftDist = dist}
+   }
+}
+
+if(upDist < rightDist and upDist < downDist and upDist < leftDist) then
+   {g.moveUp()}
+else if(rightDist < upDist and rightDist < downDist and rightDist < leftDist) then
+   {g.moveRight()}
+else if(downDist < upDist and downDist < rightDist and downDist < leftDist) then
+   {g.moveDown()}
+else if(leftDist < upDist and leftDist < righDist and leftDist < downDist) then
+   {g.moveLeft()}
+
+}
+
+
+We start with each distance variable at 1000 because that way if the move is invalid, the distance would be 1000 instead of 0, so that way when we check for the minimum distance, we don't get confused by invalid moves.
