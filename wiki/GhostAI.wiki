@@ -16,7 +16,7 @@ We form a triangle between pacman and the ghost, and then we find the hypotenuse
 absolute value of pacman.x - ghost.x = DeltaX
 absolute value of pacman.y - ghost.y = DeltaY
 
-Distance = root (DeltaX^2 + DeltaY^2)
+Distance = root (DeltaX^2^ + DeltaY^2^)
 
 In order to find which direction to move the ghost, we loop through four times to check each direction, check the distance if it is a valid move, and then after checking each distance, move in the direction that would cause the distance to be the lowest.
 
@@ -31,7 +31,7 @@ leftDist = 1000
 
 for(i = 0 to 3){
    if(canMove(i)) then { // integer i represents a direction to the proposed method, where say 0 = up, 1 = right, 2 = down, 3 = left
-      dist = root((abs(pacman.y-ghost.y))^2 + (abs(pacman.x-ghost.x))^2)
+      dist = root((abs(pacman.y-ghost.y))^2^ + (abs(pacman.x-ghost.x))^2^)
       if(i = 0) then
          {upDist = dist}
       else if(i = 1) then
