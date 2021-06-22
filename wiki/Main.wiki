@@ -7,3 +7,4 @@ The project consists of a game structure that is designed to build games like pa
 Pages of interest:
 
 * GhostAI
+* CreateMapable
