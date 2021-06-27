@@ -21,7 +21,7 @@ Distance = root (DeltaX^2^ + DeltaY^2^)
 In order to find which direction to move the ghost, we loop through four times to check each direction, check the distance if it is a valid move, and then after checking each distance, move in the direction that would cause the distance to be the lowest.
 
 * Sudo Code:
-
+{{{
 moveGhost( ghost g){
 
 upDist = 1000
@@ -53,6 +53,6 @@ else if(leftDist < upDist and leftDist < righDist and leftDist < downDist) then
    {g.moveLeft()}
 
 }
-
+}}}
 
 We start with each distance variable at 1000 because that way if the move is invalid, the distance would be 1000 instead of 0, so that way when we check for the minimum distance, we don't get confused by invalid moves.
