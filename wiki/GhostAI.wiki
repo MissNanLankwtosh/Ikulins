@@ -31,7 +31,7 @@ leftDist = 1000
 
 for(i = 0 to 3){
    if(canMove(i)) then { // integer i represents a direction to the proposed method, where say 0 = up, 1 = right, 2 = down, 3 = left
-      dist = root((abs(pacman.y-ghost.y))^2^ + (abs(pacman.x-ghost.x))^2^)
+      dist = root((abs(pacman.y-ghost.y))^2 + (abs(pacman.x-ghost.x))^2)
       if(i = 0) then
          {upDist = dist}
       else if(i = 1) then
