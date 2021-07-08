@@ -51,7 +51,7 @@ else if(downDist < upDist and downDist < rightDist and downDist < leftDist) then
    {g.moveDown()}
 else if(leftDist < upDist and leftDist < righDist and leftDist < downDist) then
    {g.moveLeft()}
-//if it hasn't made a move by now, it wont move, but give each variable starts at 1000, 
+//if it hasn't made a move by now, it wont move, but given each variable starts at 1000, 
 //and just making the calculations for valid moves will be less than 1000, it should never happen that a ghost doesn't move
 
 }
