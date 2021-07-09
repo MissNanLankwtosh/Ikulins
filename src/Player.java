@@ -4,9 +4,9 @@ public abstract class Player extends Mappable {
 		super(x, y);
 		// TODO Auto-generated constructor stub
 	}
-	public abstract void moveUp();
-	public abstract void moveDown();
-	public abstract void moveLeft();
-	public abstract void moveRight();
+	public abstract void moveUp(Map map);
+	public abstract void moveDown(Map map);
+	public abstract void moveLeft(Map map);
+	public abstract void moveRight(Map map);
 
 }
