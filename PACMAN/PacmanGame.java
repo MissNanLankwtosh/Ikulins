@@ -27,6 +27,10 @@ public class PacmanGame extends Game {
 	public void setScore(int score) {
 		this.score = score;
 	}
+	public World getMap() {
+		return map;
+	}
+	
 	
 	public void start() {
 		//game logic here
@@ -38,49 +42,48 @@ public class PacmanGame extends Game {
 		
 		//game start;
 		while(pillsLeft != 0) {
-
 			displayGame();
-			turnInput(); //do a '-' on timer after the input is found to be good
+			turn();
 			
+			timer--;
 			if(map.getPacman().getLives() == 0) end("Out of Lives, Game Over");
-			
+			else if(timer == 0) end("Time Up, Game Over");
 		}
 		end("You WIN");
 	}
 	
-	//note this will probably all be changed in a bit... just leave for testing movement atm
-	public void turnInput() {
+	private void turn() {
 		BufferedReader inp = new BufferedReader(new InputStreamReader(System.in));
 		String s;
-		try { s = inp.readLine();
-		} catch (IOException e) {
-			s = "";
-			e.printStackTrace();
+		boolean success = false;
+		while(success == false) {
+			try { s = inp.readLine();
+			} catch (IOException e) {
+				s = "--Not Proper Input--";
+				e.printStackTrace();
+			}
+			
+			if(s.equals("q")) {
+				end("Force Quit");
+			}
+			
+			//if it is a movement key press notify with the movement
+			else if(s.equals("w") || s.equals("a") || s.equals("s") || s.equals("d")){
+				success = true;
+				notify(new GameEvent(s, this));
+			}
 		}
-		System.out.println(s);
 		
-		if(s.equals("w")) { //move UP
-			notify(new GameEvent("pUP",map.getPacman()));
-		}
-		else if(s.equals("a")) { //move LEFT
-			notify(new GameEvent("pLEFT",map.getPacman()));
-		}
-		else if(s.equals("s")) { //move DOWN
-			notify(new GameEvent("pDOWN",map.getPacman()));
-		}
-		else if(s.equals("d")) { //move RIGHT
-			notify(new GameEvent("pRIGHT",map.getPacman()));
-		}
-		else if(s.equals("q")) end("Q Pressed. Game Over");
+		
 	}
 	
 	private void displayGame() {
 		displayMessage("SCORE: " + score + "  --  TIMER: " + timer);
-		map.display();
+		map.consoleDisplay();
 	}
 	
-	public void end(String endMessage) {
-		displayMessage(endMessage);
+	public void end(String message) {
+		displayMessage(message);
 		System.exit(0); //end program
 	}
 	
@@ -89,6 +92,10 @@ public class PacmanGame extends Game {
 		System.out.println(message);
 	}
 
+	
+	
+	
+	
 	
 	
 	public static void main(String args[]) {

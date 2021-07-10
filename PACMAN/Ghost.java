@@ -15,25 +15,32 @@ public class Ghost extends Player {
 		//???
 	}
 	
-
 	@Override
-	public void moveDown() {
+	public void moveDown(Map map) {
+		map.removeMappable(x,y);
 		setY(getY()-1);		
+		map.addMappable(this);
 	}
 
 	@Override
-	public void moveLeft() {
+	public void moveLeft(Map map) {
+		map.removeMappable(x,y);
 		setX(getX()-1);
+		map.addMappable(this);
 	}
 
 	@Override
-	public void moveRight() {
+	public void moveRight(Map map) {
+		map.removeMappable(x,y);
 		setX(getX()+1);
+		map.addMappable(this);
 	}
 
 	@Override
-	public void moveUp() {
+	public void moveUp(Map map) {
+		map.removeMappable(x,y);
 		setY(getY()+1);
+		map.addMappable(this);
 	}
 	
 	@Override

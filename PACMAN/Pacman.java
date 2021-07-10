@@ -1,3 +1,4 @@
+//note... no checks for out of bounds movement yet...
 
 public class Pacman extends Player {
 	private int numLives, mode;
@@ -24,32 +25,51 @@ public class Pacman extends Player {
 	
 
 	@Override
-	public void moveDown() {
+	public void moveDown(Map map) {
+		map.removeMappable(x,y);
 		setY(getY()-1);		
+		map.addMappable(this);
+		
 	}
 
 	@Override
-	public void moveLeft() {
+	public void moveLeft(Map map) {
+		map.removeMappable(x,y);
 		setX(getX()-1);
+		map.addMappable(this);
 	}
 
 	@Override
-	public void moveRight() {
+	public void moveRight(Map map) {
+		map.removeMappable(x,y);
 		setX(getX()+1);
+		map.addMappable(this);
 	}
 
 	@Override
-	public void moveUp() {
+	public void moveUp(Map map) {
+		map.removeMappable(x,y);
 		setY(getY()+1);
+		map.addMappable(this);
 	}
 	
 	@Override
 	public void onEvent(GameEvent e) {
-		if(e.getGameValue() instanceof Pacman) { //PACMAN MOVEMENT
-			if(e.getSource().equals("pUP")) moveUp();
-			if(e.getSource().equals("pLEFT")) moveLeft();
-			if(e.getSource().equals("pDOWN")) moveDown();
-			if(e.getSource().equals("pRIGHT")) moveRight(); 
+		if(e.getGameValue() instanceof PacmanGame) { //PACMAN MOVEMENT
+			PacmanGame game = (PacmanGame)e.getGameValue();
+			World world = (World)game.getMap();
+			if(e.getSource().equals("w")) {
+				moveUp(world);
+			}
+			if(e.getSource().equals("a")) {
+				moveLeft(world);
+			}
+			if(e.getSource().equals("s")) {
+				moveDown(world);
+			}
+			if(e.getSource().equals("d")) {
+				moveRight(world);
+			}
 		}
 	}
 

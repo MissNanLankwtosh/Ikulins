@@ -1,5 +1,8 @@
+//note... MAP will need to be changed... (x > xSize || y > ySize || x < 0 || y < 0)
+//I failed... fucked up error checking XD
 
-public class World extends Map implements GameListener {
+
+public class World extends Map {
 	private PacmanGame game;
 	private Pacman pacman;
 	private Ghost ghosts[];
@@ -8,14 +11,12 @@ public class World extends Map implements GameListener {
 	public World(int Xsize, int Ysize, PacmanGame game) { //used for testing
 		super(Xsize, Ysize, game);
 		this.game = game;
-		
 		if (!initMap()) System.out.println("Errors when adding Mappables to Map");
 	}
 
 	public World(String fileName, PacmanGame game) {
 		super(fileName, game);
 		this.game = game;
-		
 		if (!initMap()) System.out.println("Errors when adding Mappables to Map");
 	}
 	
@@ -51,6 +52,7 @@ public class World extends Map implements GameListener {
 				if(isEmpty(x, y)) { //add a pill if the spot is empty
 					LittlePill tempPill = new LittlePill(x,y);
 					addMappable(tempPill);
+					game.addListener(tempPill);
 					totalPills++;
 				}
 			}
@@ -60,7 +62,7 @@ public class World extends Map implements GameListener {
 		return true;
 	}
 	
-	public void display() {
+	public void consoleDisplay() {
 		String s;
 		for (int x=0; x<xSize; x++) {
 			s = "";
@@ -97,10 +99,7 @@ public class World extends Map implements GameListener {
 	}
 	
 	
-	@Override
-	public void onEvent(GameEvent e) {
-		
-	}
+
 	
 	
 }
