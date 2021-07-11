@@ -7,25 +7,25 @@ public class Hero extends Player {
 	}
 
 	@Override
-	public void moveDown() {
+	public void moveDown(Map map) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void moveLeft() {
+	public void moveLeft(Map map) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void moveRight() {
+	public void moveRight(Map map) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void moveUp() {
+	public void moveUp(Map map) {
 		// TODO Auto-generated method stub
 		
 	}
