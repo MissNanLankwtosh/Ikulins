@@ -76,10 +76,6 @@ public abstract class Map {
 
 	public boolean addMappable(Mappable m){
 		
-		if(m.getX() > xSize || m.getY() > ySize){
-			return false;
-		}
-		
 		if (isEmpty(m.getX(),m.getY())){
 			map[m.getX()][m.getY()] = OnMap.MAPPABLE;
 			mappables.put(m.toString(), m);
@@ -90,10 +86,6 @@ public abstract class Map {
 	
 	public boolean addWall(int x, int y){
 		
-		if(x > xSize || y > ySize){
-			return false;
-		}
-		
 		if(isEmpty(x,y)){
 			map[x][y] = OnMap.WALL;
 			return true;
@@ -102,28 +94,19 @@ public abstract class Map {
 	}
 	
 	public boolean isEmpty(int x, int y){
-		
-		if(x > xSize || y > ySize){
-			return false;
-		}
-		
-		return map[x][y] == OnMap.EMPTY;
+		return ((!isOutOfBounds(x,y))&&(map[x][y] == OnMap.EMPTY));
 	}
 	
 	public boolean isWall(int x, int y){
-		
-		if(x > xSize || y > ySize) {
-			return false;
-		}
-		
-		return map[x][y] == OnMap.WALL;
+		return ((!isOutOfBounds(x,y)) && (map[x][y] == OnMap.WALL));
+	}
+	
+	public boolean isOutOfBounds(int x, int y){
+		return (x >= this.xSize || y >= this.ySize || x < 0 || y < 0);
 	}
 	
 	public boolean removeMappable(int x, int y){
-		
-		if(x > xSize || y > ySize){
-			return false;
-		}
+
 		//Checks to see if anything is in the spot
 		if(isEmpty(x,y) || isWall(x,y)){
 			return false;
@@ -134,9 +117,6 @@ public abstract class Map {
 	}
 	
 	public boolean removeWall(int x, int y){
-		if(x > xSize || y > ySize){
-			return false;
-		}
 		//Checks to see if there is a wall
 		if(!isWall(x,y)){
 			return false;
