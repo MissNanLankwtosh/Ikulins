@@ -7,6 +7,12 @@ public abstract class Game {
 	public Game(){
 		GameList = new ArrayList<GameListener>();
 	}
+	public Map getMap() {
+		return map;
+	}
+	public void setMap(Map map) {
+		this.map = map;
+	}
 	public void addListener(GameListener g){
 		GameList.add(g);
 	}
