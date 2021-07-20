@@ -1,7 +1,7 @@
 
-public abstract class Mappable implements GameListener {
-	protected int x;
-	protected int y;
+public abstract class Mappable {
+	private int x;
+	private int y;
 	
 	public Mappable(int x ,int y){
 		this.x = x;
