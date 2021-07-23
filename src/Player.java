@@ -56,37 +56,37 @@ public abstract class Player extends Mappable {
 		this.numOflives = numOflives;
 	}
 	/*
-	 * Moves the Player in its current direction
+	 * Moves the Player in its current direction.
 	 * @param Map current map the Player is on
 	 * @return true if the move was successful, false otherwise.
 	 */
 	public boolean move(Map map){
 		switch(this.direction){
 			case UP:
-				if(map.isEmpty(this.x, this.y - 1)){
-					map.removeMappable(this.x, this.y);
-					this.y -= 1;
+				if(map.isEmpty(this.getX(), this.getY() - 1)){
+					map.removeMappable(this.getX(), this.getY());
+					this.setY(this.getY() - 1);
 					return map.addMappable(this);
 				}
 				return false;
 			case LEFT:
-				if(map.isEmpty(this.x - 1, this.y)){
-					map.removeMappable(this.x, this.y);
-					this.x -= 1;
+				if(map.isEmpty(this.getX() - 1, this.getY())){
+					map.removeMappable(this.getX(), this.getY());
+					this.setX(this.getX() - 1);
 					return map.addMappable(this);
 				}
 				return false;
 			case DOWN:
-				if(map.isEmpty(this.x, this.y + 1)){
-					map.removeMappable(this.x, this.y);
-					this.y += 1;
+				if(map.isEmpty(this.getX(), this.getY() + 1)){
+					map.removeMappable(this.getX(), this.getY());
+					this.setY(this.getY() + 1);
 					return map.addMappable(this);
 				}
 				return false;
 			case RIGHT:
-				if(map.isEmpty(this.x + 1, this.y)){
-					map.removeMappable(this.x, this.y);
-					this.x += 1;
+				if(map.isEmpty(this.getX() + 1, this.getY())){
+					map.removeMappable(this.getX(), this.getY());
+					this.setX(this.getX() + 1);
 					return map.addMappable(this);
 				}
 				return false;
