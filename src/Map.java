@@ -6,9 +6,9 @@ import java.util.Hashtable;
 
 public abstract class Map {
 	protected Game game;
-	protected OnMap map[][];
-	protected Hashtable<String,ArrayList<Mappable>> mappables;
-	protected int xSize, ySize;
+	private OnMap map[][];
+	private Hashtable<String,ArrayList<Mappable>> mappables;
+	private int xSize, ySize;
 	
 	/*
 	 * Constructs an empty map of size Xsize by Ysize.
@@ -248,5 +248,5 @@ public abstract class Map {
 	public int getY() {
 		return ySize;
 	}
-	
+
 }
