@@ -209,26 +209,16 @@ public abstract class Map {
 		return true;
 	}
 	
-	/*
-	 * Attempts to retrieve a Mappable from a desired tile
-	 * @param x the X position of the desired tile
-	 * @param y the Y position of the desired tile
-	 * @return The desired Mappable or null if Mappable is present at that location
-	 */
-	public Mappable getMappable(int x, int y){
-		return getMappable(x,y,0);
-	}
 	
 	/*
-	 * Attempts to retrieve a Mappable from a desired tile
+	 * Attempts to retrieve a Mappables from a desired tile
 	 * @param x the X position of the desired tile
 	 * @param y the Y position of the desired tile
-	 * @param pos the position of the Mappable in the ArrayList at that position
 	 * @return The desired Mappable or null if Mappable is present at that location
 	 */
-	public Mappable getMappable(int x, int y, int pos) {
+	public ArrayList<Mappable> getMappable(int x, int y) {
 		if (isEmpty(x,y) && isWall(x,y)) return null;
-		return ((ArrayList<Mappable>)mappables.get(x + "," + y)).get(pos);
+		return ((ArrayList<Mappable>)mappables.get(x + "," + y));
 	}
 	
 	/*
