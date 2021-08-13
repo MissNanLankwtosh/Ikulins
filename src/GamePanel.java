@@ -96,7 +96,9 @@ public abstract class GamePanel extends JPanel{
 	class KeyPressHandler extends KeyAdapter{
 		public void keyPressed(KeyEvent e){
 			int key = e.getKeyCode();
+			switch(key){
 			//Add cases for different key presses here
+			}
 		}
 	}
 	
