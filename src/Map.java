@@ -10,7 +10,7 @@ public abstract class Map {
 	private Hashtable<String,ArrayList<Mappable>> mappables;
 	private int xSize, ySize;
 	
-	/*
+	/**
 	 * Constructs an empty map of size Xsize by Ysize.
 	 * @param Xsize the number of X tiles on the map.
 	 * @param Ysize the number of Y tiles on the map.
@@ -29,7 +29,7 @@ public abstract class Map {
 		this.game = game;
 	}
 	
-	/*
+	/**
 	 * Constructs an empty map from a file.
 	 * <p>
 	 * See wiki page for full details on thie method
@@ -89,7 +89,7 @@ public abstract class Map {
 		return i;
 	}
 
-	/*
+	/**
 	 * Adds a Mappable Object to the Map.
 	 * <p>
 	 * Adds a Mappable to an empty tile on the map and then marks that tile as MAPPABLE. 
@@ -113,7 +113,7 @@ public abstract class Map {
 		return false;
 	}
 	
-	/*
+	/**
 	 * Adds a wall in the specified tile.
 	 * @param x the X position of the desired tile
 	 * @param y the Y position of the desired tile
@@ -128,7 +128,7 @@ public abstract class Map {
 		return false;
 	}
 	
-	/*
+	/**
 	 * Checks to see if tile is empty.
 	 * @param x the X position of the desired tile
 	 * @param y the Y position of the desired tile
@@ -138,7 +138,7 @@ public abstract class Map {
 		return ((!isOutOfBounds(x,y))&&(map[x][y] == OnMap.EMPTY));
 	}
 	
-	/*
+	/**
 	 * Checks to see if tile is a wall.
 	 * @param x the X position of the desired tile
 	 * @param y the Y position of the desired tile
@@ -148,7 +148,7 @@ public abstract class Map {
 		return ((!isOutOfBounds(x,y)) && (map[x][y] == OnMap.WALL));
 	}
 	
-	/*
+	/**
 	 * Checks to see if desired tile is within the map.
 	 * @param x the X position of the desired tile
 	 * @param y the Y position of the desired tile
@@ -158,7 +158,7 @@ public abstract class Map {
 		return (x >= this.xSize || y >= this.ySize || x < 0 || y < 0);
 	}
 	
-	/*
+	/**
 	 * Attempts to remove a Mappable from the Map
 	 * @param x the X position of the desired tile
 	 * @param y the Y position of the desired tile
@@ -175,7 +175,7 @@ public abstract class Map {
 		//ArrayList will not be null otherwise it would not have made this far in the code.
 		onDmap.remove(pos);
 		if(onDmap.size() == 0){
-			/*
+			/**
 			 * remove comment if you want to remove the empty list from the HashTable
 			 *mappables.remove((x + "," + y));
 			 */
@@ -184,7 +184,7 @@ public abstract class Map {
 		return true;
 	}
 	
-	/*
+	/**
 	 * Attempts to remove a Mappable from the Map
 	 * @param x the X position of the desired tile
 	 * @param y the Y position of the desired tile
@@ -194,7 +194,7 @@ public abstract class Map {
 		return removeMappable(x,y,0);
 	}
 	
-	/*
+	/**
 	 * Attempts to remove a wall
 	 * @param x the X position of the desired tile
 	 * @param y the Y position of the desired tile
@@ -210,7 +210,7 @@ public abstract class Map {
 	}
 	
 	
-	/*
+	/**
 	 * Attempts to retrieve a Mappables from a desired tile
 	 * @param x the X position of the desired tile
 	 * @param y the Y position of the desired tile
@@ -221,7 +221,7 @@ public abstract class Map {
 		return ((ArrayList<Mappable>)mappables.get(x + "," + y));
 	}
 	
-	/*
+	/**
 	 * Retrieves Map's current X size
 	 * @return Map's Xsize variable
 	 */
@@ -230,7 +230,7 @@ public abstract class Map {
 		return xSize;
 	}
 	
-	/*
+	/**
 	 * Retrieves Map's current Y size
 	 * @return Map's Ysize variable
 	 */
