@@ -13,6 +13,11 @@ public abstract class GameFrame extends JFrame implements ActionListener{
 	private JMenuBar menuBar;
 	private GamePanel gpanel;
 
+	/**
+	 * Creates a frame that contains the game
+	 * @param title Title of the frame
+	 * @param gpanel Panel that contains the game
+	 */
 	public GameFrame(String title, GamePanel gpanel){
 		menuBar.add(new JMenu("Game"));
 		menuBar.getMenu(0).add(new JMenuItem("New Game"));
@@ -24,10 +29,17 @@ public abstract class GameFrame extends JFrame implements ActionListener{
 		setVisible(true);
 
 	}
+	/**
+	 * Creates a Frame of the Game
+	 * @param gpanel Panel of the current game
+	 */
 	public GameFrame(GamePanel gpanel){
 		this("Default Title", gpanel);
 	}
 	
+	/**
+	 * Allows the user to start a new game
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String s = e.getActionCommand();
