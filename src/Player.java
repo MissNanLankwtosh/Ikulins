@@ -60,7 +60,7 @@ public abstract class Player extends Mappable {
 	 * @param Map current map the Player is on
 	 * @return true if the move was successful, false otherwise.
 	 */
-	public boolean move(Map map){
+	public boolean updateLocation(Map map){
 		switch(this.direction){
 			case UP:
 				if(map.isEmpty(this.getX(), this.getY() - 1)){
