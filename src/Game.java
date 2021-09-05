@@ -2,8 +2,8 @@ import java.util.ArrayList;
 
 
 public abstract class Game {
-	protected ArrayList<GameListener> GameList;
-	protected Map map;
+	private ArrayList<GameListener> GameList;
+	private Map map;
 	/**
 	 * Creates a new game
 	 */
