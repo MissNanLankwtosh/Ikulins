@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Hashtable;
 
 public abstract class Map {
-	protected Game game;
 	private OnMap map[][];
 	private Hashtable<String,ArrayList<Mappable>> mappables;
 	private int xSize, ySize;
@@ -14,9 +13,8 @@ public abstract class Map {
 	 * Constructs an empty map of size Xsize by Ysize.
 	 * @param Xsize the number of X tiles on the map.
 	 * @param Ysize the number of Y tiles on the map.
-	 * @param Game i unno bout this one, alex wanna add something here?
 	 */
-	public Map(int Xsize, int Ysize, Game game){
+	public Map(int Xsize, int Ysize){
 		this.xSize = Xsize;
 		this.ySize = Ysize;
 		this.map = new OnMap[Xsize][Ysize];
@@ -26,7 +24,6 @@ public abstract class Map {
 			}
 		}
 		this.mappables = new Hashtable<String,ArrayList<Mappable>>();
-		this.game = game;
 	}
 	
 	/**
@@ -34,9 +31,8 @@ public abstract class Map {
 	 * <p>
 	 * See wiki page for full details on thie method
 	 * @param filename name of file containing map layout
-	 * @param Game i unno bout this one, alex wanna add something here?
 	 */
-	public Map(String fileName, Game game) {
+	public Map(String fileName) {
 		this.mappables = new Hashtable<String,ArrayList<Mappable>>();
 		try{
 			BufferedReader in = new BufferedReader(new InputStreamReader(new FileInputStream(fileName)));
@@ -45,7 +41,6 @@ public abstract class Map {
 			this.xSize = sToInt(nums[0]);
 			this.ySize = sToInt(nums[1]);
 			this.map = new OnMap[xSize][ySize];
-			this.game = game;
 			int y = 0;
 			while( (s = in.readLine()) != null){
 				nums = s.split(",");
