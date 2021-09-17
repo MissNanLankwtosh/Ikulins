@@ -1,8 +1,8 @@
 
 public class PacmanMap extends Map {
 
-	public PacmanMap(int Xsize, int Ysize, Game game) {
-		super(Xsize, Ysize, game);
+	public PacmanMap(int Xsize, int Ysize) {
+		super(Xsize, Ysize);
 		// TODO Auto-generated constructor stub
 	}
 
