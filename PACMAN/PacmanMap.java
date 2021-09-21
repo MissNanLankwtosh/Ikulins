@@ -5,5 +5,10 @@ public class PacmanMap extends Map {
 		super(Xsize, Ysize);
 		// TODO Auto-generated constructor stub
 	}
+	
+	public PacmanMap(String filename) {
+		super(filename);
+		// TODO Auto-generated constructor stub
+	}
 
 }
