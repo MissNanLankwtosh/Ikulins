@@ -19,6 +19,7 @@ public abstract class GameFrame extends JFrame implements ActionListener{
 	 * @param gpanel Panel that contains the game
 	 */
 	public GameFrame(String title, GamePanel gpanel){
+		menuBar = new JMenuBar();
 		menuBar.add(new JMenu("Game"));
 		menuBar.getMenu(0).add(new JMenuItem("New Game"));
 		menuBar.getMenu(0).getItem(0).addActionListener(this);

@@ -95,7 +95,7 @@ public abstract class Player extends Mappable {
 		return false;
 	}
 
-	public abstract void spawn();
+	public abstract void spawn(Map map);
 	
 	/**
 	 * Decrements current lives by one.

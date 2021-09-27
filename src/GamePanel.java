@@ -52,6 +52,10 @@ public abstract class GamePanel extends JPanel{
 	 * Performs Game initializations.
 	 */
 	public abstract void GameInit();
+	
+	public void setGame(Game game) {
+		this.game = game;
+	}
 
 	/**
 	 * Changes current background colour
@@ -67,6 +71,13 @@ public abstract class GamePanel extends JPanel{
 	 */
 	public void setMazeColor( Color color){
 		this.mazeColor = color;
+	}
+	
+	/**
+	 * @return returns instance of current game
+	 */
+	public Game getGame() {
+		return game;
 	}
 	
 	/**
