@@ -123,7 +123,7 @@ public abstract class GamePanel extends JPanel{
 			for(int y = 0; y < this.game.getMap().getY(); y++){
 				if(this.game.getMap().isWall(x,y)){
 					g2d.setColor(mazeColor);
-					g2d.drawRect(x, y, defaultTileSize, defaultTileSize);
+					g2d.drawRect(x*defaultTileSize, y*defaultTileSize, defaultTileSize, defaultTileSize);
 				}
 				else{
 					ArrayList<Mappable> onmap = this.game.getMap().getMappable(x, y);
