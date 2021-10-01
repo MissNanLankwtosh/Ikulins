@@ -129,7 +129,7 @@ public abstract class GamePanel extends JPanel{
 					ArrayList<Mappable> onmap = this.game.getMap().getMappable(x, y);
 					if(onmap != null){
 						for(Mappable om: onmap){
-							DrawImage(g2d, x, y, om.getImage());
+							DrawImage(g2d, x*defaultTileSize, y*defaultTileSize, om.getImage());
 						}
 					}
 					
