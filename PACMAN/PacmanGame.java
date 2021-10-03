@@ -6,24 +6,26 @@ public class PacmanGame extends Game {
 	
 	public PacmanGame() {
 		super();
+		setUpGame();
 	}
 	
 	/**
 	 * 
 	 */
 	public void start() {
-		setUpGame();
+		System.out.println("test");
 	}
 	
 	/**
 	 * 
 	 * @return true if game set up successful. false otherwise.
 	 */
-	public boolean setUpGame() {
+	public void setUpGame() {
 		score = 0;
 		timer = 180;
+		ghosts = new Ghost[4];
 		
-		setMap(new PacmanMap("pacmanMap.txt")); //set up the PacmanMap
+		setMap(new PacmanMap("PACMAN/pacmanMap.txt")); //set up the PacmanMap
 		
 		for(int x=0; x<getMap().getX(); x++) { //add LittlePillItems to every Empty Space
 			for(int y=0; y<getMap().getY(); y++) {
@@ -32,16 +34,29 @@ public class PacmanGame extends Game {
 			}
 		}
 		
-		pacman = new Pacman(5,5);
-		pacman.spawn();
+		pacman = new Pacman(9,9,Direction.UP,3); //add pacman
+		getMap().addMappable(pacman);
+		addListener(pacman);
+		pacman.spawn(getMap());
 		
-		for(Ghost ghost : ghosts) {
-			ghost = new Ghost(5,5);
-			ghost.spawn();
+		int i=1; //i is a counter for which ghost is added
+		for(Ghost ghost : ghosts) { //add ghosts
+			ghost = new Ghost(i+7,5,Direction.UP,i);
+			getMap().addMappable(ghost);
+			addListener(ghost);
+			ghost.spawn(getMap());
+			i++;
 		}
 		
-		
-		return true;
+		BigPillItem bigPill = new BigPillItem(1,1); //add big pills
+		getMap().addMappable(bigPill);
+		bigPill = new BigPillItem(18,1);
+		getMap().addMappable(bigPill);
+		bigPill = new BigPillItem(1,9);
+		getMap().addMappable(bigPill);
+		bigPill = new BigPillItem(18,9);
+		getMap().addMappable(bigPill);
+
 	}
 	
 	
@@ -52,7 +67,9 @@ public class PacmanGame extends Game {
 	
 	
 	public static void main(String args[]) {
-		new PacmanGame().start();
+		PacmanGame tempGame = new PacmanGame();
+		new PacmanFrame(new PacmanPanel(tempGame));
+		tempGame.start();
 	}
 	
 }

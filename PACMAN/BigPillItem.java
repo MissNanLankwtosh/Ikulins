@@ -3,6 +3,7 @@ public class BigPillItem extends Item {
 
 	public BigPillItem(int x, int y) {
 		super(x, y);
+		setImage("PACMAN/bigpill.png");
 		// TODO Auto-generated constructor stub
 	}
 
