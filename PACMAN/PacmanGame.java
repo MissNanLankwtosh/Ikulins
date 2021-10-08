@@ -17,8 +17,7 @@ public class PacmanGame extends Game {
 	}
 	
 	/**
-	 * 
-	 * @return true if game set up successful. false otherwise.
+	 * Sets up the map and all the players/items for a new game
 	 */
 	public void setUpGame() {
 		score = 0;
