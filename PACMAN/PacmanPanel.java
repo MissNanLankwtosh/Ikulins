@@ -1,3 +1,5 @@
+import java.awt.event.KeyEvent;
+
 
 public class PacmanPanel extends GamePanel{
 
@@ -18,10 +20,12 @@ public class PacmanPanel extends GamePanel{
 		((PacmanGame)getGame()).start();
 	}
 
+	/**
+	 * Pass the KeyEvent to PacmanGame and let it deal with it in recieveInput
+	 */
 	@Override
 	public void onKeyPress(int keycode) {
-		// TODO Auto-generated method stub
-		
+		((PacmanGame)getGame()).recieveInput(keycode);
 	}
 
 }
