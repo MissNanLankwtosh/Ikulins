@@ -29,8 +29,8 @@ public abstract class GamePanel extends JPanel{
 		this.game = g;
 		addKeyListener(new KeyPressHandler());
 		setFocusable(true);
-		
 		d = new Dimension(this.game.getMap().getX() * defaultTileSize, this.game.getMap().getY() * defaultTileSize);
+		setSize(d);
 		mazeColor = new Color(0,255,0);
 		bgColor = new Color(0,0,0);
 		
