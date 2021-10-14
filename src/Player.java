@@ -63,28 +63,28 @@ public abstract class Player extends Mappable {
 	public boolean updateLocation(Map map){
 		switch(this.direction){
 			case UP:
-				if(map.isEmpty(this.getX(), this.getY() - 1)){
+				if(!map.isWall(this.getX(), this.getY() - 1)){
 					map.removeMappable(this.getX(), this.getY());
 					this.setY(this.getY() - 1);
 					return map.addMappable(this);
 				}
 				return false;
 			case LEFT:
-				if(map.isEmpty(this.getX() - 1, this.getY())){
+				if(!map.isWall(this.getX() - 1, this.getY())){
 					map.removeMappable(this.getX(), this.getY());
 					this.setX(this.getX() - 1);
 					return map.addMappable(this);
 				}
 				return false;
 			case DOWN:
-				if(map.isEmpty(this.getX(), this.getY() + 1)){
+				if(!map.isWall(this.getX(), this.getY() + 1)){
 					map.removeMappable(this.getX(), this.getY());
 					this.setY(this.getY() + 1);
 					return map.addMappable(this);
 				}
 				return false;
 			case RIGHT:
-				if(map.isEmpty(this.getX() + 1, this.getY())){
+				if(!map.isWall(this.getX() + 1, this.getY())){
 					map.removeMappable(this.getX(), this.getY());
 					this.setX(this.getX() + 1);
 					return map.addMappable(this);
