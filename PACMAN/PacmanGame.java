@@ -1,3 +1,5 @@
+import java.awt.event.KeyEvent;
+
 
 public class PacmanGame extends Game {
 	private int pillsLeft, score, timer;
@@ -7,6 +9,7 @@ public class PacmanGame extends Game {
 	public PacmanGame() {
 		super();
 		setUpGame();
+		
 	}
 	
 	/**
@@ -58,17 +61,50 @@ public class PacmanGame extends Game {
 
 	}
 	
+	/**
+	 * Handles all the inputs from the keyboard. Inputs are taken from PacmanPanel onKeypress() method
+	 * @param keycode passed from the PacmanPanel as a KeyEvent on it
+	 */
+	public void recieveInput(int keycode) {
+		//if keycode is one of the arrow keys... move pacman and ghosts
+		if (keycode==KeyEvent.VK_LEFT || keycode==KeyEvent.VK_RIGHT || keycode==KeyEvent.VK_UP || keycode==KeyEvent.VK_DOWN) {
+			movePacman(keycode);
+			moveGhosts(pacman.getX(),pacman.getY(),pacman.getState());
+		}
+
+		switch(keycode) {	
+		case KeyEvent.VK_ESCAPE:
+			System.out.println("Escape Pressed. Terminate");
+			System.exit(0);
+			break;
+		}
+	}
 	
-	
-	
+	public void movePacman(int keycode) {
+		switch (keycode) {
+		case KeyEvent.VK_LEFT:
+			pacman.setDirection(Direction.LEFT);
+			break;
+		case KeyEvent.VK_RIGHT:
+			pacman.setDirection(Direction.RIGHT);
+			break;
+		case KeyEvent.VK_UP:
+			pacman.setDirection(Direction.UP);
+			break;
+		case KeyEvent.VK_DOWN:
+			pacman.setDirection(Direction.DOWN);
+			break;
+		}
+		pacman.updateLocation(getMap());
+	}
 	
 	
 	
 	
 	public static void main(String args[]) {
-		PacmanGame tempGame = new PacmanGame();
-		new PacmanFrame(new PacmanPanel(tempGame));
-		tempGame.start();
+		PacmanGame tempGame = new PacmanGame(); //create the game
+		new PacmanFrame(new PacmanPanel(tempGame)); //set up the frame
+		tempGame.start(); //start the game
 	}
 	
 }
