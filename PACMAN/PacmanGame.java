@@ -80,6 +80,10 @@ public class PacmanGame extends Game {
 		}
 	}
 	
+	/**
+	 * Moves pacman depending on the KeyEvent passed. Method called from recieveInput().
+	 * @param keycode 4 cases: VK_LEFT,VK_RIGHT,VK_UP,VK_DOWN
+	 */
 	public void movePacman(int keycode) {
 		switch (keycode) {
 		case KeyEvent.VK_LEFT:
