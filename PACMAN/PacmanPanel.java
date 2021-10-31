@@ -18,6 +18,7 @@ public class PacmanPanel extends GamePanel{
 	public void newGame() {
 		setGame(new PacmanGame());
 		((PacmanGame)getGame()).start();
+		repaint();
 	}
 
 	/**
@@ -26,6 +27,7 @@ public class PacmanPanel extends GamePanel{
 	@Override
 	public void onKeyPress(int keycode) {
 		((PacmanGame)getGame()).recieveInput(keycode);
+		repaint();
 	}
 
 }

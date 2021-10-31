@@ -16,7 +16,7 @@ public class PacmanGame extends Game {
 	 * 
 	 */
 	public void start() {
-		System.out.println("test");
+		
 	}
 	
 	/**
@@ -69,7 +69,8 @@ public class PacmanGame extends Game {
 		//if keycode is one of the arrow keys... move pacman and ghosts
 		if (keycode==KeyEvent.VK_LEFT || keycode==KeyEvent.VK_RIGHT || keycode==KeyEvent.VK_UP || keycode==KeyEvent.VK_DOWN) {
 			movePacman(keycode);
-			moveGhosts(pacman.getX(),pacman.getY(),pacman.getState(),getMap());
+			//moveGhosts(pacman.getX(),pacman.getY(),pacman.getState(),getMap());
+			
 		}
 
 		switch(keycode) {	
