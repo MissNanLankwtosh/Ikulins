@@ -50,7 +50,8 @@ public class Ghost extends Player implements GameListener {
 				}else{
 					this.setDirection(Direction.LEFT);
 				}
-				if(!this.updateLocation(map)){
+				if(this.updateLocation(map) == true){return;}
+				else{
 					if(this.getY() > Y){
 						if(mode == PacmanState.BEASTMODE){
 							this.setDirection(Direction.DOWN);
@@ -58,19 +59,22 @@ public class Ghost extends Player implements GameListener {
 							this.setDirection(Direction.UP);
 						}
 					}
-					if(!this.updateLocation(map)){
+					if(this.updateLocation(map) == true){return;}
+					else{
 						if(mode == PacmanState.BEASTMODE){
 							this.setDirection(Direction.LEFT);
 						}else{
 							this.setDirection(Direction.RIGHT);
 						}
-						if(!this.updateLocation(map)){
+						if(this.updateLocation(map) == true){return;}
+						else{
 							if(mode == PacmanState.BEASTMODE){
 								this.setDirection(Direction.UP);
 							}else{
 								this.setDirection(Direction.DOWN);
 							}
-							this.updateLocation(map);
+							if(this.updateLocation(map) == true){return;}
+							else{return;}
 						}
 					}
 				}
