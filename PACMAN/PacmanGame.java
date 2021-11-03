@@ -39,14 +39,12 @@ public class PacmanGame extends Game {
 		pacman = new Pacman(9,9,Direction.UP,3); //add pacman
 		getMap().addMappable(pacman);
 		addListener(pacman);
-		pacman.spawn(getMap());
 		
 		int i=1; //i is a counter for which ghost is added
 		for(Ghost ghost : ghosts) { //add ghosts
 			ghost = new Ghost(i+7,5,Direction.UP,i);
 			getMap().addMappable(ghost);
 			addListener(ghost);
-			ghost.spawn(getMap());
 			i++;
 		}
 		
@@ -69,7 +67,9 @@ public class PacmanGame extends Game {
 		//if keycode is one of the arrow keys... move pacman and ghosts
 		if (keycode==KeyEvent.VK_LEFT || keycode==KeyEvent.VK_RIGHT || keycode==KeyEvent.VK_UP || keycode==KeyEvent.VK_DOWN) {
 			movePacman(keycode);
-			//moveGhosts(pacman.getX(),pacman.getY(),pacman.getState(),getMap());
+			for (Ghost g : ghosts) {
+				g.moveGhosts(pacman.getX(),pacman.getY(),pacman.getState(),getMap());
+			}
 			
 		}
 
