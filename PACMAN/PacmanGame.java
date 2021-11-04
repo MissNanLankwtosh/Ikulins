@@ -2,6 +2,8 @@ import java.awt.event.KeyEvent;
 
 
 public class PacmanGame extends Game {
+	private static final int NUM_GHOSTS = 4;
+	
 	private int pillsLeft, score, timer;
 	private Pacman pacman;
 	private Ghost[] ghosts;
@@ -40,12 +42,10 @@ public class PacmanGame extends Game {
 		getMap().addMappable(pacman);
 		addListener(pacman);
 		
-		int i=1; //i is a counter for which ghost is added
-		for(Ghost ghost : ghosts) { //add ghosts
-			ghost = new Ghost(i+7,5,Direction.UP,i);
-			getMap().addMappable(ghost);
-			addListener(ghost);
-			i++;
+		for (int i=0; i<NUM_GHOSTS; i++){ //add ghosts
+			ghosts[i] = new Ghost(i+8,5,Direction.UP,i+1);
+			getMap().addMappable(ghosts[i]);
+			addListener(ghosts[i]);
 		}
 		
 		BigPillItem bigPill = new BigPillItem(1,1); //add big pills
@@ -67,8 +67,8 @@ public class PacmanGame extends Game {
 		//if keycode is one of the arrow keys... move pacman and ghosts
 		if (keycode==KeyEvent.VK_LEFT || keycode==KeyEvent.VK_RIGHT || keycode==KeyEvent.VK_UP || keycode==KeyEvent.VK_DOWN) {
 			movePacman(keycode);
-			for (Ghost g : ghosts) {
-				g.moveGhosts(pacman.getX(),pacman.getY(),pacman.getState(),getMap());
+			for (Ghost ghost : ghosts) {
+				ghost.moveGhosts(pacman.getX(),pacman.getY(),pacman.getState(),getMap());
 			}
 			
 		}
