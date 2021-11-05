@@ -13,7 +13,7 @@ public class Ghost extends Player implements GameListener {
 
 	@Override
 	public void spawn(Map map) {
-		// TODO Auto-generated method stub
+		
 	}
 	
 	@Override
@@ -43,7 +43,6 @@ public class Ghost extends Player implements GameListener {
 	 *
 	 */
 	public void moveGhosts(int X, int Y, PacmanState mode, Map map){
-		if(mode == PacmanState.BEASTMODE){
 			if(this.getX() > X){
 				if(mode == PacmanState.BEASTMODE){
 					this.setDirection(Direction.RIGHT);
@@ -81,5 +80,5 @@ public class Ghost extends Player implements GameListener {
 			}
 		return;
 		}
-	}
+
 }
