@@ -108,7 +108,6 @@ public class PacmanGame extends Game {
 			break;
 		}
 		pacman.updateLocation(getMap());
-		timer--;
 	}
 	
 	
