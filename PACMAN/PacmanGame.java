@@ -15,10 +15,17 @@ public class PacmanGame extends Game {
 	}
 	
 	/**
-	 * 
+	 *
 	 */
 	public void start() {
 		
+	}
+	
+	/**
+	 * 
+	 */
+	public void end() {
+
 	}
 	
 	/**
@@ -101,6 +108,7 @@ public class PacmanGame extends Game {
 			break;
 		}
 		pacman.updateLocation(getMap());
+		timer--;
 	}
 	
 	
