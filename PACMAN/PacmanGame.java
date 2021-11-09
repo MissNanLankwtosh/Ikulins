@@ -34,14 +34,14 @@ public class PacmanGame extends Game {
 	public void setUpGame() {
 		score = 0;
 		timer = 180;
+		pillsLeft = 0;
 		ghosts = new Ghost[4];
 		
 		setMap(new PacmanMap("PACMAN/pacmanMap.txt")); //set up the PacmanMap
 		
 		for(int x=0; x<getMap().getX(); x++) { //add LittlePillItems to every Empty Space
 			for(int y=0; y<getMap().getY(); y++) {
-				getMap().addMappable(new LittlePillItem(x,y));
-				pillsLeft++;
+				if(getMap().addMappable(new LittlePillItem(x,y))) pillsLeft++;
 			}
 		}
 		
@@ -77,7 +77,7 @@ public class PacmanGame extends Game {
 			for (Ghost ghost : ghosts) {
 				ghost.moveGhosts(pacman.getX(),pacman.getY(),pacman.getState(),getMap());
 			}
-			
+			notify(new GameEvent("movement", this));
 		}
 
 		switch(keycode) {	
@@ -110,6 +110,18 @@ public class PacmanGame extends Game {
 		pacman.updateLocation(getMap());
 	}
 	
+	public void setScore(int score) {
+		this.score = score;
+	}
+	public int getScore() {
+		return score;
+	}
+	public void setPillsLeft(int pillsLeft) {
+		this.pillsLeft = pillsLeft;
+	}
+	public int getPillsLeft() {
+		return pillsLeft;
+	}
 	
 	
 	

@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 
 public class Pacman extends Player implements GameListener{
 	private PacmanState state;
@@ -19,7 +21,20 @@ public class Pacman extends Player implements GameListener{
 
 	@Override
 	public void onEvent(GameEvent e) {
-		// TODO Auto-generated method stub
+		if(e.getSource().equals("movement") && e.getGameValue() instanceof PacmanGame) { //if movement has occured
+			PacmanGame tempGame = (PacmanGame)e.getGameValue(); //create a temp variable of the game
+			
+			ArrayList<Mappable> array = tempGame.getMap().getMappable(getX(),getY());
+			for(int i=0; i<array.size(); i++) { //go through array to check if pacman is on something
+				if(array.get(i) instanceof LittlePillItem) { //if a LittlePillItem
+					array.remove(i);
+					tempGame.setScore(tempGame.getScore()+1);
+					tempGame.setPillsLeft(tempGame.getPillsLeft()-1);
+					System.out.println("PILLS: " + tempGame.getPillsLeft());
+					System.out.println("SCORE: " + tempGame.getScore());
+				}
+			}
+		}
 
 	}
 	/**
