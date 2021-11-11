@@ -30,8 +30,6 @@ public class Pacman extends Player implements GameListener{
 					array.remove(i);
 					tempGame.setScore(tempGame.getScore()+1);
 					tempGame.setPillsLeft(tempGame.getPillsLeft()-1);
-					System.out.println("PILLS: " + tempGame.getPillsLeft());
-					System.out.println("SCORE: " + tempGame.getScore());
 				}
 			}
 		}
