@@ -43,42 +43,124 @@ public class Ghost extends Player implements GameListener {
 	 *
 	 */
 	public void moveGhosts(int X, int Y, PacmanState mode, Map map){
-			if(this.getX() > X){
-				if(mode == PacmanState.BEASTMODE){
-					this.setDirection(Direction.RIGHT);
-				}else{
-					this.setDirection(Direction.LEFT);
-				}
-				if(this.updateLocation(map) == true){return;}
-				else{
-					if(this.getY() > Y){
-						if(mode == PacmanState.BEASTMODE){
-							this.setDirection(Direction.DOWN);
-						}else{
+		int distance_x = X - getX();
+		int distance_y = Y - getY();
+		if(mode == PacmanState.BEASTMODE){
+			if((distance_x * distance_x) <= (distance_y * distance_y)){
+					if(distance_x > 0){
+						this.setDirection(Direction.LEFT);
+					}else{
+						this.setDirection(Direction.RIGHT);
+					}
+					if(!this.updateLocation(map)){
+						if(distance_y > 0){
 							this.setDirection(Direction.UP);
+						}else{
+							this.setDirection(Direction.DOWN);
+						}
+						if(!this.updateLocation(map)){
+							if(distance_y > 0){
+								this.setDirection(Direction.DOWN);
+							}else{
+								this.setDirection(Direction.UP);
+							}
+							if(!this.updateLocation(map)){
+								if(distance_x > 0){
+									this.setDirection(Direction.RIGHT);
+								}else{
+									this.setDirection(Direction.LEFT);
+								}
+									this.updateLocation(map);
+							}
 						}
 					}
-					if(this.updateLocation(map) == true){return;}
-					else{
-						if(mode == PacmanState.BEASTMODE){
-							this.setDirection(Direction.LEFT);
-						}else{
+			}else{ //X >= Y
+				if(distance_y > 0){
+					this.setDirection(Direction.UP);
+				}else{
+					this.setDirection(Direction.DOWN);
+				}
+				if(!this.updateLocation(map)){
+					if(distance_x > 0){
+						this.setDirection(Direction.LEFT);
+					}else{
+						this.setDirection(Direction.RIGHT);
+					}
+					if(!this.updateLocation(map)){
+						if(distance_x > 0){
 							this.setDirection(Direction.RIGHT);
+						}else{
+							this.setDirection(Direction.LEFT);
 						}
-						if(this.updateLocation(map) == true){return;}
-						else{
-							if(mode == PacmanState.BEASTMODE){
-								this.setDirection(Direction.UP);
-							}else{
+						if(!this.updateLocation(map)){
+							if(distance_y > 0){
 								this.setDirection(Direction.DOWN);
+							}else{
+								this.setDirection(Direction.UP);
 							}
-							if(this.updateLocation(map) == true){return;}
-							else{return;}
+								this.updateLocation(map);
 						}
 					}
 				}
 			}
-		return;
+		}else{ //normal mode
+			if((distance_x * distance_x) <= (distance_y * distance_y)){
+				if(distance_x > 0){
+					this.setDirection(Direction.RIGHT);
+				}else{
+					this.setDirection(Direction.LEFT);
+				}
+				if(!this.updateLocation(map)){
+					if(distance_y > 0){
+						this.setDirection(Direction.DOWN);
+					}else{
+						this.setDirection(Direction.UP);
+					}
+					if(!this.updateLocation(map)){
+						if(distance_y > 0){
+							this.setDirection(Direction.UP);
+						}else{
+							this.setDirection(Direction.DOWN);
+						}
+						if(!this.updateLocation(map)){
+							if(distance_x > 0){
+								this.setDirection(Direction.LEFT);
+							}else{
+								this.setDirection(Direction.RIGHT);
+							}
+								this.updateLocation(map);
+						}
+					}
+				}
+			}else{ //X >= Y
+				if(distance_y > 0){
+					this.setDirection(Direction.DOWN);
+				}else{
+					this.setDirection(Direction.UP);
+				}
+				if(!this.updateLocation(map)){
+					if(distance_x > 0){
+						this.setDirection(Direction.RIGHT);
+					}else{
+						this.setDirection(Direction.LEFT);
+					}
+					if(!this.updateLocation(map)){
+						if(distance_x > 0){
+							this.setDirection(Direction.LEFT);
+						}else{
+							this.setDirection(Direction.RIGHT);
+						}
+						if(!this.updateLocation(map)){
+							if(distance_y > 0){
+								this.setDirection(Direction.UP);
+							}else{
+								this.setDirection(Direction.DOWN);
+							}
+								this.updateLocation(map);
+						}
+					}
+				}
+			}
 		}
-
+	}
 }
