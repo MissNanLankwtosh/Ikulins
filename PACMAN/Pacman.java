@@ -24,12 +24,34 @@ public class Pacman extends Player implements GameListener{
 		if(e.getSource().equals("movement") && e.getGameValue() instanceof PacmanGame) { //if movement has occured
 			PacmanGame tempGame = (PacmanGame)e.getGameValue(); //create a temp variable of the game
 			
-			ArrayList<Mappable> array = tempGame.getMap().getMappable(getX(),getY());
-			for(int i=0; i<array.size(); i++) { //go through array to check if pacman is on something
-				if(array.get(i) instanceof LittlePillItem) { //if a LittlePillItem
+			ArrayList<Mappable> mappables = tempGame.getMap().getMappable(getX(),getY());
+			
+			for(int i=0; i<mappables.size(); i++) { //go through array to check if pacman is on a LittlePillItem
+				if(mappables.get(i) instanceof LittlePillItem) {
 					tempGame.getMap().removeMappable(getX(),getY(),i);
 					tempGame.setScore(tempGame.getScore()+1); //increment score by 1
 					tempGame.setPillsLeft(tempGame.getPillsLeft()-1); //decrement pillsLeft by 1
+				}
+			}
+			for(int i=0; i<mappables.size(); i++) { //go through array to check if pacman is on a Ghost
+				if(mappables.get(i) instanceof Ghost) {
+					if(state == PacmanState.NORMAL) {
+						if(getNumOflives() == 0) {
+							tempGame.end();
+						}
+						else { //has lives left
+							
+						}
+						die(); //decrement lives left
+						tempGame.getMap().removeMappable(getX(),getY(),i);
+						setX(9);
+						setY(9);
+						spawn(tempGame.getMap()); //respawn pacman
+						break;
+					}
+					else { //BEASTMODE
+						
+					}
 				}
 			}
 		}
@@ -42,7 +64,6 @@ public class Pacman extends Player implements GameListener{
 	public void setState(PacmanState state) {
 		this.state = state;
 	}
-
 	/**
 	 * @return Returns pacmans current state
 	 */
