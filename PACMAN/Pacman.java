@@ -43,11 +43,11 @@ public class Pacman extends Player implements GameListener{
 							
 						}
 						die(); //decrement lives left
-						tempGame.getMap().removeMappable(getX(),getY(),i);
-						setX(9);
+						tempGame.getMap().removeMappable(getX(),getY(),i); //remove pacman
+						setX(9); 
 						setY(9);
 						spawn(tempGame.getMap()); //respawn pacman
-						break;
+						break; //break in case you were on 2 ghosts... dont want to die 2 times (errors)
 					}
 					else { //BEASTMODE
 						
