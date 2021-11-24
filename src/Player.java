@@ -100,7 +100,5 @@ public abstract class Player extends Mappable {
 	/**
 	 * Decrements current lives by one.
 	 */
-	public void die(){
-		this.setNumOflives(this.numOflives -1);
-	}
+	public void die(Map map);
 }
