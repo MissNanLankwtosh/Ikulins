@@ -17,8 +17,8 @@ public class Ghost extends Player implements GameListener {
 	}
 	
 	@Override
-	public void die() {
-		//don't decrease numOfLives when a ghost dies.
+	public void die(Map map) {
+		
 	}
 
 	@Override
