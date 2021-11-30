@@ -18,6 +18,11 @@ public class Pacman extends Player implements GameListener{
 	public void spawn(Map map) {
 		updateLocation(map);
 	}
+	
+	@Override
+	public void die(Map map) {
+		
+	}
 
 	@Override
 	public void onEvent(GameEvent e) {
@@ -27,7 +32,6 @@ public class Pacman extends Player implements GameListener{
 			PacmanGame tempGame = (PacmanGame)e.getGameValue(); //create a temp variable of the game
 			
 			ArrayList<Mappable> mappables = tempGame.getMap().getMappable(getX(),getY());
-			state = PacmanState.BEASTMODE;
 			
 			for(int i=mappables.size()-1; i>0; i--) { //go through array to check if pacman is on a LittlePillItem
 				if(mappables.get(i) instanceof LittlePillItem) {
@@ -35,23 +39,21 @@ public class Pacman extends Player implements GameListener{
 					tempGame.setScore(tempGame.getScore()+1); //increment score by 1
 					tempGame.setPillsLeft(tempGame.getPillsLeft()-1); //decrement pillsLeft by 1
 				}
-			}
-			
-			//not working
-			for(int i=mappables.size()-1; i>0; i--) { //go through array to check if pacman is on a Ghost
-				if(mappables.get(i) instanceof Ghost) {
+				else if(mappables.get(i) instanceof Ghost) {
 					if(state == PacmanState.NORMAL) { //NORMAL
-						
+						die(tempGame.getMap());
 						break;
 					}
 					else { //BEASTMODE
-						tempGame.getMap().removeMappable(getX(),getY(),i);
+						((Ghost)mappables.get(i)).die(tempGame.getMap());
 					}
 				}
 			}
+			
 		}
-
 	}
+	
+	
 	/**
 	 * Allows pacman's state to be changed.
 	 * @param state Pacman's new state

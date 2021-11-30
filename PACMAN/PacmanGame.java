@@ -73,10 +73,7 @@ public class PacmanGame extends Game {
 	public void recieveInput(int keycode) {
 		//if keycode is one of the arrow keys... move pacman and ghosts
 		if (keycode==KeyEvent.VK_LEFT || keycode==KeyEvent.VK_RIGHT || keycode==KeyEvent.VK_UP || keycode==KeyEvent.VK_DOWN) {
-			movePacman(keycode);
-			for (Ghost ghost : ghosts) {
-				ghost.moveGhosts(pacman.getX(),pacman.getY(),pacman.getState(),getMap());
-			}
+			movement(keycode);
 			notify(new GameEvent("movement", this)); //notify anything that cares if pacman and the ghosts have moved
 		}
 
@@ -92,7 +89,7 @@ public class PacmanGame extends Game {
 	 * Moves pacman depending on the KeyEvent passed. Method called from recieveInput().
 	 * @param keycode 4 cases: VK_LEFT,VK_RIGHT,VK_UP,VK_DOWN
 	 */
-	public void movePacman(int keycode) {
+	public void movement(int keycode) {
 		switch (keycode) {
 		case KeyEvent.VK_LEFT:
 			pacman.setDirection(Direction.LEFT);
@@ -108,6 +105,9 @@ public class PacmanGame extends Game {
 			break;
 		}
 		pacman.updateLocation(getMap());
+		for (Ghost ghost : ghosts) {
+			ghost.moveGhosts(pacman.getX(),pacman.getY(),pacman.getState(),getMap());
+		}
 	}
 	
 	public void setScore(int score) {
