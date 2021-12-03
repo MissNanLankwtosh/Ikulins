@@ -35,18 +35,19 @@ public class Pacman extends Player implements GameListener{
 			
 			for(int i=mappables.size()-1; i>0; i--) { //go through array to check if pacman is on a LittlePillItem
 				if(mappables.get(i) instanceof LittlePillItem) {
-					tempGame.getMap().removeMappable(getX(),getY(),i);
+					mappables.remove(mappables.get(i));
 					tempGame.setScore(tempGame.getScore()+1); //increment score by 1
 					tempGame.setPillsLeft(tempGame.getPillsLeft()-1); //decrement pillsLeft by 1
 				}
 				else if(mappables.get(i) instanceof Ghost) {
 					if(state == PacmanState.NORMAL) { //NORMAL
-						die(tempGame.getMap());
+						mappables.remove(mappables.get(i));
 						break;
 					}
 					else { //BEASTMODE
-						((Ghost)mappables.get(i)).die(tempGame.getMap());
+						mappables.remove(mappables.get(i));
 					}
+					mappables.remove(mappables.get(i));
 				}
 			}
 			
