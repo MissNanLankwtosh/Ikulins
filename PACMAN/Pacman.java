@@ -42,16 +42,19 @@ public class Pacman extends Player implements GameListener{
 				else if(mappables.get(i) instanceof Ghost) {
 					if(state == PacmanState.NORMAL) { //NORMAL
 						mappables.remove(mappables.get(i));
-						break;
 					}
 					else { //BEASTMODE
 						mappables.remove(mappables.get(i));
 					}
 					mappables.remove(mappables.get(i));
 				}
+				else if(mappables.get(i) instanceof BigPillItem) {
+					
+				}
 			}
-			
-		}
+		}//end of Movement
+		
+		
 	}
 	
 	
