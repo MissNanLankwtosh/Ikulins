@@ -75,6 +75,11 @@ public class PacmanGame extends Game {
 		if (keycode==KeyEvent.VK_LEFT || keycode==KeyEvent.VK_RIGHT || keycode==KeyEvent.VK_UP || keycode==KeyEvent.VK_DOWN) {
 			movement(keycode);
 			notify(new GameEvent("movement", this)); //notify anything that cares if pacman and the ghosts have moved
+			for (Ghost ghost : ghosts) {
+				ghost.moveGhosts(pacman.getX(),pacman.getY(),pacman.getState(),getMap());
+				notify(new GameEvent("movement", this)); //notify anything that cares if pacman and the ghosts have moved
+			}
+
 		}
 
 		switch(keycode) {	
@@ -105,9 +110,6 @@ public class PacmanGame extends Game {
 			break;
 		}
 		pacman.updateLocation(getMap());
-		for (Ghost ghost : ghosts) {
-			ghost.moveGhosts(pacman.getX(),pacman.getY(),pacman.getState(),getMap());
-		}
 	}
 	
 	public void setScore(int score) {
