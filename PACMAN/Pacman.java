@@ -32,6 +32,7 @@ public class Pacman extends Player implements GameListener{
 			PacmanGame tempGame = (PacmanGame)e.getGameValue(); //create a temp variable of the game
 			
 			ArrayList<Mappable> mappables = tempGame.getMap().getMappable(getX(),getY());
+			state = PacmanState.BEASTMODE;
 			
 			for(int i=mappables.size()-1; i>=0; i--) { //go through array to check if pacman is on a LittlePillItem
 				Mappable tempMappable = mappables.get(i);
@@ -42,12 +43,12 @@ public class Pacman extends Player implements GameListener{
 				}
 				else if(tempMappable instanceof Ghost) {
 					if(state == PacmanState.NORMAL) { //NORMAL
-						tempGame.getMap().removeMappable(getX(),getY(),i);
-						tempMappable.setX(9);
-						tempMappable.setY(5);
+					
+						
 					}
 					else { //BEASTMODE
-						
+						((Ghost)tempMappable).spawn(tempGame.getMap()); //spawn the ghost at start
+						tempGame.getMap().removeMappable(getX(),getY(),i);
 					}
 	
 				}
