@@ -7,7 +7,7 @@ This section outlines how to program the AI that the ghosts will follow in order
 
 = Details =
 
-In order to decide where each ghost should move to, there are four checks that must be accomplished.  First, the ghost will attempt to move in a direction, and if the direction is valid (no wall), then the spot where the ghost would move to is recorded, and saved as an (x,y) point.  Then pacman's position is accessed, and through some trigonometry magic, we find the straight line distance between them.
+In order to decide where each ghost should move to, there are four checks that must be accomplished.  First, the ghost will attempt to move in a direction, and if the direction is valid (no wall), then the spot where the ghost would move to is used to calculate a distance associated with that direction of movement.  The distance is found via trigonometry magic.  Then, depending on pacman's state, ghosts will take a path.
 
 * The Trigonometry Magic:
 
@@ -18,43 +18,8 @@ absolute value of pacman.y - ghost.y = DeltaY
 
 Distance = root (DeltaX^2^ + DeltaY^2^)
 
-In order to find which direction to move the ghost, we loop through four times to check each direction, check the distance if it is a valid move, and then after checking each distance, move in the direction that would cause the distance to be the lowest.
+Where the ghosts go depends on whether pacman is in BEAST MODE or not.  If pacman is hopped up on drugs and raging around, then the ghosts run away, taking the path that puts them furthest from pacman each square.
 
-* Sudo Code:
-{{{
-moveGhost( ghost g){
+If pacman has sobered up, and isn't raging around, then the ghosts take the square that puts them closest to pacman each movement they take.
 
-upDist = 1000
-rightDist = 1000
-downDist = 1000
-leftDist = 1000
-
-for(i = 0 to 3){
-   if(canMove(i)) then { // integer i represents a direction to the proposed method, where say 0 = up, 1 = right, 2 = down, 3 = left
-      dist = root((abs(pacman.y-ghost.y))^2 + (abs(pacman.x-ghost.x))^2)
-      if(i = 0) then
-         {upDist = dist}
-      else if(i = 1) then
-         {rightDist = dist}
-      else if(i = 2) then
-         {downDist = dist}
-      else if(i = 3) then
-         {leftDist = dist}
-   }
-}
-
-if(upDist < rightDist and upDist < downDist and upDist < leftDist) then
-   {g.moveUp()}
-else if(rightDist < upDist and rightDist < downDist and rightDist < leftDist) then
-   {g.moveRight()}
-else if(downDist < upDist and downDist < rightDist and downDist < leftDist) then
-   {g.moveDown()}
-else if(leftDist < upDist and leftDist < righDist and leftDist < downDist) then
-   {g.moveLeft()}
-//if it hasn't made a move by now, it wont move, but given each variable starts at 1000, 
-//and just making the calculations for valid moves will be less than 1000, it should never happen that a ghost doesn't move
-
-}
-}}}
-
-We start with each distance variable at 1000 because that way if the move is invalid, the distance would be 1000 instead of 0, so that way when we check for the minimum distance, we don't get confused by invalid moves.
+Ghosts are DISCOURAGED from turning around directly.  They CAN if they are some how cornered and turning directly around is the only path. 
