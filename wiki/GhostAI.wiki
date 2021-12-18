@@ -2,12 +2,11 @@
 
 = Introduction =
 
-This section outlines how to program the AI that the ghosts will follow in order to decide how to best move.  The section will be explained, and then programmed in sudo code that will likely look a lot like java anyways.
-
+This section outlines the AI that the ghosts will follow in order to decide how to best move.
 
 = Details =
 
-In order to decide where each ghost should move to, there are four checks that must be accomplished.  First, the ghost will attempt to move in a direction, and if the direction is valid (no wall), then the spot where the ghost would move to is used to calculate a distance associated with that direction of movement.  The distance is found via trigonometry magic.  Then, depending on pacman's state, ghosts will take a path.
+In order to decide where each ghost should move to, all possible directions are assessed for possibility of movement.  First, the ghost will attempt to move in a direction, and if the direction is valid (no wall), then the spot where the ghost would move to is used to calculate a distance associated with that direction of movement.  The distance is found via trigonometry magic.  Then, depending on pacman's state, ghosts will take a path.
 
 * The Trigonometry Magic:
 
