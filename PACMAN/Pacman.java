@@ -1,10 +1,15 @@
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import javax.swing.Timer;
 
 
-public class Pacman extends Player implements GameListener{
+public class Pacman extends Player implements GameListener, ActionListener{
 	private PacmanState state;
+	private Timer beastTimer;
 	public Pacman(int x, int y) {
 		super(x, y);
+		beastTimer = new Timer(5000, this);
 		// TODO Auto-generated constructor stub
 	}
 	
@@ -67,6 +72,10 @@ public class Pacman extends Player implements GameListener{
 	 * @param state Pacman's new state
 	 */
 	public void setState(PacmanState state) {
+		if(state == PacmanState.BEASTMODE){
+			
+			beastTimer.start();
+		}
 		this.state = state;
 	}
 	/**
@@ -74,6 +83,12 @@ public class Pacman extends Player implements GameListener{
 	 */
 	public PacmanState getState() {
 		return state;
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		beastTimer.stop();
+		this.setState(PacmanState.NORMAL);
 	}
 
 }
