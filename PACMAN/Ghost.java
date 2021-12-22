@@ -128,6 +128,15 @@ public class Ghost extends Player implements GameListener {
 				rDist = 990;}
 			break;
 		}
+		// Here, we're adding a small amount of randomness to the distances (a number between 0 and 1)
+		// The small amount of randomness prevents situations where distances are exactly the same (hopefully)
+		// but is a small enough change to not cause changes in what would be considered the right path to
+		// take
+		uDist += Math.random();
+		rDist += Math.random();
+		dDist += Math.random();
+		lDist += Math.random();
+		
 		// By now, the opposite direction the ghost was travelling is less desirable than other paths, but
 		// paths that would lead to walls are the least desirable
 		if(mode == PacmanState.BEASTMODE){//running away
