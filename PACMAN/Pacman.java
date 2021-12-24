@@ -10,6 +10,7 @@ public class Pacman extends Player implements GameListener, ActionListener{
 	public Pacman(int x, int y) {
 		super(x, y);
 		beastTimer = new Timer(5000, this);
+		beastTimer.stop();
 		// TODO Auto-generated constructor stub
 	}
 	
