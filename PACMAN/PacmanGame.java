@@ -4,7 +4,7 @@ import java.awt.event.KeyEvent;
 public class PacmanGame extends Game {
 	private static final int NUM_GHOSTS = 4;
 	
-	private int pillsLeft, score, timer;
+	private int pillsLeft, score;
 	private Pacman pacman;
 	private Ghost[] ghosts;
 	
@@ -33,7 +33,6 @@ public class PacmanGame extends Game {
 	 */
 	public void setUpGame() {
 		score = 0;
-		timer = 180;
 		pillsLeft = 0;
 		ghosts = new Ghost[4];
 		
