@@ -18,16 +18,26 @@ public class Pacman extends Player implements GameListener, ActionListener{
 		super(x,y,direction,numOfLives);
 		setImage("PACMAN/pacmanimg.png");
 		state = PacmanState.NORMAL;
+		beastTimer = new Timer(5000, this);
 	}
 
 	@Override
 	public void spawn(Map map) {
-		updateLocation(map);
+		setX(9);
+		setY(9);
+		map.addMappable(this);
 	}
 	
 	@Override
 	public void die(Map map) {
-		
+		setNumOflives(getNumOflives()-1);
+		ArrayList<Mappable> mappableArray = map.getMappable(getX(),getY());
+		for (int i=mappableArray.size()-1; i >= 0; i--) {
+			if(mappableArray.get(i) == this) {
+				map.removeMappable(getX(),getY(),i);
+			}
+		}
+	
 	}
 
 	@Override
@@ -38,7 +48,6 @@ public class Pacman extends Player implements GameListener, ActionListener{
 			PacmanGame tempGame = (PacmanGame)e.getGameValue(); //create a temp variable of the game
 			
 			ArrayList<Mappable> mappables = tempGame.getMap().getMappable(getX(),getY());
-			state = PacmanState.BEASTMODE;
 			
 			for(int i=mappables.size()-1; i>=0; i--) { //go through array to check if pacman is on a LittlePillItem
 				Mappable tempMappable = mappables.get(i);
@@ -49,22 +58,20 @@ public class Pacman extends Player implements GameListener, ActionListener{
 				}
 				else if(tempMappable instanceof Ghost) {
 					if(state == PacmanState.NORMAL) { //NORMAL
-					
-						
+						die(tempGame.getMap());
+						spawn(tempGame.getMap());
 					}
 					else { //BEASTMODE
-						((Ghost)tempMappable).spawn(tempGame.getMap()); //spawn the ghost at start
-						tempGame.getMap().removeMappable(getX(),getY(),i);
+						((Ghost)tempMappable).die(tempGame.getMap()); //spawn the ghost at start
 					}
-	
 				}
 				else if(tempMappable instanceof BigPillItem) {
-					
+					tempGame.getMap().removeMappable(getX(),getY(),i);
+					setState(PacmanState.BEASTMODE); //turn on BEASTMODE!
+					//change images to beastmode
 				}
 			}
 		}//end of Movement
-		
-		
 	}
 	
 	

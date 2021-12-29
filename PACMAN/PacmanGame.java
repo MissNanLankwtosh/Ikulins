@@ -45,12 +45,12 @@ public class PacmanGame extends Game {
 		}
 		
 		pacman = new Pacman(9,9,Direction.UP,3); //add pacman
-		getMap().addMappable(pacman);
+		pacman.spawn(getMap());
 		addListener(pacman);
 		
 		for (int i=0; i<NUM_GHOSTS; i++){ //add ghosts
-			ghosts[i] = new Ghost(i+8,5,Direction.UP,i+1);
-			getMap().addMappable(ghosts[i]);
+			ghosts[i] = new Ghost(i+8,5,Direction.DOWN,i+1);
+			ghosts[i].spawn(getMap());
 			addListener(ghosts[i]);
 		}
 		

@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 
 public class Ghost extends Player implements GameListener {
 
@@ -13,12 +15,20 @@ public class Ghost extends Player implements GameListener {
 
 	@Override
 	public void spawn(Map map) {
-		
+		setX(7+getNumOflives());
+		setY(5);
+		map.addMappable(this);
 	}
 	
 	@Override
 	public void die(Map map) {
-		
+		ArrayList<Mappable> mappableArray = map.getMappable(getX(),getY());
+		for (int i=mappableArray.size()-1; i >= 0; i--) {
+			if(mappableArray.get(i) == this) {
+				map.removeMappable(getX(),getY(),i);
+			}
+		}
+		spawn(map);
 	}
 
 	@Override
