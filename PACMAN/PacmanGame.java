@@ -70,30 +70,6 @@ public class PacmanGame extends Game {
 	 * @param keycode passed from the PacmanPanel as a KeyEvent on it
 	 */
 	public void recieveInput(int keycode) {
-		//if keycode is one of the arrow keys... move pacman and ghosts
-		if (keycode==KeyEvent.VK_LEFT || keycode==KeyEvent.VK_RIGHT || keycode==KeyEvent.VK_UP || keycode==KeyEvent.VK_DOWN) {
-			movement(keycode);
-			notify(new GameEvent("movement", this)); //notify anything that cares if pacman and the ghosts have moved
-			for (Ghost ghost : ghosts) {
-				ghost.moveGhosts(pacman.getX(),pacman.getY(),pacman.getState(),getMap());
-				notify(new GameEvent("movement", this)); //notify anything that cares if pacman and the ghosts have moved
-			}
-
-		}
-
-		switch(keycode) {	
-		case KeyEvent.VK_ESCAPE:
-			System.out.println("Escape Pressed. Terminate");
-			System.exit(0);
-			break;
-		}
-	}
-	
-	/**
-	 * Moves pacman depending on the KeyEvent passed. Method called from recieveInput().
-	 * @param keycode 4 cases: VK_LEFT,VK_RIGHT,VK_UP,VK_DOWN
-	 */
-	public void movement(int keycode) {
 		switch (keycode) {
 		case KeyEvent.VK_LEFT:
 			pacman.setDirection(Direction.LEFT);
@@ -107,8 +83,28 @@ public class PacmanGame extends Game {
 		case KeyEvent.VK_DOWN:
 			pacman.setDirection(Direction.DOWN);
 			break;
+		case KeyEvent.VK_ESCAPE:
+			System.out.println("Escape Pressed. Terminate");
+			System.exit(0);
+			break;
 		}
 		pacman.updateLocation(getMap());
+		
+		notify(new GameEvent("movement", this)); //notify anything that cares if pacman and the ghosts have moved
+		for (Ghost ghost : ghosts) {
+			ghost.moveGhosts(pacman.getX(),pacman.getY(),pacman.getState(),getMap());
+			notify(new GameEvent("movement", this)); //notify anything that cares if pacman and the ghosts have moved
+		}
+
+}
+
+
+	/**
+	 * Moves pacman depending on the KeyEvent passed. Method called from recieveInput().
+	 * @param keycode 4 cases: VK_LEFT,VK_RIGHT,VK_UP,VK_DOWN
+	 */
+	public void movement(int keycode) {
+		
 	}
 	
 	public void setScore(int score) {

@@ -1,7 +1,12 @@
-import java.awt.event.KeyEvent;
+
 
 
 public class PacmanPanel extends GamePanel{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	public PacmanPanel(Game g) {
 		super(g);
