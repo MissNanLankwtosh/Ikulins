@@ -4,7 +4,6 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
@@ -150,11 +149,6 @@ public abstract class GamePanel extends JPanel{
 	 * @param keycode integer representation of current key being pressed
 	 */
 	public abstract void onKeyPress(int keycode);
-	/**
-	 * Simply redraws everything on any event
-	 */
-	public void actionPerformed(ActionEvent e) {
-	        repaint();  
-	}
+
 
 }
