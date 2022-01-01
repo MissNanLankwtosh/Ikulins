@@ -233,5 +233,26 @@ public abstract class Map {
 	public int getY() {
 		return ySize;
 	}
-
+	
+	@Override
+	public String toString(){
+		String s = "";
+		for(int x = 0; x < this.getX(); x++){
+			for(int y = 0; y < this.getY(); y++){
+				switch(map[x][y]){
+					case WALL:
+						s += "W";
+						break;
+					case EMPTY:
+						s += "E";
+						break;
+					case MAPPABLE:
+						s += getMappable(x,y).get(0).toString();
+						break;
+				}
+			}
+			s += "\n";
+		}
+		return s;
+	}
 }
