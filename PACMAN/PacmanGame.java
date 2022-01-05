@@ -15,6 +15,12 @@ public class PacmanGame extends Game {
 	}
 	
 	/**
+	 * Prints current map to console
+	 */
+	public void printToConsole(){
+		System.out.println(this.getMap());
+	}
+	/**
 	 *
 	 */
 	public void start() {

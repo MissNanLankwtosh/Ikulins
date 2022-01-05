@@ -18,5 +18,9 @@ public class LittlePillItem extends Item {
 		// TODO Auto-generated method stub
 
 	}
+	@Override
+	public String toString(){
+		return "L";
+	}
 
 }

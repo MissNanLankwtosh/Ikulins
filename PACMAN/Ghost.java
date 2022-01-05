@@ -175,4 +175,9 @@ public class Ghost extends Player implements GameListener {
 		this.updateLocation(map); //actually move the ghosts
 	return;
 	}
+	
+	@Override
+	public String toString(){
+		return "G";
+	}
 }
