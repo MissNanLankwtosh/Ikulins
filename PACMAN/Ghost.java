@@ -176,8 +176,4 @@ public class Ghost extends Player implements GameListener {
 	return;
 	}
 	
-	@Override
-	public String toString(){
-		return "G";
-	}
 }

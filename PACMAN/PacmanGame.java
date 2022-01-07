@@ -18,7 +18,7 @@ public class PacmanGame extends Game {
 	 * Prints current map to console
 	 */
 	public void printToConsole(){
-		System.out.println(this.getMap());
+		System.out.println("Score: " + score);
 	}
 	/**
 	 *
@@ -101,6 +101,7 @@ public class PacmanGame extends Game {
 			ghost.moveGhosts(pacman.getX(),pacman.getY(),pacman.getState(),getMap());
 			notify(new GameEvent("movement", this)); //notify anything that cares if pacman and the ghosts have moved
 		}
+		printToConsole();
 
 }
 

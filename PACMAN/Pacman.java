@@ -98,8 +98,5 @@ public class Pacman extends Player implements GameListener, ActionListener{
 		beastTimer.stop();
 		this.setState(PacmanState.NORMAL);
 	}
-	@Override
-	public String toString(){
-		return "P";
-	}
+
 }
