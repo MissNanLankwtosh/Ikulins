@@ -18,10 +18,4 @@ public class Hero extends Player {
 
 	}
 
-	@Override
-	public void onEvent(GameEvent e) {
-		// TODO Auto-generated method stub
-
-	}
-
 }

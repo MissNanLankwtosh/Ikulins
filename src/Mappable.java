@@ -17,8 +17,6 @@ public abstract class Mappable {
 		this.x = x;
 		this.y = y;
 	}
-	
-	public abstract void onEvent(GameEvent e);
 
 	/**
 	 * @return X value of Mappable
