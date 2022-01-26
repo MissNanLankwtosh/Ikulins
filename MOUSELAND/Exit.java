@@ -12,10 +12,4 @@ public class Exit extends Item {
 
 	}
 
-	@Override
-	public void onEvent(GameEvent e) {
-		// TODO Auto-generated method stub
-
-	}
-
 }
