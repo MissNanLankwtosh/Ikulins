@@ -1,4 +1,4 @@
-import java.util.ArrayList;
+
 
 
 public class Hero extends Player {
@@ -48,10 +48,7 @@ public class Hero extends Player {
 
 	@Override
 	public void die(Map map) {
-		ArrayList<Mappable> onDmap = map.getMappable(getX(), getY());
-		for(Mappable m : onDmap){
-			
-		}
+		System.exit(-1);
 	}
 	/**
 	 * Lays down trap on current position.
