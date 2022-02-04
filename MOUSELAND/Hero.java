@@ -1,8 +1,7 @@
 
 
 
-public class Hero extends Player {
-	
+public class Hero extends Player implements GameListener{
 	private int numOfTraps;
 	private final int MAXNUMTRAP = 4;
 	private final int INITIALX = 1;
@@ -59,6 +58,12 @@ public class Hero extends Player {
 			map.addMappable(new TrapItem(this.getX(), this.getY()));
 			numOfTraps--;
 		}
+		
+	}
+
+	@Override
+	public void onEvent(GameEvent e) {
+		// TODO Auto-generated method stub
 		
 	}
 	
