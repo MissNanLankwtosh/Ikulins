@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class Mouse extends Player implements GameListener {
 	public Mouse(int x, int y){
 		super(x, y);
+		setImage("MOUSELAND/mouse.png");
 	}
 	public Mouse(int x, int y, Direction direction, int numOfLives) {
 		super(x,y,direction,numOfLives);
@@ -13,9 +14,6 @@ public class Mouse extends Player implements GameListener {
 
 	@Override
 	public void spawn(Map map) {
-		// TODO Auto-generated method stub
-		setX(7+getNumOflives());
-		setY(5);
 		map.addMappable(this);
 	}
 
@@ -24,17 +22,12 @@ public class Mouse extends Player implements GameListener {
 		// TODO Auto-generated method stub
 		ArrayList<Mappable> mappableArray = map.getMappable(getX(),getY());
 		for (int i=mappableArray.size()-1; i >= 0; i--) {
-			if(mappableArray.get(i) == this) {
+			if(mappableArray.get(i).getClass().getName() == "Mouse") {
 				map.removeMappable(getX(),getY(),i);
 			}
 		}
 	}
 
-	@Override
-	public void onEvent(GameEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
 	/**
 	 * This function dictates the movement of the mice.
 	 * The  mice will constantly try to chase you down, and their movement is decided on which path is the shortest distance
@@ -127,5 +120,10 @@ public class Mouse extends Player implements GameListener {
 		}
 		this.updateLocation(map); //actually move the mice
 	return;
+	}
+	@Override
+	public void onEvent(GameEvent e) {
+		
+		
 	}
 }
