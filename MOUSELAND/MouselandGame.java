@@ -76,14 +76,6 @@ public class MouselandGame extends Game {
 			notify(new GameEvent("movement", this)); //notify anything that cares if hero and the mice have moved
 		}
 
-}
-
-	/**
-	 * Moves hero depending on the KeyEvent passed. Method called from recieveInput().
-	 * @param keycode 4 cases: VK_LEFT,VK_RIGHT,VK_UP,VK_DOWN
-	 */
-	public void movement(int keycode) {
-		
 	}
 	
 	public static void main(String args[]) {
