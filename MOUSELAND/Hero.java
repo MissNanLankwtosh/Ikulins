@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 
 
 
@@ -64,7 +66,27 @@ public class Hero extends Player implements GameListener{
 	@Override
 	public void onEvent(GameEvent e) {
 		// TODO Auto-generated method stub
-		
+		// TODO Auto-generated method stub
+		/**
+		 * If hero hits a mouse, .die()
+		 * If hero hits the ladder, print you win, die.
+		 * That is all.
+		 */
+		//MOVEMENT
+		if(e.getSource().equals("heromovement") && e.getGameValue() instanceof MouselandGame) { //if mouse movement has occurred
+			MouselandGame tempGame = (MouselandGame)e.getGameValue(); //create a temp variable of the game
+			ArrayList<Mappable> mappableArray = tempGame.getMap().getMappable(getX(),getY());
+			for (int i=mappableArray.size()-1; i >= 0; i--) {
+				if(mappableArray.get(i).getClass().getName() == "Mouse") {
+					this.die(tempGame.getMap());
+				}
+				if(mappableArray.get(i).getClass().getName() == "Exit") {
+					System.out.println("You won!");
+					this.die(tempGame.getMap());
+				}
+				
+			}
+		}//end of Movement
 	}
 	
 	

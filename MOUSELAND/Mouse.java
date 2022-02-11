@@ -28,6 +28,30 @@ public class Mouse extends Player implements GameListener {
 		}
 	}
 
+	@Override
+	public void onEvent(GameEvent e) {
+		// TODO Auto-generated method stub
+		/**
+		 * If mouse hits a trap, completely remove the mouse and trap from the location.
+		 * If mouse hits the hero, exit the game.
+		 * That is all.
+		 */
+		//MOVEMENT
+		if(e.getSource().equals("mousemovement") && e.getGameValue() instanceof MouselandGame) { //if mouse movement has occurred
+			MouselandGame tempGame = (MouselandGame)e.getGameValue(); //create a temp variable of the game
+			ArrayList<Mappable> mappableArray = tempGame.getMap().getMappable(getX(),getY());
+			for (int i=mappableArray.size()-1; i >= 0; i--) {
+				if(mappableArray.get(i).getClass().getName() == "Hero") {
+					((Hero)mappableArray.get(i)).die(tempGame.getMap());
+				}
+				if(mappableArray.get(i).getClass().getName() == "TrapItem") {
+					this.die(tempGame.getMap());
+					tempGame.getMap().removeMappable(getX(), getY(), i);
+				}
+				
+			}
+		}//end of Movement
+	}
 	/**
 	 * This function dictates the movement of the mice.
 	 * The  mice will constantly try to chase you down, and their movement is decided on which path is the shortest distance
@@ -120,10 +144,5 @@ public class Mouse extends Player implements GameListener {
 		}
 		this.updateLocation(map); //actually move the mice
 	return;
-	}
-	@Override
-	public void onEvent(GameEvent e) {
-		
-		
 	}
 }

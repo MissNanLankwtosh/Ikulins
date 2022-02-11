@@ -70,13 +70,17 @@ public class MouselandGame extends Game {
 		}
 		hero.updateLocation(getMap());
 		
-		notify(new GameEvent("movement", this)); //notify anything that cares if hero and the mice have moved
+		notify(new GameEvent("heroMovement", this)); //notify anything that cares if hero and the mice have moved
+		for (Mouse mouse: mice) {
+			mouse.moveMice(hero.getX(),hero.getY(),getMap());
+			notify(new GameEvent("mouseMovement", this)); //notify anything that cares if hero and the mice have moved
 		if(keycode >= KeyEvent.VK_LEFT && keycode <= KeyEvent.VK_DOWN){
-			for (Mouse mouse: mice) {
-				mouse.moveMice(hero.getX(),hero.getY(),getMap());
+			for (Mouse mouse1: mice) {
+				mouse1.moveMice(hero.getX(),hero.getY(),getMap());
 				notify(new GameEvent("movement", this)); //notify anything that cares if hero and the mice have moved
 			}
 		}
+}
 	}
 	
 	public static void main(String args[]) {
