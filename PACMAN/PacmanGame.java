@@ -97,11 +97,15 @@ public class PacmanGame extends Game {
 		pacman.updateLocation(getMap());
 		
 		notify(new GameEvent("movement", this)); //notify anything that cares if pacman and the ghosts have moved
-		for (Ghost ghost : ghosts) {
-			ghost.moveGhosts(pacman.getX(),pacman.getY(),pacman.getState(),getMap());
-			notify(new GameEvent("movement", this)); //notify anything that cares if pacman and the ghosts have moved
+		if(keycode >= KeyEvent.VK_LEFT && keycode <= KeyEvent.VK_DOWN){
+			for (Ghost ghost : ghosts) {
+				ghost.moveGhosts(pacman.getX(),pacman.getY(),pacman.getState(),getMap());
+				notify(new GameEvent("movement", this)); //notify anything that cares if pacman and the ghosts have moved
+			}
+			printToConsole();
 		}
-		printToConsole();
+		
+		
 
 }
 
