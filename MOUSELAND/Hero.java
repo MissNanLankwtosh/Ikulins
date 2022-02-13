@@ -56,8 +56,21 @@ public class Hero extends Player implements GameListener{
 	 * @param map Map on which the trap is to be laid
 	 */
 	public void layTrap(Map map){
-		if(numOfTraps != 0){	
-			map.addMappable(new TrapItem(this.getX(), this.getY()));
+		if(numOfTraps != 0){
+			switch(this.getDirection()){
+			case UP:
+				if(!map.addMappable(new TrapItem(this.getX(), this.getY()-1))) return;
+				break;
+			case DOWN:
+				if(!map.addMappable(new TrapItem(this.getX(), this.getY()+1))) return;
+				break;
+			case LEFT:
+				if(!map.addMappable(new TrapItem(this.getX()-1, this.getY()))) return;
+				break;
+			case RIGHT:
+				if(!map.addMappable(new TrapItem(this.getX()+1, this.getY()))) return;
+				break;
+			}
 			numOfTraps--;
 		}
 		
@@ -73,7 +86,7 @@ public class Hero extends Player implements GameListener{
 		 * That is all.
 		 */
 		//MOVEMENT
-		if(e.getSource().equals("heromovement") && e.getGameValue() instanceof MouselandGame) { //if mouse movement has occurred
+		if(e.getSource().equals("heroMovement") && e.getGameValue() instanceof MouselandGame) { //if mouse movement has occurred
 			MouselandGame tempGame = (MouselandGame)e.getGameValue(); //create a temp variable of the game
 			ArrayList<Mappable> mappableArray = tempGame.getMap().getMappable(getX(),getY());
 			for (int i=mappableArray.size()-1; i >= 0; i--) {

@@ -22,8 +22,9 @@ public class Mouse extends Player implements GameListener {
 		// TODO Auto-generated method stub
 		ArrayList<Mappable> mappableArray = map.getMappable(getX(),getY());
 		for (int i=mappableArray.size()-1; i >= 0; i--) {
+			System.out.println(mappableArray.get(i).getClass().getName());
 			if(mappableArray.get(i).getClass().getName() == "Mouse") {
-				map.removeMappable(getX(),getY(),i);
+				map.removeMappable(getX(), getY(), i);
 			}
 		}
 	}
@@ -37,7 +38,7 @@ public class Mouse extends Player implements GameListener {
 		 * That is all.
 		 */
 		//MOVEMENT
-		if(e.getSource().equals("mousemovement") && e.getGameValue() instanceof MouselandGame) { //if mouse movement has occurred
+		if(e.getSource().equals("mouseMovement") && e.getGameValue() instanceof MouselandGame) { //if mouse movement has occurred
 			MouselandGame tempGame = (MouselandGame)e.getGameValue(); //create a temp variable of the game
 			ArrayList<Mappable> mappableArray = tempGame.getMap().getMappable(getX(),getY());
 			for (int i=mappableArray.size()-1; i >= 0; i--) {
@@ -46,6 +47,7 @@ public class Mouse extends Player implements GameListener {
 				}
 				if(mappableArray.get(i).getClass().getName() == "TrapItem") {
 					this.die(tempGame.getMap());
+					i--;
 					tempGame.getMap().removeMappable(getX(), getY(), i);
 				}
 				

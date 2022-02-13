@@ -2,9 +2,18 @@ import java.awt.event.KeyEvent;
 
 
 public class MouselandGame extends Game {
-	private static final int NUM_MICE = 4;
+	private int NUM_MICE = 4;
+	public int getNUM_MICE() {
+		return NUM_MICE;
+	}
+
+	public void setNUM_MICE(int nUM_MICE) {
+		NUM_MICE = nUM_MICE;
+	}
+
 	private Hero hero;
 	private Mouse[] mice;
+	private Exit ladder;
 	
 	public MouselandGame() {
 		super();
@@ -30,10 +39,10 @@ public class MouselandGame extends Game {
 	 * Sets up the map and all the players/items for a new game
 	 */
 	public void setUpGame() {
-		mice = new Mouse[4];
-		
-		setMap(new MouselandMap("PACMAN/mouselandMap.txt")); //set up the PacmanMap
-		
+		mice = new Mouse[NUM_MICE];
+		ladder = new Exit(18, 1);
+		setMap(new MouselandMap("MOUSELAND/mouselandMap.txt")); //set up the PacmanMap
+		getMap().addMappable(ladder);
 		hero = new Hero(9,9,Direction.UP,3); //add Hero
 		hero.spawn(getMap());
 		addListener(hero);
@@ -44,7 +53,6 @@ public class MouselandGame extends Game {
 			addListener(mice[i]);
 		}
 	}
-	
 	/**
 	 * Handles all the inputs from the keyboard. Inputs are taken from PacmanPanel onKeypress() method
 	 * @param keycode passed from the PacmanPanel as a KeyEvent on it
@@ -63,6 +71,9 @@ public class MouselandGame extends Game {
 		case KeyEvent.VK_DOWN:
 			hero.setDirection(Direction.DOWN);
 			break;
+		case KeyEvent.VK_SPACE:
+			hero.layTrap(this.getMap());
+			return; //return made a trap second
 		case KeyEvent.VK_ESCAPE:
 			System.out.println("Escape Pressed. Terminate");
 			System.exit(0);
@@ -71,16 +82,12 @@ public class MouselandGame extends Game {
 		hero.updateLocation(getMap());
 		
 		notify(new GameEvent("heroMovement", this)); //notify anything that cares if hero and the mice have moved
-		for (Mouse mouse: mice) {
-			mouse.moveMice(hero.getX(),hero.getY(),getMap());
-			notify(new GameEvent("mouseMovement", this)); //notify anything that cares if hero and the mice have moved
 		if(keycode >= KeyEvent.VK_LEFT && keycode <= KeyEvent.VK_DOWN){
 			for (Mouse mouse1: mice) {
 				mouse1.moveMice(hero.getX(),hero.getY(),getMap());
-				notify(new GameEvent("movement", this)); //notify anything that cares if hero and the mice have moved
+				notify(new GameEvent("mousemovement", this)); //notify anything that cares if hero and the mice have moved
 			}
 		}
-}
 	}
 	
 	public static void main(String args[]) {
