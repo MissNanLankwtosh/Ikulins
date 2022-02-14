@@ -1,15 +1,19 @@
 
+import java.awt.Image;
 import java.util.ArrayList;
 
 
 public class Mouse extends Player implements GameListener {
+	private boolean isAlive;
 	public Mouse(int x, int y){
 		super(x, y);
 		setImage("MOUSELAND/mouse.png");
+		this.isAlive = true;
 	}
 	public Mouse(int x, int y, Direction direction, int numOfLives) {
 		super(x,y,direction,numOfLives);
 		setImage("MOUSELAND/mouse.png");
+		this.isAlive = true;
 	}
 
 	@Override
@@ -25,6 +29,8 @@ public class Mouse extends Player implements GameListener {
 			System.out.println(mappableArray.get(i).getClass().getName());
 			if(mappableArray.get(i).getClass().getName() == "Mouse") {
 				map.removeMappable(getX(), getY(), i);
+				this.isAlive = false;
+				this.setImage((Image)null); 
 			}
 		}
 	}
@@ -62,6 +68,7 @@ public class Mouse extends Player implements GameListener {
 	 * @param map
 	 */
 	public void moveMice(int X, int Y, Map map){
+		if(!isAlive){ return; }
 		//for the purpose of this method, 0 is up, 1 is right, 2 is down, 3 is left
 		double uDist = 0;
 		double rDist = 0;

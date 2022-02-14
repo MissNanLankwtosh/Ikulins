@@ -3,14 +3,6 @@ import java.awt.event.KeyEvent;
 
 public class MouselandGame extends Game {
 	private int NUM_MICE = 4;
-	public int getNUM_MICE() {
-		return NUM_MICE;
-	}
-
-	public void setNUM_MICE(int nUM_MICE) {
-		NUM_MICE = nUM_MICE;
-	}
-
 	private Hero hero;
 	private Mouse[] mice;
 	private Exit ladder;
@@ -83,9 +75,9 @@ public class MouselandGame extends Game {
 		
 		notify(new GameEvent("heroMovement", this)); //notify anything that cares if hero and the mice have moved
 		if(keycode >= KeyEvent.VK_LEFT && keycode <= KeyEvent.VK_DOWN){
-			for (Mouse mouse1: mice) {
-				mouse1.moveMice(hero.getX(),hero.getY(),getMap());
-				notify(new GameEvent("mousemovement", this)); //notify anything that cares if hero and the mice have moved
+			for (int x = 0; x < NUM_MICE; x++){
+					mice[x].moveMice(hero.getX(),hero.getY(),getMap());
+					notify(new GameEvent("mouseMovement", this)); //notify anything that cares if hero and the mice have moved
 			}
 		}
 	}
