@@ -28,7 +28,8 @@ public class SurvivalPanel extends GamePanel {
 	@Override
 	public void onKeyPress(int keycode) {
 		// TODO Auto-generated method stub
-
+		((SurvivalGame)getGame()).recieveInput(keycode);
+		repaint();
 	}
 
 }
