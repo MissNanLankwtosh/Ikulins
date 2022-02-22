@@ -4,7 +4,7 @@
 public class PacmanPanel extends GamePanel{
 
 	/**
-	 * 
+	 * The Panel - Used for Graphical Representation
 	 */
 	private static final long serialVersionUID = 1L;
 
@@ -20,6 +20,9 @@ public class PacmanPanel extends GamePanel{
 	}
 
 	@Override
+	/**
+	 * Creates a new pacman game and displays it on the frame
+	 */
 	public void newGame() {
 		setGame(new PacmanGame());
 		((PacmanGame)getGame()).start();

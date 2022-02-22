@@ -1,4 +1,9 @@
-
+/**
+ * 
+ * This class extends Item and represents the big pill in the Pacman game.
+ * On the graphical interface, it is displayed as bigpill.png
+ *
+ */
 public class BigPillItem extends Item {
 
 	public BigPillItem(int x, int y) {

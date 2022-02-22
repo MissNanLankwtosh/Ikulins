@@ -1,4 +1,4 @@
-/*
+/**
  * Pacmans current state.
  */
 public enum PacmanState {

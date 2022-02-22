@@ -3,7 +3,12 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.Timer;
 
-
+/**
+ * This is the class representing the Pacman player.
+ * @variable state - represents the state (Normal or BeastMode) of Pacman
+ * @variable timer - counts down the time left when Pacman is in BeastMode
+ * 
+ */
 public class Pacman extends Player implements GameListener, ActionListener{
 	private PacmanState state;
 	private Timer beastTimer;
@@ -13,7 +18,13 @@ public class Pacman extends Player implements GameListener, ActionListener{
 		beastTimer.stop();
 		// TODO Auto-generated constructor stub
 	}
-	
+	/**
+	 * Initializes Pacman and associates the pacman image to the player
+	 * @param x
+	 * @param y
+	 * @param direction
+	 * @param numOfLives
+	 */
 	public Pacman(int x, int y, Direction direction, int numOfLives) {
 		super(x,y,direction,numOfLives);
 		setImage("PACMAN/pacmanimg.png");
@@ -21,14 +32,17 @@ public class Pacman extends Player implements GameListener, ActionListener{
 		beastTimer = new Timer(5000, this);
 	}
 
-	@Override
+	/**
+	 * This method spawns Pacman on the Map. Pacman will always spawn at location (9,9) on the Map.
+	 */
 	public void spawn(Map map) {
 		setX(9);
 		setY(9);
 		map.addMappable(this);
 	}
-	
-	@Override
+	/**
+	 * Kills Pacman. Removes  existance on the map.
+	 */
 	public void die(Map map) {
 		setNumOflives(getNumOflives()-1);
 		ArrayList<Mappable> mappableArray = map.getMappable(getX(),getY());
@@ -41,6 +55,13 @@ public class Pacman extends Player implements GameListener, ActionListener{
 	}
 
 	@Override
+	/**
+	 * This deals with movement affecting Pacman in some way.
+	 * If Pacman moves, he can either collide with a little pill, a big pill, or a ghost
+	 * @case little pill, score must be increased, the little pill must be removed 
+	 * @case big pill, Pacman's state must be changed
+	 * @case ghost, must kill or be killed depending on the state of Pacman
+	 */
 	public void onEvent(GameEvent e) {
 		
 		//MOVEMENT

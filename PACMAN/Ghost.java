@@ -2,24 +2,39 @@ import java.util.ArrayList;
 
 
 public class Ghost extends Player implements GameListener {
-
+	/**
+	 * Constructs Ghost based on the X,Y location on the map
+	 * @param x
+	 * @param y
+	 */
 	public Ghost(int x, int y) {
 		super(x, y);
 		// TODO Auto-generated constructor stub
 	}
-	
+	/**
+	 * Constructs Ghost based not only on X,Y locations, but also by the direction the Ghost is facing and how many lives the ghost has.
+	 * An image depicting the Ghost is also set.
+	 * @param x
+	 * @param y
+	 * @param direction
+	 * @param numOfLives
+	 */
 	public Ghost(int x, int y, Direction direction, int numOfLives) {
 		super(x,y,direction,numOfLives);
 		setImage("PACMAN/ghostimg" + numOfLives + ".png");
 	}
-
+	/**
+	 * Spawns a ghost on the map
+	 */
 	@Override
 	public void spawn(Map map) {
 		setX(7+getNumOflives());
 		setY(5);
 		map.addMappable(this);
 	}
-	
+	/**
+	 * Kills a ghost and erases its existence on the map. When a ghost dies, it is immediately respawned.
+	 */
 	@Override
 	public void die(Map map) {
 		ArrayList<Mappable> mappableArray = map.getMappable(getX(),getY());
