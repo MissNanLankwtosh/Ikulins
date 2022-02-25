@@ -68,6 +68,13 @@ public class Ghost extends Player implements GameListener {
 		double rDist = 0;
 		double dDist = 0;
 		double lDist = 0;
+		
+		int difficulty = 1; //This is a sudo difficulty meter, set higher to make ghosts more stupid
+		
+		int DiscouragingLargeNumber = 1000;
+		int SmallerDiscouragingLargeNumber = 990;
+		int DiscouragingSmallNumber = -10;
+		int LargerDiscouragingLargeNumber = 1;
 
 		//find the distance the ghost is from pacman for each possible move
 		for (int i = 0; i < 4; i++){
@@ -78,9 +85,9 @@ public class Ghost extends Player implements GameListener {
 					uDist = Math.sqrt(Math.pow(Math.abs(Y-(this.getY()-1)),2) + Math.pow(Math.abs(X-this.getX()),2));
 					}else{//there is a wall
 						if (mode == PacmanState.BEASTMODE){
-							uDist = 0; //set to small number so this will not be chosen as a possible path
+							uDist = DiscouragingSmallNumber; //set to small number so this will not be chosen as a possible path
 						}else{ //NORMAL
-							uDist = 1000; //set to large number so when normal, path won't be chosen
+							uDist = DiscouragingLargeNumber; //set to large number so when normal, path won't be chosen
 						}
 					}
 				break;
@@ -90,9 +97,9 @@ public class Ghost extends Player implements GameListener {
 					rDist = Math.sqrt(Math.pow(Math.abs(Y-this.getY()),2) + Math.pow(Math.abs(X-(this.getX()+1)),2));
 				}else{//there is a wall
 					if (mode == PacmanState.BEASTMODE){
-						rDist = 0; //set to small number so this will not be chosen as a possible path
+						rDist = DiscouragingSmallNumber; //set to small number so this will not be chosen as a possible path
 					}else{ //NORMAL
-						rDist = 1000; //set to large number so when normal, path won't be chosen
+						rDist = DiscouragingLargeNumber; //set to large number so when normal, path won't be chosen
 					}
 				}
 				break;
@@ -102,9 +109,9 @@ public class Ghost extends Player implements GameListener {
 					dDist = Math.sqrt(Math.pow(Math.abs(Y-(this.getY()+1)),2) + Math.pow(Math.abs(X-this.getX()),2));
 				}else{//there is a wall
 					if (mode == PacmanState.BEASTMODE){
-						dDist = 0; //set to small number so this will not be chosen as a possible path
+						dDist = DiscouragingSmallNumber; //set to small number so this will not be chosen as a possible path
 					}else{ //NORMAL
-						dDist = 1000; //set to large number so when normal, path won't be chosen
+						dDist = DiscouragingLargeNumber; //set to large number so when normal, path won't be chosen
 					}
 				}
 				break;
@@ -114,9 +121,9 @@ public class Ghost extends Player implements GameListener {
 					lDist = Math.sqrt(Math.pow(Math.abs(Y-this.getY()),2) + Math.pow(Math.abs(X-(this.getX()-1)),2));
 				}else{//there is a wall
 					if (mode == PacmanState.BEASTMODE){
-						lDist = 0; //set to small number so this will not be chosen as a possible path
+						lDist = DiscouragingSmallNumber; //set to small number so this will not be chosen as a possible path
 					}else{ //NORMAL
-						lDist = 1000; //set to large number so when normal, path won't be chosen
+						lDist = DiscouragingLargeNumber; //set to large number so when normal, path won't be chosen
 					}
 				}
 				break;
@@ -130,37 +137,37 @@ public class Ghost extends Player implements GameListener {
 		switch(this.getDirection()){
 		case UP:					
 			if (mode == PacmanState.BEASTMODE){
-				dDist = 1; 
+				dDist = LargerDiscouragingLargeNumber; 
 			}else{ //NORMAL
-				dDist = 990; }			 
+				dDist = SmallerDiscouragingLargeNumber; }			 
 			break;			 
 		case RIGHT:
 			if (mode == PacmanState.BEASTMODE){
-				lDist = 1;
+				lDist = LargerDiscouragingLargeNumber;
 			}else{ //NORMAL
-				lDist = 990;}
+				lDist = SmallerDiscouragingLargeNumber;}
 			break;
 		case DOWN:
 			if (mode == PacmanState.BEASTMODE){
-				uDist = 1;
+				uDist = LargerDiscouragingLargeNumber;
 			}else{ //NORMAL
-				uDist = 990;}
+				uDist = SmallerDiscouragingLargeNumber;}
 			break;
 		case LEFT:
 			if (mode == PacmanState.BEASTMODE){
-				rDist = 1;
+				rDist = LargerDiscouragingLargeNumber;
 			}else{ //NORMAL
-				rDist = 990;}
+				rDist = SmallerDiscouragingLargeNumber;}
 			break;
 		}
 		// Here, we're adding a small amount of randomness to the distances (a number between 0 and 1)
 		// The small amount of randomness prevents situations where distances are exactly the same (hopefully)
 		// but is a small enough change to not cause changes in what would be considered the right path to
 		// take
-		uDist += Math.random();
-		rDist += Math.random();
-		dDist += Math.random();
-		lDist += Math.random();
+		uDist += Math.random()*difficulty;
+		rDist += Math.random()*difficulty;
+		dDist += Math.random()*difficulty;
+		lDist += Math.random()*difficulty;
 		
 		// By now, the opposite direction the ghost was travelling is less desirable than other paths, but
 		// paths that would lead to walls are the least desirable

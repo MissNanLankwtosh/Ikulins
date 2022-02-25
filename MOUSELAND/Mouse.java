@@ -70,20 +70,23 @@ public class Mouse extends Player implements GameListener {
 	public void moveMice(int X, int Y, Map map){
 		if(!isAlive){ return; }
 		//for the purpose of this method, 0 is up, 1 is right, 2 is down, 3 is left
-		double uDist = 0;
-		double rDist = 0;
-		double dDist = 0;
-		double lDist = 0;
-
+		double uDist = 5;
+		double rDist = 5;
+		double dDist = 5;
+		double lDist = 5;
+		int numberofMice = 4;
+		int randomfactor = 3; //this is a bit of a difficulty meter, set this higher to make mice more stupid
+		int LargeDiscouragingNumber = 1000;
+		int SlightlyLessLargeDiscouragingNumber = 990;
 		//find the distance the mice is from hero for each possible move
-		for (int i = 0; i < 4; i++){
+		for (int i = 0; i < numberofMice; i++){
 			switch(i){
 			case 0://UP
 				if ((map.isWall(this.getX(), this.getY()-1)) == false){
 					//not a wall, you can move up
 					uDist = Math.sqrt(Math.pow(Math.abs(Y-(this.getY()-1)),2) + Math.pow(Math.abs(X-this.getX()),2));
 				}else{//there is a wall
-					uDist = 1000; //set to large number so when normal, path won't be chosen
+					uDist = LargeDiscouragingNumber; //set to large number so when normal, path won't be chosen
 				}
 				break;
 			case 1://RIGHT
@@ -91,7 +94,7 @@ public class Mouse extends Player implements GameListener {
 					//not a wall, you can move right
 					rDist = Math.sqrt(Math.pow(Math.abs(Y-this.getY()),2) + Math.pow(Math.abs(X-(this.getX()+1)),2));
 				}else{//there is a wall
-					rDist = 1000; //set to large number so when normal, path won't be chosen
+					rDist = LargeDiscouragingNumber; //set to large number so when normal, path won't be chosen
 				}
 				break;
 			case 2://DOWN
@@ -99,7 +102,7 @@ public class Mouse extends Player implements GameListener {
 					//not a wall, you can move down
 					dDist = Math.sqrt(Math.pow(Math.abs(Y-(this.getY()+1)),2) + Math.pow(Math.abs(X-this.getX()),2));
 				}else{//there is a wall
-					dDist = 1000; //set to large number so when normal, path won't be chosen
+					dDist = LargeDiscouragingNumber; //set to large number so when normal, path won't be chosen
 				}
 				break;
 			case 3://LEFT
@@ -107,9 +110,10 @@ public class Mouse extends Player implements GameListener {
 					//not a wall, you can move left
 					lDist = Math.sqrt(Math.pow(Math.abs(Y-this.getY()),2) + Math.pow(Math.abs(X-(this.getX()-1)),2));
 				}else{//there is a wall
-					lDist = 1000; //set to large number so when normal, path won't be chosen
+					lDist = LargeDiscouragingNumber; //set to large number so when normal, path won't be chosen
 				}
 				break;
+			}
 		}
 		// The following switch statement determines the direction you were going, and makes the opposite
 		// direction less desirable, since mice should not spontaneously change direction
@@ -118,38 +122,37 @@ public class Mouse extends Player implements GameListener {
 		// running away from them
 		switch(this.getDirection()){
 		case UP:
-			dDist = 990; 			 
+			dDist = SlightlyLessLargeDiscouragingNumber; 			 
 			break;			 
 		case RIGHT:
-			lDist = 990;
+			lDist = SlightlyLessLargeDiscouragingNumber;
 			break;
 		case DOWN:
-			uDist = 990;
+			uDist = SlightlyLessLargeDiscouragingNumber;
 			break;
 		case LEFT:
-			rDist = 990;
+			rDist = SlightlyLessLargeDiscouragingNumber;
 			break;
 		}
 		// Here, we're adding a small amount of randomness to the distances (a number between 0 and 1)
 		// The small amount of randomness prevents situations where distances are exactly the same (hopefully)
 		// but is a small enough change to not cause changes in what would be considered the right path to
 		// take
-		uDist += Math.random();
-		rDist += Math.random();
-		dDist += Math.random();
-		lDist += Math.random();
+		uDist += (Math.random()*randomfactor);
+		rDist += (Math.random()*randomfactor);
+		dDist += (Math.random()*randomfactor);
+		lDist += (Math.random()*randomfactor);
 		
 		// By now, the opposite direction the ghost was travelling is less desirable than other paths, but
 		// paths that would lead to walls are the least desirable
-			if(uDist < rDist && uDist < dDist && uDist < lDist ){
-				this.setDirection(Direction.UP);
-			}else if(rDist < uDist && rDist < dDist && rDist < lDist){
-				this.setDirection(Direction.RIGHT);
-			}else if(dDist < uDist && dDist < rDist && dDist < lDist){
-				this.setDirection(Direction.DOWN);
-			}else if(lDist < uDist && lDist < rDist && lDist < dDist){
-				this.setDirection(Direction.LEFT);
-			}
+		if(uDist < rDist && uDist < dDist && uDist < lDist ){
+			this.setDirection(Direction.UP);
+		}else if(rDist < uDist && rDist < dDist && rDist < lDist){
+			this.setDirection(Direction.RIGHT);
+		}else if(dDist < uDist && dDist < rDist && dDist < lDist){
+			this.setDirection(Direction.DOWN);
+		}else if(lDist < uDist && lDist < rDist && lDist < dDist){
+			this.setDirection(Direction.LEFT);
 		}
 		this.updateLocation(map); //actually move the mice
 	return;
