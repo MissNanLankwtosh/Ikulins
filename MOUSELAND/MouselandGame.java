@@ -1,6 +1,13 @@
 import java.awt.event.KeyEvent;
 
-
+/**
+ * Mouseland Game creates the game itself, as well as deals with collisions and runs the game rules
+ * @variable NUM_MICE determines the number of mice that will be displayed on the level
+ * @variable hero is the player
+ * @variable mice is a list of mice. when moving mice, moveMouse must be invoked on each mouse in this list
+ * @variable ladder is the exit
+ *
+ */
 public class MouselandGame extends Game {
 	private int NUM_MICE = 4;
 	private Hero hero;
@@ -81,7 +88,10 @@ public class MouselandGame extends Game {
 			}
 		}
 	}
-	
+	/**
+	 * Sets up the game to start and be displayed on the interface.
+	 * @param args
+	 */
 	public static void main(String args[]) {
 		MouselandGame tempGame = new MouselandGame(); //create the game
 		new MouselandFrame(new MouselandPanel(tempGame)); //set up the frame

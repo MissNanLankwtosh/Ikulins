@@ -15,12 +15,16 @@ public class Mouse extends Player implements GameListener {
 		setImage("MOUSELAND/mouse.png");
 		this.isAlive = true;
 	}
-
+	/**
+	 * Spawns a new mouse at location (x,y)
+	 */
 	@Override
 	public void spawn(Map map) {
 		map.addMappable(this);
 	}
-
+	/**
+	 * Kills the mouse. A mouse killed will not move or be erased. It simply chills in the trap.
+	 */
 	@Override
 	public void die(Map map) {
 		// TODO Auto-generated method stub

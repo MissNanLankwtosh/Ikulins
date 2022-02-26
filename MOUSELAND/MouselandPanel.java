@@ -2,7 +2,7 @@
 public class MouselandPanel extends GamePanel {
 
 	/**
-	 * 
+	 * The Mouse Panel is used for graphical interface purposes
 	 */
 	private static final long serialVersionUID = 1L;
 
@@ -18,6 +18,9 @@ public class MouselandPanel extends GamePanel {
 	}
 
 	@Override
+	/**
+	 * A new game is created with a map and painted onto the display
+	 */
 	public void newGame() {
 		// TODO Auto-generated method stub
 		setGame(new MouselandGame());

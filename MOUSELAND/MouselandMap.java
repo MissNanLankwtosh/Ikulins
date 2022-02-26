@@ -1,4 +1,9 @@
 
+/**
+ * A map can either be created with specific size parameters
+ * Or by using an existing filename
+ *
+ */
 public class MouselandMap extends Map {
 
 	public MouselandMap(int Xsize, int Ysize) {
