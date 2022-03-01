@@ -76,6 +76,10 @@ public class SurvivalGame extends Game {
 		}
 	}
 	
+	/**
+	 * Creates a new game of SURVIVAL! and starts the game.
+	 * @param args
+	 */
 	public static void main(String args[]) {
 		SurvivalGame tempGame = new SurvivalGame(); //create the game
 		new SurvivalFrame(new SurvivalPanel(tempGame)); //set up the frame

@@ -31,13 +31,18 @@ public class Survivor extends Player implements GameListener{
 	
 
 	@Override
+	/**
+	 * Creates a new survivor at (1, 7)
+	 */
 	public void spawn(Map map) {
 		// TODO Auto-generated method stub
 		this.setX(INITIALX);
 		this.setY(INITIALY);
 		map.addMappable(this);
 	}
-
+	/**
+	 * Kills the survivor. This means you lose.
+	 */
 	@Override
 	public void die(Map map) {
 		

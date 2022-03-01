@@ -7,16 +7,27 @@ public class HeadHunter extends Player implements GameListener {
 		super(x, y);
 		setImage("SURVIVAL/evil.png");
 	}
+	/**
+	 * Creates new headhunter and associates an image with it
+	 * @param x
+	 * @param y
+	 * @param direction
+	 * @param numOfLives
+	 */
 	public HeadHunter(int x, int y, Direction direction, int numOfLives) {
 		super(x,y,direction,numOfLives);
 		setImage("SURVIVAL/evil.png");
 	}
-
+	/**
+	 * Spawns a new headhunter at location (x,y)
+	 */
 	@Override
 	public void spawn(Map map) {
 		map.addMappable(this);
 	}
-
+	/**
+	 * Kills a headhunter. This should NEVER happen.
+	 */
 	@Override
 	public void die(Map map) {
 	}

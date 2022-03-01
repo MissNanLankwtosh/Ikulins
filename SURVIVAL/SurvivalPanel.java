@@ -2,7 +2,7 @@
 public class SurvivalPanel extends GamePanel {
 
 	/**
-	 * 
+	 * This panel is used for user interface purposes and displaying information to the frame.
 	 */
 	private static final long serialVersionUID = 1L;
 
