@@ -18,7 +18,7 @@ public class PacmanGame extends Game {
 	 * Prints current map to console
 	 */
 	public void printToConsole(){
-		System.out.println("Score: " + score);
+		System.out.println("Score: " + score + "      Lives: " + pacman.getNumOflives());
 	}
 	/**
 	 *
@@ -31,7 +31,7 @@ public class PacmanGame extends Game {
 	 * 
 	 */
 	public void end() {
-
+		
 	}
 	
 	/**
@@ -43,13 +43,7 @@ public class PacmanGame extends Game {
 		ghosts = new Ghost[4];
 		
 		setMap(new PacmanMap("PACMAN/pacmanMap.txt")); //set up the PacmanMap
-		
-		for(int x=0; x<getMap().getX(); x++) { //add LittlePillItems to every Empty Space
-			for(int y=0; y<getMap().getY(); y++) {
-				if(getMap().addMappable(new LittlePillItem(x,y))) pillsLeft++;
-			}
-		}
-		
+				
 		pacman = new Pacman(9,9,Direction.UP,3); //add pacman
 		pacman.spawn(getMap());
 		addListener(pacman);
@@ -69,6 +63,14 @@ public class PacmanGame extends Game {
 		bigPill = new BigPillItem(18,9);
 		getMap().addMappable(bigPill);
 
+		for(int x=0; x<getMap().getX(); x++) { //add LittlePillItems to every Empty Space
+			for(int y=0; y<getMap().getY(); y++) {
+				if (getMap().isEmpty(x, y) == true) {
+					if(getMap().addMappable(new LittlePillItem(x,y))) pillsLeft++;
+				}
+			}
+		}
+		
 	}
 	
 	/**
@@ -95,7 +97,6 @@ public class PacmanGame extends Game {
 			break;
 		}
 		pacman.updateLocation(getMap());
-		
 		notify(new GameEvent("movement", this)); //notify anything that cares if pacman and the ghosts have moved
 		if(keycode >= KeyEvent.VK_LEFT && keycode <= KeyEvent.VK_DOWN){
 			for (Ghost ghost : ghosts) {
