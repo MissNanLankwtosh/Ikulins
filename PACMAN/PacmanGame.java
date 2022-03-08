@@ -66,7 +66,8 @@ public class PacmanGame extends Game {
 		for(int x=0; x<getMap().getX(); x++) { //add LittlePillItems to every Empty Space
 			for(int y=0; y<getMap().getY(); y++) {
 				if (getMap().isEmpty(x, y) == true) {
-					if(getMap().addMappable(new LittlePillItem(x,y))) pillsLeft++;
+					getMap().addMappable(new LittlePillItem(x,y)); 
+					pillsLeft++;
 				}
 			}
 		}
