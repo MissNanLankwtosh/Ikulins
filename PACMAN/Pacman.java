@@ -49,6 +49,7 @@ public class Pacman extends Player implements GameListener, ActionListener{
 		for (int i=mappableArray.size()-1; i >= 0; i--) {
 			if(mappableArray.get(i) == this) {
 				map.removeMappable(getX(),getY(),i);
+				break;
 			}
 		}
 	
@@ -102,7 +103,6 @@ public class Pacman extends Player implements GameListener, ActionListener{
 	 */
 	public void setState(PacmanState state) {
 		if(state == PacmanState.BEASTMODE){
-			
 			beastTimer.start();
 		}
 		this.state = state;

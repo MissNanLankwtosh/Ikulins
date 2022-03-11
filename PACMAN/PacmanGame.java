@@ -7,6 +7,7 @@ public class PacmanGame extends Game {
 	private int pillsLeft, score;
 	private Pacman pacman;
 	private Ghost[] ghosts;
+	private boolean gameON;
 	
 	public PacmanGame() {
 		super();
@@ -24,14 +25,15 @@ public class PacmanGame extends Game {
 	 *
 	 */
 	public void start() {
-		
+		gameON = true;
 	}
 	
 	/**
 	 * 
 	 */
-	public void end() {
-		
+	public void end(String message) {
+		System.out.println(message);
+		gameON = false;
 	}
 	
 	/**
@@ -41,6 +43,7 @@ public class PacmanGame extends Game {
 		score = 0;
 		pillsLeft = 0;
 		ghosts = new Ghost[4];
+		gameON = false;
 		
 		setMap(new PacmanMap("PACMAN/pacmanMap.txt")); //set up the PacmanMap
 				
@@ -79,6 +82,7 @@ public class PacmanGame extends Game {
 	 * @param keycode passed from the PacmanPanel as a KeyEvent on it
 	 */
 	public void recieveInput(int keycode) {
+		if (gameON == false) return;
 		switch (keycode) {
 		case KeyEvent.VK_LEFT:
 			pacman.setDirection(Direction.LEFT);
@@ -97,13 +101,17 @@ public class PacmanGame extends Game {
 			System.exit(0);
 			break;
 		}
+		
+		//VICTORY AND END CONDITIONS
+		if(pacman.getNumOflives() < 0) end("OUT OF LIVES!");
+		if(pillsLeft <= 0) end("YOU WIN! --- ALL PILLS COLLECTED");
+				
 		pacman.updateLocation(getMap());
-		notify(new GameEvent("movement", this)); //notify anything that cares if pacman and the ghosts have moved
 		if(keycode >= KeyEvent.VK_LEFT && keycode <= KeyEvent.VK_DOWN){
 			for (Ghost ghost : ghosts) {
 				ghost.moveGhosts(pacman.getX(),pacman.getY(),pacman.getState(),getMap());
-				notify(new GameEvent("movement", this)); //notify anything that cares if pacman and the ghosts have moved
 			}
+			notify(new GameEvent("movement", this)); //notify anything that cares if pacman and the ghosts have moved
 			printToConsole();
 		}
 		
