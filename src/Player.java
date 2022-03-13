@@ -97,4 +97,24 @@ public abstract class Player extends Mappable {
 
 	public abstract void spawn(Map map);
 	public abstract void die(Map map);
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (!(obj instanceof Player))
+			return false;
+		Player other = (Player) obj;
+		if (numOflives != other.numOflives)
+			return false;
+		if (getX() != other.getX())
+			return false;
+		if (getY() != other.getY())
+			return false;
+		return true;
+	}
+	
+	
 }
