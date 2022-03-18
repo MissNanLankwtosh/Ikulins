@@ -34,6 +34,7 @@ public class Pacman extends Player implements GameListener, ActionListener{
 
 	/**
 	 * This method spawns Pacman on the Map. Pacman will always spawn at location (9,9) on the Map.
+	 * Method by Alexander Clelland
 	 */
 	public void spawn(Map map) {
 		setX(9);
@@ -42,6 +43,7 @@ public class Pacman extends Player implements GameListener, ActionListener{
 	}
 	/**
 	 * Kills Pacman. Removes  existance on the map.
+	 * Method by Alexander Clelland
 	 */
 	public void die(Map map) {
 		setNumOflives(getNumOflives()-1);
@@ -62,6 +64,7 @@ public class Pacman extends Player implements GameListener, ActionListener{
 	 * @case little pill, score must be increased, the little pill must be removed 
 	 * @case big pill, Pacman's state must be changed
 	 * @case ghost, must kill or be killed depending on the state of Pacman
+	 * Method by Alexander Clelland
 	 */
 	public void onEvent(GameEvent e) {
 		

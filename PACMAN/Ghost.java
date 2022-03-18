@@ -25,6 +25,7 @@ public class Ghost extends Player implements GameListener {
 	}
 	/**
 	 * Spawns a ghost on the map
+	 * Method by Alexander Clelland
 	 */
 	@Override
 	public void spawn(Map map) {
@@ -34,6 +35,7 @@ public class Ghost extends Player implements GameListener {
 	}
 	/**
 	 * Kills a ghost and erases its existence on the map. When a ghost dies, it is immediately respawned.
+	 * Method by Alexander Clelland
 	 */
 	@Override
 	public void die(Map map) {
