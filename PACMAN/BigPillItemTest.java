@@ -65,15 +65,13 @@ public class BigPillItemTest extends TestCase {
 		assertEquals(testBigPillHuge.toString(),"5000,10000");
 	}
 		
-	/**
-	 *having trouble comparing image... its equals() method is fucked...
 	public void testGetSetImageImage() {
 		//DEFAULT IMAGE IS "PACMAN/bigpill.png"
 		assertEquals(testBigPillNorm.getImage(), new ImageIcon("PACMAN/bigpill.png").getImage());
 		
 		//SET NEW IMAGE
 		testBigPillNorm.setImage(testImage);
-		assertEquals(testBigPillNorm.getImage(), new ImageIcon("PACMAN/smallpill.png").getImage(););
+		assertEquals(testBigPillNorm.getImage(), testImage);
 	}
 	
 	public void testGetSetImageString() {
@@ -84,7 +82,6 @@ public class BigPillItemTest extends TestCase {
 		testBigPillNorm.setImage("PACMAN/smallpill.png");
 		assertEquals(testBigPillNorm.getImage(), new ImageIcon("PACMAN/smallpill.png").getImage());
 	}
-	**/
 	
 	//ITEM TESTS
 	
