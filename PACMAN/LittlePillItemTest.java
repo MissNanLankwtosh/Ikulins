@@ -2,7 +2,6 @@ import java.awt.Image;
 
 import javax.swing.ImageIcon;
 
-
 import junit.framework.TestCase;
 
 /**
@@ -10,28 +9,30 @@ import junit.framework.TestCase;
  * @author Alexander Clelland
  *
  */
-public class BigPillItemTest extends TestCase {
-	BigPillItem testNormal, testZero, testNegative, testHuge;
+public class LittlePillItemTest extends TestCase {
+	LittlePillItem testNormal, testZero, testNegative, testHuge;
 	Image testImage;
-
-	public BigPillItemTest(String arg0) {
+	
+	public LittlePillItemTest(String arg0) {
 		super(arg0);
 	}
 
 	protected void setUp() throws Exception {
-		testNormal = new BigPillItem(5,10);
-		testZero = new BigPillItem(0,0);
-		testNegative = new BigPillItem(-5,-10);
-		testHuge = new BigPillItem(5000,10000);
+		super.setUp();
+		testNormal = new LittlePillItem(5,10);
+		testZero = new LittlePillItem(0,0);
+		testNegative = new LittlePillItem(-5,-10);
+		testHuge = new LittlePillItem(5000,10000);
 		
-		Image testImage = new ImageIcon("PACMAN/smallpill.png").getImage();
-		
+		Image testImage = new ImageIcon("PACMAN/bigpill.png").getImage();
 	}
 
 	protected void tearDown() throws Exception {
 		super.tearDown();
 	}
 
+	
+	
 	
 	//MAPPABLE TESTS
 	public void testGetSetX() {
@@ -71,7 +72,7 @@ public class BigPillItemTest extends TestCase {
 		
 	public void testGetSetImageImage() {
 		//DEFAULT IMAGE IS "PACMAN/bigpill.png"
-		assertEquals(testNormal.getImage(), new ImageIcon("PACMAN/bigpill.png").getImage());
+		assertEquals(testNormal.getImage(), new ImageIcon("PACMAN/smallpill.png").getImage());
 		
 		//SET NEW IMAGE
 		testNormal.setImage(testImage);
@@ -80,16 +81,21 @@ public class BigPillItemTest extends TestCase {
 	
 	public void testGetSetImageString() {
 		//DEFAULT IMAGE IS "PACMAN/bigpill.png"
-		assertEquals(testNormal.getImage(), new ImageIcon("PACMAN/bigpill.png").getImage());
+		assertEquals(testNormal.getImage(), new ImageIcon("PACMAN/smallpill.png").getImage());
 		
 		//SET NEW IMAGE ("PACMAN/littlepill.png" because it exists)
-		testNormal.setImage("PACMAN/smallpill.png");
-		assertEquals(testNormal.getImage(), new ImageIcon("PACMAN/smallpill.png").getImage());
+		testNormal.setImage("PACMAN/bigpill.png");
+		assertEquals(testNormal.getImage(), new ImageIcon("PACMAN/bigpill.png").getImage());
 	}
 	
 	//ITEM TESTS
 	
 	//BIGPILLITEM TESTS
+	
+	
+	
+	
+	
 	
 	
 	
