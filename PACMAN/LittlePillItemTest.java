@@ -24,7 +24,7 @@ public class LittlePillItemTest extends TestCase {
 		testNegative = new LittlePillItem(-5,-10);
 		testHuge = new LittlePillItem(5000,10000);
 		
-		Image testImage = new ImageIcon("PACMAN/bigpill.png").getImage();
+		testImage = new ImageIcon("PACMAN/bigpill.png").getImage();
 	}
 
 	protected void tearDown() throws Exception {

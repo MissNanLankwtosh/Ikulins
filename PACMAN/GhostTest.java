@@ -10,6 +10,7 @@ import junit.framework.TestCase;
 public class GhostTest extends TestCase {
 	Ghost testNormal, testZero, testNegative, testHuge;
 	Image testImage;
+	PacmanMap map;
 
 	public GhostTest(String arg0) {
 		super(arg0);
@@ -23,7 +24,9 @@ public class GhostTest extends TestCase {
 		testNegative = new Ghost(-5,-10,Direction.LEFT,3);
 		testHuge = new Ghost(5000,10000,Direction.LEFT,4);
 		
-		Image testImage = new ImageIcon("PACMAN/pacmanimg.png").getImage();
+		testImage = new ImageIcon("PACMAN/pacmanimg.png").getImage();
+		
+		
 		
 		
 	}
@@ -109,8 +112,18 @@ public class GhostTest extends TestCase {
 		assertEquals(testNormal.getDirection(), Direction.DOWN);
 	}
 
-	
-	
+	public void testSetGetNumOfLives() {
+		//DEFAULT WAS SET TO 1
+		assertEquals(testNormal.getNumOflives(), 1);
+		
+		//SET TO... 4
+		testNormal.setNumOflives(4);
+		assertEquals(testNormal.getNumOflives(), 4);
+	}
+
+	public void testUpdateLocation() { //this is a big one...
+		
+	}
 	
 	//GHOST TESTS
 	

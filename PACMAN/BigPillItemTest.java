@@ -24,7 +24,7 @@ public class BigPillItemTest extends TestCase {
 		testNegative = new BigPillItem(-5,-10);
 		testHuge = new BigPillItem(5000,10000);
 		
-		Image testImage = new ImageIcon("PACMAN/smallpill.png").getImage();
+		testImage = new ImageIcon("PACMAN/smallpill.png").getImage();
 		
 	}
 
