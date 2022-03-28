@@ -8,7 +8,7 @@ import junit.framework.TestCase;
 
 
 public class GhostTest extends TestCase {
-	Ghost testNormal, testZero, testNegative, testHuge;
+	Ghost testNormal, testNormal2, testZero, testNegative, testHuge;
 	Image testImage;
 	PacmanMap map;
 
@@ -20,13 +20,19 @@ public class GhostTest extends TestCase {
 		super.setUp();
 		
 		testNormal = new Ghost(5,10,Direction.LEFT,1);
+		testNormal2 = new Ghost(15,20,Direction.LEFT,1);
 		testZero = new Ghost(0,0,Direction.LEFT,2);
 		testNegative = new Ghost(-5,-10,Direction.LEFT,3);
 		testHuge = new Ghost(5000,10000,Direction.LEFT,4);
 		
 		testImage = new ImageIcon("PACMAN/pacmanimg.png").getImage();
 		
-		
+		map = new PacmanMap(50,50);
+		//suround testNormal2 with walls so it cant move
+		map.addWall(5,6);
+		map.addWall(5,4);
+		map.addWall(6,5);
+		map.addWall(4,5);
 		
 		
 	}
