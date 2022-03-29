@@ -94,7 +94,7 @@ public abstract class Map {
 	 * @return true if the add was successful, false otherwise.
 	 */
 	public boolean addMappable(Mappable m){
-		
+		if (isOutOfBounds(m.getX(), m.getY())) return false;
 		if (!isWall(m.getX(),m.getY())){
 			map[m.getX()][m.getY()] = OnMap.MAPPABLE;
 			ArrayList<Mappable> onDmap = mappables.get((m.getX() + "," + m.getY()));

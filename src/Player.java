@@ -61,6 +61,7 @@ public abstract class Player extends Mappable {
 	 * @return true if the move was successful, false otherwise.
 	 */
 	public boolean updateLocation(Map map){
+		if(map.isOutOfBounds(getX(), getY())) return false;
 		switch(this.direction){
 			case UP:
 				if(!map.isWall(this.getX(), this.getY() - 1)){
