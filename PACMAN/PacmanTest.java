@@ -153,10 +153,29 @@ public class PacmanTest extends TestCase {
 	
 	//PACMAN TESTS
 	
+	public void testSpawn() {
+		
+	}
 	
+	public void testDie() {
+		
+	}
 	
+	public void testSetState() {
+		
+	}
 	
+	public void testGetState() {
+		
+	}
 	
+	public void testOnEvent() { //this is a big one
+		//send a non-existent event
+		//send a movement for each type of movement case... UP,DOWN,LEFT,RIGHT
+		//assert if it dies for moving on a ghost
+		//assert that score goes up for moving onto a pill
+		//assert that BEASTMODE is started when you go on a big pill
+	}
 	
 	
 	
