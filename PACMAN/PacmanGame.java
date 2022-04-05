@@ -38,7 +38,7 @@ public class PacmanGame extends Game {
 	
 	/**
 	 * Sets up the map and all the players/items for a new game
-	 * Method by Alexander Clelland
+	 * @author Alexander Clelland
 	 */
 	public void setUpGame() {
 		score = 0;
@@ -81,7 +81,7 @@ public class PacmanGame extends Game {
 	/**
 	 * Handles all the inputs from the keyboard. Inputs are taken from PacmanPanel onKeypress() method
 	 * @param keycode passed from the PacmanPanel as a KeyEvent on it
-	 * Method by Alexander Clelland
+	 * @author Alexander Clelland
 	 */
 	public void recieveInput(int keycode) {
 		if (gameON == false) return;
