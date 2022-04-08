@@ -48,6 +48,7 @@ public class Pacman extends Player implements GameListener, ActionListener{
 	public void die(Map map) {
 		setNumOflives(getNumOflives()-1);
 		ArrayList<Mappable> mappableArray = map.getMappable(getX(),getY());
+		if (mappableArray == null) return;
 		for (int i=mappableArray.size()-1; i >= 0; i--) {
 			if(mappableArray.get(i) == this) {
 				map.removeMappable(getX(),getY(),i);
