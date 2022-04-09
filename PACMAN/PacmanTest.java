@@ -1,4 +1,5 @@
 import java.awt.Image;
+import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 
@@ -152,15 +153,42 @@ public class PacmanTest extends TestCase {
 	}
 	
 	//PACMAN TESTS
-	
-	public void testSpawn() {
+	/**
+	 * calls spawn() on a map. then checks the map to see if Pacman was spawned
+	 */
+	public void testSpawnAndDie() {
+		//CHECK SPAWN LOCATION (9,9) IS EMPTY
+		ArrayList<Mappable> tempMappable = map.getMappable(9,9); //assert the space is empty before the spawn
+		assertEquals(tempMappable, null); //should be null if nothing was ever there
 		
-	}
-	
-	public void testDie() {
+		//TEST DIE ON EMPTY LOCATION
+		testNormal.die(map);
+		assertEquals(tempMappable, null);
 		
+		//SPAWN TO EMPTY LOCATION
+		testNormal.spawn(map);
+		tempMappable = map.getMappable(9,9); //find the mappable where pacman should have been added
+		boolean isInMappable = false;
+		for(int i=0; i<tempMappable.size();i++) {
+			if(tempMappable.get(i).equals(testNormal)) isInMappable = true; //flag true if Pacman is there
+		}
+		assertEquals(isInMappable, true);
+		
+		//TEST DIE ON LOCATION WITH PACMAN
+		testNormal.die(map); //call die to remove the pacman
+		assertEquals(tempMappable.size(), 0); //there will be an array there now
+		
+		//SPAWN ONTO A WALL	
+		map.addWall(9,9);
+		testNormal.spawn(map);
+		tempMappable = map.getMappable(9,9); //find the mappable where pacman should have been added
+		isInMappable = false;
+		for(int i=0; i<tempMappable.size();i++) {
+			if(tempMappable.get(i).equals(testNormal)) isInMappable = true; //flag true if Pacman is there
+		}
+		assertEquals(isInMappable, false);
 	}
-	
+		
 	public void testSetState() {
 		
 	}
