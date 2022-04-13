@@ -153,9 +153,6 @@ public class PacmanTest extends TestCase {
 	}
 	
 	//PACMAN TESTS
-	/**
-	 * calls spawn() on a map. then checks the map to see if Pacman was spawned
-	 */
 	public void testSpawnAndDie() {
 		//CHECK SPAWN LOCATION (9,9) IS EMPTY
 		ArrayList<Mappable> tempMappable = map.getMappable(9,9); //assert the space is empty before the spawn
