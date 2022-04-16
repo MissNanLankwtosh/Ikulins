@@ -3,7 +3,6 @@ import java.awt.event.KeyEvent;
 
 public class PacmanGame extends Game {
 	private static final int NUM_GHOSTS = 4;
-	
 	private int pillsLeft, score;
 	private Pacman pacman;
 	private Ghost[] ghosts;
