@@ -186,12 +186,15 @@ public class PacmanTest extends TestCase {
 		assertEquals(isInMappable, false);
 	}
 		
-	public void testSetState() {
-		
-	}
-	
-	public void testGetState() {
-		
+	public void testSetGetState() {
+		//DEFAULT IS NORMAL
+		assertEquals(testNormal.getState(),PacmanState.NORMAL);
+		//SET TO BEASTMODE
+		testNormal.setState(PacmanState.BEASTMODE);
+		assertEquals(testNormal.getState(),PacmanState.BEASTMODE);
+		//SET TO NORMAL
+		testNormal.setState(PacmanState.NORMAL);
+		assertEquals(testNormal.getState(),PacmanState.NORMAL);
 	}
 	
 	public void testOnEvent() { //this is a big one
