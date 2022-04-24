@@ -216,7 +216,21 @@ public class PacmanTest extends TestCase {
 	}
 	
 	public void testOnEventEatBigPIll() {
+		BigPillItem tempBigPill = new BigPillItem(8,9);
+		game.getMap().addMappable(tempBigPill);
+		Pacman tempPacman = new Pacman(8,9,Direction.LEFT,3);
+		game.getMap().addMappable(tempPacman);
 		
+		ArrayList<Mappable> tempMappable = game.getMap().getMappable(8,9);
+		assertEquals(tempMappable.contains(tempBigPill), true);
+		assertEquals(tempMappable.contains(tempPacman), true);
+		
+		tempPacman.onEvent(new GameEvent("movement", game));
+		
+		tempMappable = game.getMap().getMappable(8,9);
+		assertEquals(tempMappable.contains(tempBigPill), false);
+		assertEquals(tempMappable.contains(tempPacman), true);
+		assertEquals(tempPacman.getState(), PacmanState.BEASTMODE);
 	}
 	
 	public void testOnEventDieToGhost() {
