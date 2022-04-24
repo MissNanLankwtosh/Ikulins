@@ -13,6 +13,7 @@ public class PacmanTest extends TestCase {
 	Pacman testNormal, testNormal2,testNormal3, testZero, testNegative, testHuge;
 	Image testImage;
 	PacmanMap map;
+	PacmanGame game;
 	
 	public void setUp(){
 		testNormal = new Pacman(5,10,Direction.LEFT,1);
@@ -30,6 +31,8 @@ public class PacmanTest extends TestCase {
 			map.addWall(15,19);
 			map.addWall(14,20);
 			map.addWall(16,20);
+			
+		game = new PacmanGame();
 		
 	}
 	public void testNewGame(){
@@ -196,13 +199,65 @@ public class PacmanTest extends TestCase {
 		testNormal.setState(PacmanState.NORMAL);
 		assertEquals(testNormal.getState(),PacmanState.NORMAL);
 	}
+
+	public void testOnEventEatLittlePill() {
+		//Spawn a Pacman and move it to the left onto a LittlePillItem
+		testNormal.spawn(game.getMap());
+		testNormal.setDirection(Direction.LEFT);
+		testNormal.updateLocation(game.getMap());
+		
+		assertEquals(game.getScore(), 0);
+		
+		testNormal.onEvent(new GameEvent("movement", game));
+		ArrayList<Mappable> tempMappable = game.getMap().getMappable(8,9);
+		
+		assertEquals(tempMappable.contains(new LittlePillItem(8,9)), false);
+		assertEquals(game.getScore(), 1); //score needs to increment to 1 from 0
+	}
 	
-	public void testOnEvent() { //this is a big one
-		//send a non-existent event
-		//send a movement for each type of movement case... UP,DOWN,LEFT,RIGHT
-		//assert if it dies for moving on a ghost
-		//assert that score goes up for moving onto a pill
-		//assert that BEASTMODE is started when you go on a big pill
+	public void testOnEventEatBigPIll() {
+		
+	}
+	
+	public void testOnEventDieToGhost() {
+		//spawn a ghost and a pacman at (8,9)... call onEvent(). pacman should be gone. ghost should exist
+		Ghost tempGhost = new Ghost(8,9,Direction.LEFT,1);
+		game.getMap().addMappable(tempGhost);
+		Pacman tempPacman = new Pacman(8,9,Direction.LEFT,3);
+		game.getMap().addMappable(tempPacman);
+		
+		ArrayList<Mappable> tempMappable = game.getMap().getMappable(8,9);
+		assertEquals(tempMappable.contains(tempPacman), true); //there is a pacman and ghost, just added one above;
+		assertEquals(tempMappable.contains(tempGhost), true);
+		
+		tempPacman.onEvent(new GameEvent("movement", game)); //on event... there should be no pacman now
+		
+		tempMappable = game.getMap().getMappable(8,9);
+		assertEquals(tempMappable.contains(tempPacman), false);
+		assertEquals(tempMappable.contains(tempGhost), true);
+	}
+	
+	public void testOnEventKillGhost() {
+		//spawn a ghost and a pacman at (8,9)... call onEvent(). ghost should be gone. pacman should exist
+		Ghost tempGhost = new Ghost(8,9,Direction.LEFT,1);
+		game.getMap().addMappable(tempGhost);
+		Pacman tempPacman = new Pacman(8,9,Direction.LEFT,3);
+		game.getMap().addMappable(tempPacman);
+		
+		ArrayList<Mappable> tempMappable = game.getMap().getMappable(8,9);
+		assertEquals(tempMappable.contains(tempPacman), true); //there is a pacman and ghost, just added one above;
+		assertEquals(tempMappable.contains(tempGhost), true);
+		
+		tempPacman.setState(PacmanState.BEASTMODE); //turn on BEASTMODE!!!
+		tempPacman.onEvent(new GameEvent("movement", game)); //on event... there should be no ghost now
+		
+		tempMappable = game.getMap().getMappable(8,9);
+		assertEquals(tempMappable.contains(tempPacman), true);
+		assertEquals(tempMappable.contains(tempGhost), false);
+	}
+	
+	public void testOnEvent() {
+
 	}
 	
 	
