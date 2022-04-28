@@ -9,6 +9,7 @@ public class HeroTest extends TestCase {
 	Hero testNormal, testNormal2,testNormal3, testZero, testNegative, testHuge;
 	Image testImage;
 	MouselandMap map;
+	MouselandGame game;
 	
 	public void setUp(){
 		testNormal = new Hero(5,10,Direction.LEFT,1);
@@ -26,6 +27,7 @@ public class HeroTest extends TestCase {
 			map.addWall(15,19);
 			map.addWall(14,20);
 			map.addWall(16,20);
+		game = new MouselandGame();
 		
 	}
 	public void testNewGame(){
@@ -178,4 +180,35 @@ public class HeroTest extends TestCase {
 	}
 	
 	//TOADD: add collision tests
+	public void testOnEventDieToMouse() {
+		//spawn a mouse and a hero at (8,9)... call onEvent(). game should exit
+		Mouse tempMouse = new Mouse(8,9,Direction.LEFT,1);
+		game.getMap().addMappable(tempMouse);
+		Hero tempHero = new Hero(8,9,Direction.LEFT,3);
+		game.getMap().addMappable(tempHero);
+		
+		ArrayList<Mappable> tempMappable = game.getMap().getMappable(8,9);
+		assertEquals(tempMappable.contains(tempMouse), true); //there is a mouse and a hero, just added one above;
+		assertEquals(tempMappable.contains(tempHero), true);
+		
+		tempHero.onEvent(new GameEvent("heroMovement", game)); //on event... there should be no hero now
+		
+		//the game ends.
+	}
+	
+	public void testOnEventHitExit() {
+		
+		Exit tempExit = new Exit(8,9);
+		game.getMap().addMappable(tempExit);
+		Hero tempHero= new Hero(8,9,Direction.LEFT,3);
+		game.getMap().addMappable(tempHero);
+		
+		ArrayList<Mappable> tempMappable = game.getMap().getMappable(8,9);
+		assertEquals(tempMappable.contains(tempHero), true); 
+		assertEquals(tempMappable.contains(tempExit), true);
+		
+		tempHero.onEvent(new GameEvent("heroMovement", game));
+		
+		//Game ends.
+	}
 }

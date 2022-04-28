@@ -9,6 +9,7 @@ public class MouseTest extends TestCase {
 	Mouse testNormal, testNormal2,testNormal3, testZero, testNegative, testHuge;
 	Image testImage;
 	MouselandMap map;
+	MouselandGame game;
 	
 	public void setUp(){
 		testNormal = new Mouse(5,10,Direction.LEFT,1);
@@ -27,6 +28,7 @@ public class MouseTest extends TestCase {
 			map.addWall(14,20);
 			map.addWall(16,20);
 		
+		game = new MouselandGame();
 	}
 	public void testNewGame(){
 		setUp();
@@ -177,5 +179,38 @@ public class MouseTest extends TestCase {
 		assertEquals(isInMappable, false);
 	}
 	
+	public void testOnEventDieToMouse() {
+		//spawn a mouse and a hero at (8,9)... call onEvent(). game should exit
+		Mouse tempMouse = new Mouse(8,9,Direction.LEFT,1);
+		game.getMap().addMappable(tempMouse);
+		Hero tempHero = new Hero(8,9,Direction.LEFT,3);
+		game.getMap().addMappable(tempHero);
+		
+		ArrayList<Mappable> tempMappable = game.getMap().getMappable(8,9);
+		assertEquals(tempMappable.contains(tempMouse), true); //there is a mouse and a hero, just added one above;
+		assertEquals(tempMappable.contains(tempHero), true);
+		
+		tempHero.onEvent(new GameEvent("heroMovement", game)); //on event... there should be no hero now
+		
+		//the game ends.
+	}
+	
+	public void testOnEventHitTrap() {
+		
+		TrapItem tempTrap = new TrapItem(8,9);
+		game.getMap().addMappable(tempTrap);
+		Mouse tempMouse= new Mouse(8,9,Direction.LEFT,3);
+		game.getMap().addMappable(tempMouse);
+		
+		ArrayList<Mappable> tempMappable = game.getMap().getMappable(8,9);
+		assertEquals(tempMappable.contains(tempMouse), true); 
+		assertEquals(tempMappable.contains(tempTrap), true);
+		
+		tempMouse.onEvent(new GameEvent("mouseMovement", game));
+		
+		tempMappable = game.getMap().getMappable(8,9);
+		assertEquals(tempMappable.contains(tempMouse), false);
+		assertEquals(tempMappable.contains(tempTrap), false);
+	}
 	//TOADD: add collision with trap test
 }
