@@ -1,6 +1,16 @@
 
+/**
+ * @author  imran
+ */
 public abstract class Player extends Mappable {
+	/**
+	 * @uml.property  name="direction"
+	 * @uml.associationEnd  
+	 */
 	private Direction direction;
+	/**
+	 * @uml.property  name="numOflives"
+	 */
 	private int numOflives;
 	/**
 	 * General purpose constructor for Player. Sets direction to Direction.LEFT and numOfLives to 1.
@@ -27,7 +37,8 @@ public abstract class Player extends Mappable {
 	}
 	
 	/**
-	 * @return Current direction of Player
+	 * @return  Current direction of Player
+	 * @uml.property  name="direction"
 	 */
 	public Direction getDirection() {
 		return direction;
@@ -35,14 +46,16 @@ public abstract class Player extends Mappable {
 	
 	/**
 	 * Change the current direction of Player
-	 * @param direction Either UP, DOWN, LEFT or RIGHT
+	 * @param direction  Either UP, DOWN, LEFT or RIGHT
+	 * @uml.property  name="direction"
 	 */
 	public void setDirection(Direction direction) {
 		this.direction = direction;
 	}
 	
 	/**
-	 * @return Number of lives of the Player
+	 * @return  Number of lives of the Player
+	 * @uml.property  name="numOflives"
 	 */
 	public int getNumOflives() {
 		return numOflives;
@@ -50,7 +63,8 @@ public abstract class Player extends Mappable {
 	
 	/**
 	 * Change the current number of lives of the Player
-	 * @param numOflives number of lives desired.
+	 * @param numOflives  number of lives desired.
+	 * @uml.property  name="numOflives"
 	 */
 	public void setNumOflives(int numOflives) {
 		this.numOflives = numOflives;

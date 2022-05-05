@@ -7,10 +7,17 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
 
+/**
+ * @author  imran
+ */
 public abstract class GameFrame extends JFrame implements ActionListener{
 
 	private static final long serialVersionUID = 1L;
 	private JMenuBar menuBar;
+	/**
+	 * @uml.property  name="gpanel"
+	 * @uml.associationEnd  
+	 */
 	private GamePanel gpanel;
 
 	/**

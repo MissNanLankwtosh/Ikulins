@@ -11,9 +11,16 @@ import java.util.ArrayList;
 import javax.swing.JPanel;
 
 
+/**
+ * @author  imran
+ */
 public abstract class GamePanel extends JPanel{
 
 	private static final long serialVersionUID = -2458261363554188485L;
+	/**
+	 * @uml.property  name="game"
+	 * @uml.associationEnd  
+	 */
 	private Game game;
 	private Color mazeColor;
 	private Color bgColor;
@@ -52,13 +59,18 @@ public abstract class GamePanel extends JPanel{
 	 */
 	public abstract void GameInit();
 	
+	/**
+	 * @param game
+	 * @uml.property  name="game"
+	 */
 	public void setGame(Game game) {
 		this.game = game;
 	}
 
 	/**
 	 * Changes current background colour
-	 * @param color New color for background
+	 * @param color  New color for background
+	 * @uml.property  name="bgColor"
 	 */
 	public void setBgColor( Color color){
 		this.bgColor = color;
@@ -66,14 +78,16 @@ public abstract class GamePanel extends JPanel{
 	
 	/**
 	 * Changes current wall colour
-	 * @param color New color for walls in the map
+	 * @param color  New color for walls in the map
+	 * @uml.property  name="mazeColor"
 	 */
 	public void setMazeColor( Color color){
 		this.mazeColor = color;
 	}
 	
 	/**
-	 * @return returns instance of current game
+	 * @return  returns instance of current game
+	 * @uml.property  name="game"
 	 */
 	public Game getGame() {
 		return game;

@@ -4,10 +4,18 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Hashtable;
 
+/**
+ * @author  imran
+ */
 public abstract class Map {
+	/**
+	 * @uml.property  name="map"
+	 * @uml.associationEnd  multiplicity="(0 -1)"
+	 */
 	private OnMap map[][];
 	private Hashtable<String,ArrayList<Mappable>> mappables;
-	private int xSize, ySize;
+	private int xSize;
+	private int ySize;
 	
 	/**
 	 * Constructs an empty map of size Xsize by Ysize.

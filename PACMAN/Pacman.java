@@ -5,11 +5,14 @@ import javax.swing.Timer;
 
 /**
  * This is the class representing the Pacman player.
- * @variable state - represents the state (Normal or BeastMode) of Pacman
- * @variable timer - counts down the time left when Pacman is in BeastMode
- * 
+ * @variable  state - represents the state (Normal or BeastMode) of Pacman
+ * @variable  timer - counts down the time left when Pacman is in BeastMode
  */
 public class Pacman extends Player implements GameListener, ActionListener{
+	/**
+	 * @uml.property  name="state"
+	 * @uml.associationEnd  
+	 */
 	private PacmanState state;
 	private Timer beastTimer;
 	public Pacman(int x, int y) {
@@ -103,7 +106,8 @@ public class Pacman extends Player implements GameListener, ActionListener{
 	
 	/**
 	 * Allows pacman's state to be changed.
-	 * @param state Pacman's new state
+	 * @param state  Pacman's new state
+	 * @uml.property  name="state"
 	 */
 	public void setState(PacmanState state) {
 		if(state == PacmanState.BEASTMODE){
@@ -112,7 +116,8 @@ public class Pacman extends Player implements GameListener, ActionListener{
 		this.state = state;
 	}
 	/**
-	 * @return Returns pacmans current state
+	 * @return  Returns pacmans current state
+	 * @uml.property  name="state"
 	 */
 	public PacmanState getState() {
 		return state;

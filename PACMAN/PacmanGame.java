@@ -1,10 +1,28 @@
 import java.awt.event.KeyEvent;
 
 
+/**
+ * @author  imran
+ */
 public class PacmanGame extends Game {
 	private static final int NUM_GHOSTS = 4;
-	private int pillsLeft, score;
+	/**
+	 * @uml.property  name="pillsLeft"
+	 */
+	private int pillsLeft;
+	/**
+	 * @uml.property  name="score"
+	 */
+	private int score;
+	/**
+	 * @uml.property  name="pacman"
+	 * @uml.associationEnd  
+	 */
 	private Pacman pacman;
+	/**
+	 * @uml.property  name="ghosts"
+	 * @uml.associationEnd  multiplicity="(0 -1)"
+	 */
 	private Ghost[] ghosts;
 	private boolean gameON;
 	
@@ -120,15 +138,31 @@ public class PacmanGame extends Game {
 
 }
 
+	/**
+	 * @param score
+	 * @uml.property  name="score"
+	 */
 	public void setScore(int score) {
 		this.score = score;
 	}
+	/**
+	 * @return
+	 * @uml.property  name="score"
+	 */
 	public int getScore() {
 		return score;
 	}
+	/**
+	 * @param pillsLeft
+	 * @uml.property  name="pillsLeft"
+	 */
 	public void setPillsLeft(int pillsLeft) {
 		this.pillsLeft = pillsLeft;
 	}
+	/**
+	 * @return
+	 * @uml.property  name="pillsLeft"
+	 */
 	public int getPillsLeft() {
 		return pillsLeft;
 	}

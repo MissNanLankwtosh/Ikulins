@@ -3,10 +3,22 @@ import java.awt.Image;
 import javax.swing.ImageIcon;
 
 
+/**
+ * @author  imran
+ */
 public abstract class Mappable {
 	
+	/**
+	 * @uml.property  name="x"
+	 */
 	private int x;
+	/**
+	 * @uml.property  name="y"
+	 */
 	private int y;
+	/**
+	 * @uml.property  name="image"
+	 */
 	private Image image;
 	/**
 	 * Creates a Mappable with given X and Y.
@@ -19,20 +31,23 @@ public abstract class Mappable {
 	}
 
 	/**
-	 * @return X value of Mappable
+	 * @return  X value of Mappable
+	 * @uml.property  name="x"
 	 */
 	public int getX() {
 		return x;
 	}
 	/**
 	 * Change current X value of Mappable
-	 * @param x new X coordinate
+	 * @param x  new X coordinate
+	 * @uml.property  name="x"
 	 */
 	public void setX(int x) {
 		this.x = x;
 	}
 	/**
-	 * @return Y value of Mappable
+	 * @return  Y value of Mappable
+	 * @uml.property  name="y"
 	 */	
 	public int getY() {
 		return y;
@@ -40,7 +55,8 @@ public abstract class Mappable {
 
 	/**
 	 * Change current Y value of Mappable
-	 * @param y new Y coordinate
+	 * @param y  new Y coordinate
+	 * @uml.property  name="y"
 	 */
 	public void setY(int y) {
 		this.y = y;
@@ -57,7 +73,8 @@ public abstract class Mappable {
 
 	/**
 	 * Change the image of Mappable
-	 * @param image New image of mappable
+	 * @param image  New image of mappable
+	 * @uml.property  name="image"
 	 */
 	public void setImage(Image image){
 		this.image = image;
@@ -71,7 +88,8 @@ public abstract class Mappable {
 		this.image =  new ImageIcon(filepath).getImage();
 	}
 	/**
-	 * @return Current image of Mappable
+	 * @return  Current image of Mappable
+	 * @uml.property  name="image"
 	 */
 	public Image getImage() {
 		return image;

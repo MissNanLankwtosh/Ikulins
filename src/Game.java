@@ -1,8 +1,15 @@
 import java.util.ArrayList;
 
 
+/**
+ * @author  imran
+ */
 public abstract class Game {
 	private ArrayList<GameListener> GameList;
+	/**
+	 * @uml.property  name="map"
+	 * @uml.associationEnd  
+	 */
 	private Map map;
 	/**
 	 * Creates a new game
@@ -11,14 +18,16 @@ public abstract class Game {
 		GameList = new ArrayList<GameListener>();
 	}
 	/**
-	 * @return Current Map of game
+	 * @return  Current Map of game
+	 * @uml.property  name="map"
 	 */
 	public Map getMap() {
 		return map;
 	}
 	/**
 	 * Allows you to change current map of game
-	 * @param map new map that you want game to use
+	 * @param map  new map that you want game to use
+	 * @uml.property  name="map"
 	 */
 	public void setMap(Map map) {
 		this.map = map;
