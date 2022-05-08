@@ -92,6 +92,7 @@ public class Pacman extends Player implements GameListener, ActionListener{
 					}
 					else { //BEASTMODE
 						((Ghost)tempMappable).die(tempGame.getMap()); //spawn the ghost at start
+						//Make sure Pacman stays on beastmode. It seems like he's dying too soon after he kills the first ghost.
 					}
 				}
 				else if(tempMappable instanceof BigPillItem) {

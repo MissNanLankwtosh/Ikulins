@@ -40,21 +40,21 @@ public class MouselandGame extends Game {
 	public void setUpGame() {
 		mice = new Mouse[NUM_MICE];
 		ladder = new Exit(18, 1);
-		setMap(new MouselandMap("MOUSELAND/mouselandMap.txt")); //set up the PacmanMap
+		setMap(new MouselandMap("MOUSELAND/mouselandMap.txt")); //set up the mouseland map
 		getMap().addMappable(ladder);
 		hero = new Hero(9,9,Direction.UP,3); //add Hero
 		hero.spawn(getMap());
 		addListener(hero);
 		
-		for (int i=0; i<NUM_MICE; i++){ //add ghosts
+		for (int i=0; i<NUM_MICE; i++){ //add mice
 			mice[i] = new Mouse(i+8,5,Direction.DOWN,i+1);
 			mice[i].spawn(getMap());
 			addListener(mice[i]);
 		}
 	}
 	/**
-	 * Handles all the inputs from the keyboard. Inputs are taken from PacmanPanel onKeypress() method
-	 * @param keycode passed from the PacmanPanel as a KeyEvent on it
+	 * Handles all the inputs from the keyboard. Inputs are taken from MouselandPanel onKeypress() method
+	 * @param keycode passed from the MouselandPanel as a KeyEvent on it
 	 */
 	public void recieveInput(int keycode) {
 		switch (keycode) {
