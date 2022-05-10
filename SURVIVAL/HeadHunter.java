@@ -52,6 +52,7 @@ public class HeadHunter extends Player implements GameListener {
 	/**
 	 * This function dictates the movement of the mice.
 	 * The  mice will constantly try to chase you down, and their movement is decided on which path is the shortest distance
+	 * @author Colin MacDougall
 	 * @param X
 	 * @param Y
 	 * @param map

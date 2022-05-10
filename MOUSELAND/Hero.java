@@ -49,7 +49,7 @@ public class Hero extends Player implements GameListener{
 
 	@Override
 	public void die(Map map) {
-		System.exit(-1);
+		//what do when die?
 	}
 	/**
 	 * Lays down trap on current position.

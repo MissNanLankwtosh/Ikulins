@@ -65,7 +65,7 @@ public class PacmanGame extends Game {
 		
 		setMap(new PacmanMap("PACMAN/pacmanMap.txt")); //set up the PacmanMap
 				
-		pacman = new Pacman(9,9,Direction.UP,3); //add pacman
+		pacman = new Pacman(9,9,Direction.UP,3,this); //add pacman
 		pacman.spawn(getMap());
 		addListener(pacman);
 		
@@ -128,7 +128,7 @@ public class PacmanGame extends Game {
 		pacman.updateLocation(getMap());
 		if(keycode >= KeyEvent.VK_LEFT && keycode <= KeyEvent.VK_DOWN){
 			for (Ghost ghost : ghosts) {
-				ghost.moveGhosts(pacman.getX(),pacman.getY(),pacman.getState(),getMap());
+				ghost.moveGhosts(pacman.getX(),pacman.getY(),getMap());
 			}
 			notify(new GameEvent("movement", this)); //notify anything that cares if pacman and the ghosts have moved
 			printToConsole();
@@ -167,6 +167,13 @@ public class PacmanGame extends Game {
 		return pillsLeft;
 	}
 	
+	public void yellPacmanState() {
+		if (pacman.getState() == PacmanState.NORMAL){
+			notify(new GameEvent("pacmanNormal", this));
+		} else if (pacman.getState() == PacmanState.BEASTMODE){
+			notify(new GameEvent("pacmanBeastmode", this));
+		}
+	}
 	
 	
 	public static void main(String args[]) {

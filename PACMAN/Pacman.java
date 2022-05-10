@@ -15,6 +15,8 @@ public class Pacman extends Player implements GameListener, ActionListener{
 	 */
 	private PacmanState state;
 	private Timer beastTimer;
+	public PacmanGame game;
+	
 	public Pacman(int x, int y) {
 		super(x, y);
 		beastTimer = new Timer(5000, this);
@@ -27,9 +29,11 @@ public class Pacman extends Player implements GameListener, ActionListener{
 	 * @param y
 	 * @param direction
 	 * @param numOfLives
+	 * @param game 
 	 */
-	public Pacman(int x, int y, Direction direction, int numOfLives) {
+	public Pacman(int x, int y, Direction direction, int numOfLives, PacmanGame g) {
 		super(x,y,direction,numOfLives);
+		game = g; //pacman retains some pointer to the game
 		setImage("PACMAN/pacmanimg.png");
 		state = PacmanState.NORMAL;
 		beastTimer = new Timer(5000, this);
@@ -109,12 +113,21 @@ public class Pacman extends Player implements GameListener, ActionListener{
 	 * Allows pacman's state to be changed.
 	 * @param state  Pacman's new state
 	 * @uml.property  name="state"
+	 * 
+	 * @author Colin MacDougall
+	 * credits to Imran for the timer business (but isn't a timer a little imbalanced? should really be move based =P )
 	 */
 	public void setState(PacmanState state) {
 		if(state == PacmanState.BEASTMODE){
+			beastTimer.setInitialDelay(5000); //top up the timer to 5000 before setting beast mode
 			beastTimer.start();
+			//setImage("PACMAN/pacmanimg.png"); //when there is an image for beast mode, put it here
+		} else {
+			//setImage("PACMAN/pacmanimg.png"); //when the above image line is implemented, uncomment this
 		}
 		this.state = state;
+		game.yellPacmanState();
+		
 	}
 	/**
 	 * @return  Returns pacmans current state

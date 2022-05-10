@@ -2,6 +2,9 @@ import java.util.ArrayList;
 
 
 public class Ghost extends Player implements GameListener {
+	
+	private boolean ghostState = false; //this determines whether ghosts run away or not (false = chase, true = run)
+	private int ghostlives = 0;
 	/**
 	 * Constructs Ghost based on the X,Y location on the map
 	 * @param x
@@ -21,7 +24,8 @@ public class Ghost extends Player implements GameListener {
 	 */
 	public Ghost(int x, int y, Direction direction, int numOfLives) {
 		super(x,y,direction,numOfLives);
-		setImage("PACMAN/ghostimg" + numOfLives + ".png");
+		ghostlives = numOfLives;
+		setImage("PACMAN/ghostimg" + ghostlives + ".png");
 	}
 	/**
 	 * Spawns a ghost on the map
@@ -48,10 +52,25 @@ public class Ghost extends Player implements GameListener {
 		spawn(map);
 	}
 
-	@Override
+	/**
+	 * Listens for events from game
+	 * 
+	 * if the ghost receives a "pacmanBeastmode" event, it gets scared, starts to run away, and changes magically to a harmless bunny
+	 * 
+	 * if the ghost receives a "pacmanNormal" event, it gets ANGRY, and resumes chasing pacman, and becomes a scary ghost again
+	 * 
+	 * @author Colin MacDougall
+	 * @param e
+	 */
 	public void onEvent(GameEvent e) {
-		// TODO Auto-generated method stub
-
+		if(e.getSource().equals("pacmanBeastmode") && e.getGameValue() instanceof PacmanGame) {
+			ghostState = true;
+			setImage("PACMAN/bunny.png");
+		}
+		if(e.getSource().equals("pacmanNormal") && e.getGameValue() instanceof PacmanGame) {
+			ghostState = false;
+			setImage("PACMAN/ghostimg" + ghostlives + ".png");
+		}
 	}
 	/**
 	 * This function dictates the movement of the ghosts.
@@ -59,12 +78,13 @@ public class Ghost extends Player implements GameListener {
 	 * will lead to the shortest distance to you, and take that path.
 	 * If pacman is BEAST MODE, the ghosts will run away from you, taking the furthest path away from
 	 * you by deciding this each movement, for every possible square
+	 * @author Colin MacDougall
 	 * @param X
 	 * @param Y
 	 * @param mode
 	 * @param map
 	 */
-	public void moveGhosts(int X, int Y, PacmanState mode, Map map){
+	public void moveGhosts(int X, int Y, Map map){
 		//for the purpose of this method, 0 is up, 1 is right, 2 is down, 3 is left
 		double uDist = 0;
 		double rDist = 0;
@@ -86,7 +106,7 @@ public class Ghost extends Player implements GameListener {
 					//not a wall, you can move up
 					uDist = Math.sqrt(Math.pow(Math.abs(Y-(this.getY()-1)),2) + Math.pow(Math.abs(X-this.getX()),2));
 					}else{//there is a wall
-						if (mode == PacmanState.BEASTMODE){
+						if (ghostState){
 							uDist = DiscouragingSmallNumber; //set to small number so this will not be chosen as a possible path
 						}else{ //NORMAL
 							uDist = DiscouragingLargeNumber; //set to large number so when normal, path won't be chosen
@@ -98,7 +118,7 @@ public class Ghost extends Player implements GameListener {
 					//not a wall, you can move right
 					rDist = Math.sqrt(Math.pow(Math.abs(Y-this.getY()),2) + Math.pow(Math.abs(X-(this.getX()+1)),2));
 				}else{//there is a wall
-					if (mode == PacmanState.BEASTMODE){
+					if (ghostState){
 						rDist = DiscouragingSmallNumber; //set to small number so this will not be chosen as a possible path
 					}else{ //NORMAL
 						rDist = DiscouragingLargeNumber; //set to large number so when normal, path won't be chosen
@@ -110,7 +130,7 @@ public class Ghost extends Player implements GameListener {
 					//not a wall, you can move down
 					dDist = Math.sqrt(Math.pow(Math.abs(Y-(this.getY()+1)),2) + Math.pow(Math.abs(X-this.getX()),2));
 				}else{//there is a wall
-					if (mode == PacmanState.BEASTMODE){
+					if (ghostState){
 						dDist = DiscouragingSmallNumber; //set to small number so this will not be chosen as a possible path
 					}else{ //NORMAL
 						dDist = DiscouragingLargeNumber; //set to large number so when normal, path won't be chosen
@@ -122,7 +142,7 @@ public class Ghost extends Player implements GameListener {
 					//not a wall, you can move left
 					lDist = Math.sqrt(Math.pow(Math.abs(Y-this.getY()),2) + Math.pow(Math.abs(X-(this.getX()-1)),2));
 				}else{//there is a wall
-					if (mode == PacmanState.BEASTMODE){
+					if (ghostState){
 						lDist = DiscouragingSmallNumber; //set to small number so this will not be chosen as a possible path
 					}else{ //NORMAL
 						lDist = DiscouragingLargeNumber; //set to large number so when normal, path won't be chosen
@@ -138,25 +158,25 @@ public class Ghost extends Player implements GameListener {
 		// running away from them
 		switch(this.getDirection()){
 		case UP:					
-			if (mode == PacmanState.BEASTMODE){
+			if (ghostState){
 				dDist = LargerDiscouragingLargeNumber; 
 			}else{ //NORMAL
 				dDist = SmallerDiscouragingLargeNumber; }			 
 			break;			 
 		case RIGHT:
-			if (mode == PacmanState.BEASTMODE){
+			if (ghostState){
 				lDist = LargerDiscouragingLargeNumber;
 			}else{ //NORMAL
 				lDist = SmallerDiscouragingLargeNumber;}
 			break;
 		case DOWN:
-			if (mode == PacmanState.BEASTMODE){
+			if (ghostState){
 				uDist = LargerDiscouragingLargeNumber;
 			}else{ //NORMAL
 				uDist = SmallerDiscouragingLargeNumber;}
 			break;
 		case LEFT:
-			if (mode == PacmanState.BEASTMODE){
+			if (ghostState){
 				rDist = LargerDiscouragingLargeNumber;
 			}else{ //NORMAL
 				rDist = SmallerDiscouragingLargeNumber;}
@@ -173,7 +193,7 @@ public class Ghost extends Player implements GameListener {
 		
 		// By now, the opposite direction the ghost was travelling is less desirable than other paths, but
 		// paths that would lead to walls are the least desirable
-		if(mode == PacmanState.BEASTMODE){//running away
+		if(ghostState){//running away
 			//go for the farthest away path
 			if(uDist > rDist && uDist > dDist && uDist > lDist ){
 				this.setDirection(Direction.UP);
