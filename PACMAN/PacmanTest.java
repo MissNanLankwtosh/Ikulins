@@ -16,12 +16,12 @@ public class PacmanTest extends TestCase {
 	PacmanGame game;
 	
 	public void setUp(){
-		testNormal = new Pacman(5,10,Direction.LEFT,1);
-		testNormal2 = new Pacman(15,20,Direction.LEFT,1);
-		testNormal3 = new Pacman(50,50,Direction.LEFT,1);
-		testZero = new Pacman(0,0,Direction.LEFT,2);
-		testNegative = new Pacman(-5,-10,Direction.LEFT,3);
-		testHuge = new Pacman(5000,10000,Direction.LEFT,4);
+		testNormal = new Pacman(5,10,Direction.LEFT,1, game);
+		testNormal2 = new Pacman(15,20,Direction.LEFT,1, game);
+		testNormal3 = new Pacman(50,50,Direction.LEFT,1, game);
+		testZero = new Pacman(0,0,Direction.LEFT,2, game);
+		testNegative = new Pacman(-5,-10,Direction.LEFT,3,game);
+		testHuge = new Pacman(5000,10000,Direction.LEFT,4,game);
 		
 		testImage = new ImageIcon("PACMAN/ghost1img.png").getImage();
 		
@@ -218,7 +218,7 @@ public class PacmanTest extends TestCase {
 	public void testOnEventEatBigPIll() {
 		BigPillItem tempBigPill = new BigPillItem(8,9);
 		game.getMap().addMappable(tempBigPill);
-		Pacman tempPacman = new Pacman(8,9,Direction.LEFT,3);
+		Pacman tempPacman = new Pacman(8,9,Direction.LEFT,3,game);
 		game.getMap().addMappable(tempPacman);
 		
 		ArrayList<Mappable> tempMappable = game.getMap().getMappable(8,9);
@@ -237,7 +237,7 @@ public class PacmanTest extends TestCase {
 		//spawn a ghost and a pacman at (8,9)... call onEvent(). pacman should be gone. ghost should exist
 		Ghost tempGhost = new Ghost(8,9,Direction.LEFT,1);
 		game.getMap().addMappable(tempGhost);
-		Pacman tempPacman = new Pacman(8,9,Direction.LEFT,3);
+		Pacman tempPacman = new Pacman(8,9,Direction.LEFT,3,game);
 		game.getMap().addMappable(tempPacman);
 		
 		ArrayList<Mappable> tempMappable = game.getMap().getMappable(8,9);
@@ -255,7 +255,7 @@ public class PacmanTest extends TestCase {
 		//spawn a ghost and a pacman at (8,9)... call onEvent(). ghost should be gone. pacman should exist
 		Ghost tempGhost = new Ghost(8,9,Direction.LEFT,1);
 		game.getMap().addMappable(tempGhost);
-		Pacman tempPacman = new Pacman(8,9,Direction.LEFT,3);
+		Pacman tempPacman = new Pacman(8,9,Direction.LEFT,3,game);
 		game.getMap().addMappable(tempPacman);
 		
 		ArrayList<Mappable> tempMappable = game.getMap().getMappable(8,9);
