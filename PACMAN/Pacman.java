@@ -34,7 +34,7 @@ public class Pacman extends Player implements GameListener, ActionListener{
 	public Pacman(int x, int y, Direction direction, int numOfLives, PacmanGame g) {
 		super(x,y,direction,numOfLives);
 		game = g; //pacman retains some pointer to the game
-		setImage("PACMAN/pacmanimg.png");
+		setImage("PACMAN/pacmanimg3.png");
 		state = PacmanState.NORMAL;
 		beastTimer = new Timer(5000, this);
 	}
@@ -119,11 +119,12 @@ public class Pacman extends Player implements GameListener, ActionListener{
 	 */
 	public void setState(PacmanState state) {
 		if(state == PacmanState.BEASTMODE){
+			beastTimer.stop();
 			beastTimer.setInitialDelay(5000); //top up the timer to 5000 before setting beast mode
 			beastTimer.start();
-			//setImage("PACMAN/pacmanimg.png"); //when there is an image for beast mode, put it here
+			setImage("PACMAN/pacmanimg.png"); //BEASTMODE image (aka pacman hopped up on drugs)
 		} else {
-			//setImage("PACMAN/pacmanimg.png"); //when the above image line is implemented, uncomment this
+			setImage("PACMAN/pacmanimg3.png"); //back to normal pacman
 		}
 		this.state = state;
 		game.yellPacmanState();
