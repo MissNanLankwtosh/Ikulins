@@ -174,6 +174,9 @@ public class PacmanGame extends Game {
 			notify(new GameEvent("pacmanBeastmode", this));
 		}
 	}
+	public void yellPacmanDied(){
+		notify(new GameEvent("pacmanDied",this));
+	}
 	
 	
 	public static void main(String args[]) {

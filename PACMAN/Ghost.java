@@ -40,23 +40,18 @@ public class Ghost extends Player implements GameListener {
 	/**
 	 * Kills a ghost and erases its existence on the map. When a ghost dies, it is immediately respawned.
 	 * @author Alexander Clelland
+	 * 
+	 * STOP OVERCOMPLICATING SIMPLE METHODS
 	 */
 	@Override
 	public void die(Map map) {
-		ArrayList<Mappable> mappableArray = map.getMappable(getX(),getY());
-		for (int i=mappableArray.size()-1; i >= 0; i--) {
-			if(mappableArray.get(i) == this) {
-				map.removeMappable(getX(),getY(),i);
-			}
-		}
+		map.removeMappable(getX(),getY());
 		spawn(map);
 	}
 
 	/**
 	 * Listens for events from game
-	 * 
 	 * if the ghost receives a "pacmanBeastmode" event, it gets scared, starts to run away, and changes magically to a harmless bunny
-	 * 
 	 * if the ghost receives a "pacmanNormal" event, it gets ANGRY, and resumes chasing pacman, and becomes a scary ghost again
 	 * 
 	 * @author Colin MacDougall
@@ -71,6 +66,14 @@ public class Ghost extends Player implements GameListener {
 			ghostState = false;
 			setImage("PACMAN/ghostimg" + ghostlives + ".png");
 		}
+		if(e.getSource().equals("pacmanDied") && e.getGameValue() instanceof PacmanGame) {
+			((Game) e.getGameValue()).getMap().removeMappable(this.getX(), this.getY());
+			this.setX(7+ghostlives);
+			this.setY(5);
+			((Game) e.getGameValue()).getMap().addMappable(this);
+			//this moves the ghosts back to their spawn when pacman dies, and this ugly way of moving them
+			//is because updateLocation under the player class is oddly implemented... may change later
+		}
 	}
 	/**
 	 * This function dictates the movement of the ghosts.
@@ -78,6 +81,7 @@ public class Ghost extends Player implements GameListener {
 	 * will lead to the shortest distance to you, and take that path.
 	 * If pacman is BEAST MODE, the ghosts will run away from you, taking the furthest path away from
 	 * you by deciding this each movement, for every possible square
+	 * 
 	 * @author Colin MacDougall
 	 * @param X
 	 * @param Y
