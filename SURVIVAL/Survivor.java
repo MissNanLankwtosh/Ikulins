@@ -46,8 +46,7 @@ public class Survivor extends Player implements GameListener{
 	@Override
 	public void die(Map map) {
 		
-		System.exit(-1);
-		// TODO Auto-generated method stub
+		//wat do when die, please not exit
 
 	}
 	@Override

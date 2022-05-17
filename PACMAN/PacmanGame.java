@@ -120,10 +120,6 @@ public class PacmanGame extends Game {
 			System.exit(0);
 			break;
 		}
-		
-		//VICTORY AND END CONDITIONS
-		if(pacman.getNumOflives() < 0) end("OUT OF LIVES!");
-		if(pillsLeft <= 0) end("YOU WIN! --- ALL PILLS COLLECTED");
 				
 		pacman.updateLocation(getMap());
 		if(keycode >= KeyEvent.VK_LEFT && keycode <= KeyEvent.VK_DOWN){
@@ -132,6 +128,10 @@ public class PacmanGame extends Game {
 			}
 			notify(new GameEvent("movement", this)); //notify anything that cares if pacman and the ghosts have moved
 			printToConsole();
+			
+			//VICTORY AND END CONDITIONS
+			if(pacman.getNumOflives() < 0) end("OUT OF LIVES!");
+			if(pillsLeft <= 0) end("YOU WIN! --- ALL PILLS COLLECTED");
 		}
 		
 		

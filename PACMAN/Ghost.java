@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 
 public class Ghost extends Player implements GameListener {
 	
@@ -39,11 +41,17 @@ public class Ghost extends Player implements GameListener {
 	 * Kills a ghost and erases its existence on the map. When a ghost dies, it is immediately respawned.
 	 * @author Alexander Clelland
 	 * 
-	 * STOP OVERCOMPLICATING SIMPLE METHODS
 	 */
 	@Override
 	public void die(Map map) {
-		map.removeMappable(getX(),getY());
+        ArrayList<Mappable> mappableArray = map.getMappable(getX(),getY());
+        if (mappableArray == null) return;
+        for (int i=mappableArray.size()-1; i >= 0; i--) {
+                if(mappableArray.get(i) == this) {
+                        map.removeMappable(getX(),getY(),i);
+                        break;
+                }
+        }
 		spawn(map);
 	}
 

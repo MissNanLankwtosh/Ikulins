@@ -27,8 +27,15 @@ public class Mouse extends Player implements GameListener {
 	 */
 	@Override
 	public void die(Map map) {
-		// TODO Auto-generated method stub
-		map.removeMappable(getX(), getY());
+        ArrayList<Mappable> mappableArray = map.getMappable(getX(),getY());
+        if (mappableArray == null) return;
+        for (int i=mappableArray.size()-1; i >= 0; i--) {
+                if(mappableArray.get(i) == this) {
+                        map.removeMappable(getX(),getY(),i);
+                        break;
+                }
+        }
+
 		this.isAlive = false;
 		this.setImage((Image)null); 
 			

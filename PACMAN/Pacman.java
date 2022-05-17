@@ -54,7 +54,14 @@ public class Pacman extends Player implements GameListener, ActionListener{
 	 */
 	public void die(Map map) {
 		setNumOflives(getNumOflives()-1); //decrement pacman lives
-		map.removeMappable(getX(),getY()); //remove pacman from the map
+        ArrayList<Mappable> mappableArray = map.getMappable(getX(),getY());
+        if (mappableArray == null) return;
+        for (int i=mappableArray.size()-1; i >= 0; i--) {
+                if(mappableArray.get(i) == this) {
+                        map.removeMappable(getX(),getY(),i);
+                        break;
+                }
+        }
 		game.yellPacmanDied(); //tell the game to notify that pacman died (for the ghosts)
 		//why was this so complicated in the first place? -colin
 	}
