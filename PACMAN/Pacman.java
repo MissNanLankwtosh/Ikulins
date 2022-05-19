@@ -53,7 +53,11 @@ public class Pacman extends Player implements GameListener, ActionListener{
 	 * @author Alexander Clelland
 	 */
 	public void die(Map map) {
+		game.yellPacmanDied(); //tell the game to notify that pacman died (for the ghosts)
 		setNumOflives(getNumOflives()-1); //decrement pacman lives
+		//the following code finds the cell on the map and accesses the list at that cell to see if there
+		//are multiple objects in the same spot on the map.  This searches through those multiple objects
+		//for the pacman object to remove it.
         ArrayList<Mappable> mappableArray = map.getMappable(getX(),getY());
         if (mappableArray == null) return;
         for (int i=mappableArray.size()-1; i >= 0; i--) {
@@ -62,8 +66,7 @@ public class Pacman extends Player implements GameListener, ActionListener{
                         break;
                 }
         }
-		game.yellPacmanDied(); //tell the game to notify that pacman died (for the ghosts)
-		//why was this so complicated in the first place? -colin
+		
 	}
 
 	@Override
