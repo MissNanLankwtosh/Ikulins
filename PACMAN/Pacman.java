@@ -15,7 +15,8 @@ public class Pacman extends Player implements GameListener, ActionListener{
 	 */
 	private PacmanState state;
 	private Timer beastTimer;
-	public PacmanGame game;
+	private PacmanGame game;
+	private int animationstate=0;
 	
 	public Pacman(int x, int y) {
 		super(x, y);
@@ -109,6 +110,24 @@ public class Pacman extends Player implements GameListener, ActionListener{
 					//change images to beastmode
 				}
 			}
+			//The following block of code is just simple animation for the waka waka motion pacman makes
+			//
+			// -Colin
+			if (animationstate == 0){
+				if (getState() == PacmanState.NORMAL){
+					setImage("PACMAN/pacmanimg3.png");
+				}else{
+					setImage("PACMAN/pacmanimg.png");
+				}
+				animationstate = 1;
+			}else if(animationstate == 1){
+				if (getState() == PacmanState.NORMAL){
+					setImage("PACMAN/pacmanimg4.png");
+				}else{
+					setImage("PACMAN/pacmanimg2.png");
+				}
+				animationstate = 0;
+			}
 		}//end of Movement
 	}
 	
@@ -123,26 +142,26 @@ public class Pacman extends Player implements GameListener, ActionListener{
 	 */
 	public void setState(PacmanState state) {
 		if(state == PacmanState.BEASTMODE){
-			beastTimer.stop();
+			beastTimer.stop();				  //stop any previous timer that may have been running
 			beastTimer.setInitialDelay(5000); //top up the timer to 5000 before setting beast mode
-			beastTimer.start();
+			beastTimer.start();				  //start the count down
 			setImage("PACMAN/pacmanimg.png"); //BEASTMODE image (aka pacman hopped up on drugs)
 		} else {
 			setImage("PACMAN/pacmanimg3.png"); //back to normal pacman
 		}
 		this.state = state;
-		game.yellPacmanState();
-		
+		game.yellPacmanState(); //notify the ghosts of pacman's state, so they can either start running or return to chasing
 	}
 	/**
 	 * @return  Returns pacmans current state
-	 * @uml.property  name="state"
+	 * @uml.property  name="state
 	 */
 	public PacmanState getState() {
 		return state;
 	}
 
 	@Override
+	//timer is done, so stop the timer? seems awkward, but it works? also, set packman state back to normal
 	public void actionPerformed(ActionEvent e) {
 		beastTimer.stop();
 		this.setState(PacmanState.NORMAL);
