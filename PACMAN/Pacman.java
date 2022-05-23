@@ -16,7 +16,7 @@ public class Pacman extends Player implements GameListener, ActionListener{
 	private PacmanState state;
 	private Timer beastTimer;
 	private PacmanGame game;
-	private int animationstate=0;
+	private int animationstate=1; // set to 1 so that you waka waka properly at the start
 	
 	public Pacman(int x, int y) {
 		super(x, y);
@@ -83,33 +83,7 @@ public class Pacman extends Player implements GameListener, ActionListener{
 		
 		//MOVEMENT
 		if(e.getSource().equals("movement") && e.getGameValue() instanceof PacmanGame) { //if movement has occured
-			PacmanGame tempGame = (PacmanGame)e.getGameValue(); //create a temp variable of the game
 			
-			ArrayList<Mappable> mappables = tempGame.getMap().getMappable(getX(),getY());
-			
-			for(int i=mappables.size()-1; i>=0; i--) { //go through array to check if pacman is on a LittlePillItem
-				Mappable tempMappable = mappables.get(i);
-				if(tempMappable instanceof LittlePillItem) {
-					tempGame.getMap().removeMappable(getX(),getY(),i);
-					tempGame.setScore(tempGame.getScore()+1); //increment score by 1
-					tempGame.setPillsLeft(tempGame.getPillsLeft()-1); //decrement pillsLeft by 1
-				}
-				else if(tempMappable instanceof Ghost) {
-					if(state == PacmanState.NORMAL) { //NORMAL
-						die(tempGame.getMap());
-						spawn(tempGame.getMap());
-					}
-					else { //BEASTMODE
-						((Ghost)tempMappable).die(tempGame.getMap()); //spawn the ghost at start
-						//Make sure Pacman stays on beastmode. It seems like he's dying too soon after he kills the first ghost.
-					}
-				}
-				else if(tempMappable instanceof BigPillItem) {
-					tempGame.getMap().removeMappable(getX(),getY(),i);
-					setState(PacmanState.BEASTMODE); //turn on BEASTMODE!
-					//change images to beastmode
-				}
-			}
 			//The following block of code is just simple animation for the waka waka motion pacman makes
 			//
 			// -Colin
@@ -128,6 +102,35 @@ public class Pacman extends Player implements GameListener, ActionListener{
 				}
 				animationstate = 0;
 			}
+			//----------------------------------------
+			PacmanGame tempGame = (PacmanGame)e.getGameValue(); //create a temp variable of the game
+			
+			ArrayList<Mappable> mappables = tempGame.getMap().getMappable(getX(),getY());
+			
+			for(int i=mappables.size()-1; i>=0; i--) { //go through array to check if pacman is on a LittlePillItem
+				Mappable tempMappable = mappables.get(i);
+				if(tempMappable instanceof LittlePillItem) {
+					tempGame.getMap().removeMappable(getX(),getY(),i);
+					tempGame.setScore(tempGame.getScore()+1); //increment score by 1
+					tempGame.setPillsLeft(tempGame.getPillsLeft()-1); //decrement pillsLeft by 1
+				}
+				else if(tempMappable instanceof Ghost) {
+					if(state == PacmanState.NORMAL) { //NORMAL
+						die(tempGame.getMap());
+						spawn(tempGame.getMap());
+					}
+					else { //BEASTMODE
+						((Ghost)tempMappable).die(tempGame.getMap()); //spawn the ghost at start
+						setImage("PACMAN/pacmaneatrabbit.png");
+					}
+				}
+				else if(tempMappable instanceof BigPillItem) {
+					tempGame.getMap().removeMappable(getX(),getY(),i);
+					setState(PacmanState.BEASTMODE); //turn on BEASTMODE!
+					//change images to beastmode
+				}
+			}
+
 		}//end of Movement
 	}
 	
