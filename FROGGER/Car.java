@@ -27,7 +27,7 @@ public class Car extends Player implements GameListener {
 	 */
 	public Car(int x, int y, Direction direction, int numOfLives) {
 		super(x,y,direction,numOfLives);
-		setImage("PACMAN/ghostimg1.png");
+		putImage();
 	}
 
 	/**
@@ -38,7 +38,7 @@ public class Car extends Player implements GameListener {
 	 */
 	public void onEvent(GameEvent e) {
 
-		if(e.getSource().equals("MoveCars") && e.getGameValue() instanceof FroggerGame) {
+		if(e.getSource().equals("movement") && e.getGameValue() instanceof FroggerGame) {
 			moveCars(((Game) e.getGameValue()).getMap());
 		}
 	}
@@ -54,7 +54,7 @@ public class Car extends Player implements GameListener {
 		if(this.getDirection() == Direction.RIGHT){
 			if(map.isWall(this.getX()+1,this.getY()) == true){
 				map.removeMappable(this.getX(), this.getY());
-				this.setX(1);
+				this.setX(0);
 				map.addMappable(this);
 			}
 		}
@@ -62,7 +62,7 @@ public class Car extends Player implements GameListener {
 		if(this.getDirection() == Direction.LEFT){
 			if(map.isWall(this.getX()-1,this.getY()) == true){
 				map.removeMappable(this.getX(), this.getY());
-				this.setX(17);
+				this.setX(18);
 				map.addMappable(this);
 			}
 		}
@@ -80,4 +80,24 @@ public class Car extends Player implements GameListener {
 		// TODO Auto-generated method stub
 	}
 	
+	public void putImage(){
+		switch (this.getNumOflives()){
+		case 1: //cars with lives of 1 get red car in the RIGHT direction
+		case 2: //cars with lives of 2 get red car in the LEFT direction
+			setImage("FROGGER/car"+this.getNumOflives()+".png");
+			break;
+		case 3:
+		case 4://cars with lives from 3-6 get the appropriate piece of truck in the RIGHT direction
+		case 5:
+		case 6:
+			setImage("FROGGER/truckR"+(this.getNumOflives()-2)+".png");
+			break;
+		case 7:
+		case 8://cars with lives from 7-10 get the appropriate piece of truck in the LEFT direction
+		case 9:
+		case 10:
+			setImage("FROGGER/truckL"+(this.getNumOflives()-6)+".png");
+			break;
+		}
+	}
 }

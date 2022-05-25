@@ -9,6 +9,8 @@ import java.util.ArrayList;
  */
 public class Frogger extends Player implements GameListener, ActionListener{
 	
+	private boolean hasFlower = false;
+	
 	public Frogger(int x, int y) {
 		super(x, y);
 	}
@@ -22,7 +24,7 @@ public class Frogger extends Player implements GameListener, ActionListener{
 	 */
 	public Frogger(int x, int y, Direction direction, int numOfLives) {
 		super(x,y,direction,numOfLives);
-		setImage("PACMAN/pacmanimg3.png");
+		setImage("FROGGER/frog1.png");
 	}
 
 	/**
@@ -69,19 +71,43 @@ public class Frogger extends Player implements GameListener, ActionListener{
 			
 			ArrayList<Mappable> mappables = tempGame.getMap().getMappable(getX(),getY());
 			
-			for(int i=mappables.size()-1; i>=0; i--) { //go through array to check if pacman is on a LittlePillItem
+			for(int i=mappables.size()-1; i>=0; i--) { //go through array to check if Frogger is hit by a Car
 				Mappable tempMappable = mappables.get(i);
 				if(tempMappable instanceof Car) {
 					die(tempGame.getMap());
+					System.out.println("You have "+this.getNumOflives()+" lives remaining.");
+					if(hasFlower){
+						System.out.println("You lost your flower!");}
+					hasFlower = false;
 					spawn(tempGame.getMap());
+					break; //this is here as a temporary measure to prevent multiple deaths to the same car
+						   //in theory this shouln't happen cause there should only be one car per block, but
+						   //it has been happening, so this is a work around.  if we solve the underyling problem
+						   //of multiple cars on the same block, this will likely be unneeded
 				}
-				/*  This is going to become the check for the Flower
-				 * 
-				else if(tempMappable instanceof BigPillItem) {
-					tempGame.getMap().removeMappable(getX(),getY(),i);
-				}*/
+				else if(tempMappable instanceof Flower) {
+					if(!hasFlower){
+						System.out.println("You got a flower from the flower patch!");
+						hasFlower = true;
+					}else{
+						System.out.println("You already have a flower!");
+					}
+				}else if(tempMappable instanceof Home){
+					if(hasFlower){
+						tempGame.winner();
+					}
+				}
 			}
-
+			switch(this.getDirection()){ //change frogger to be looking the right direction
+			case UP:
+				setImage("FROGGER/frog1.png"); break;
+			case RIGHT:
+				setImage("FROGGER/frog2.png"); break;
+			case DOWN:
+				setImage("FROGGER/frog3.png"); break;
+			case LEFT:
+				setImage("FROGGER/frog4.png"); break;
+			}
 		}//end of Movement
 	}//end of  onEvent()
 	

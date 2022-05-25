@@ -1,4 +1,4 @@
-
+import java.awt.Color;
 
 
 public class FroggerPanel extends GamePanel{
@@ -8,9 +8,11 @@ public class FroggerPanel extends GamePanel{
 	 */
 	private static final long serialVersionUID = 1L;
 
+	
 	public FroggerPanel(Game g) {
 		super(g);
-		// TODO Auto-generated constructor stub
+		this.setBgColor(new Color(200,200,200));
+		this.setMazeColor(new Color(0,0,0));
 	}
 
 	@Override
@@ -37,5 +39,6 @@ public class FroggerPanel extends GamePanel{
 		((FroggerGame)getGame()).recieveInput(keycode);
 		repaint();
 	}
+
 
 }
