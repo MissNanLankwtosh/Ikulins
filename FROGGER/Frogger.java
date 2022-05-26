@@ -66,7 +66,7 @@ public class Frogger extends Player implements GameListener, ActionListener{
 	public void onEvent(GameEvent e) {
 		
 		//MOVEMENT
-		if(e.getSource().equals("movement") && e.getGameValue() instanceof FroggerGame) { //if movement has occured
+		if(e.getSource().equals("collisionCheck") && e.getGameValue() instanceof FroggerGame) { //if movement has occured
 			FroggerGame tempGame = (FroggerGame)e.getGameValue(); //create a temp variable of the game
 			
 			ArrayList<Mappable> mappables = tempGame.getMap().getMappable(getX(),getY());

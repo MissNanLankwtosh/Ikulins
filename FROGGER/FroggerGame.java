@@ -94,22 +94,31 @@ public class FroggerGame extends Game {
 	/**
 	 * Handles all the inputs from the keyboard. Inputs are taken from FroggerPanel onKeypress() method
 	 * @param keycode passed from the FroggerPanel as a KeyEvent on it
-	 * @author Alexander Clelland
+	 * 
+	 * Instead of the code that used to be below the switch statement, it is now encapsuled in movementMacro()
+	 * so that no cheating can occure. The game will only progress on valid key presses.
+	 * Also, a second notify of "collisionCheck" especially for frogger is to check for collisions after all
+	 * movement has occured.  This is to avoid errors with moving into cells previously occupied, etc.
+	 * 
 	 */
 	public void recieveInput(int keycode) {
 		if (gameON == false) return;
 		switch (keycode) {
 		case KeyEvent.VK_LEFT:
 			frogger.setDirection(Direction.LEFT);
+			movementMacro();
 			break;
 		case KeyEvent.VK_RIGHT:
 			frogger.setDirection(Direction.RIGHT);
+			movementMacro();
 			break;
 		case KeyEvent.VK_UP:
 			frogger.setDirection(Direction.UP);
+			movementMacro();
 			break;
 		case KeyEvent.VK_DOWN:
 			frogger.setDirection(Direction.DOWN);
+			movementMacro();
 			break;
 		case KeyEvent.VK_ESCAPE:
 			System.out.println("Escape Pressed. Terminate");
@@ -117,22 +126,29 @@ public class FroggerGame extends Game {
 			break;
 		}
 				
-		frogger.updateLocation(getMap());
-		if(keycode >= KeyEvent.VK_LEFT && keycode <= KeyEvent.VK_DOWN){
-			notify(new GameEvent("movement", this)); //yell at stuff to move
-			printToConsole(); //whatever you put in the method gets printed, a score maybe?
-			
-			//VICTORY AND END CONDITIONS
-			if(frogger.getNumOflives() < 0) end("OUT OF LIVES!");
-			//Put the win condition here, did you make it back with the flower?
-		}
-		
+		//loss condition
+		if(frogger.getNumOflives() < 0) end("OUT OF LIVES!");
+		//update frogger location - because of how our movement and collision detection is implemented,
+		// ALWAYS DO THIS LAST or else you will not be able to move to predict where cars will be.
+
 	}
 
 	public void winner(){
 		end("You Win! Congratulations!");
 	}
 
+	/**
+	 * This method is simply to encapsulate code that would otherwise be repeated in the switch statement
+	 * in the receiveInput method above.
+	 * 
+	 * The code notifies all cars to move, moves frogger, and then notifies frogger to check to see if he
+	 * has collided with anything
+	 */
+	public void movementMacro(){
+		notify(new GameEvent("movement", this));
+		frogger.updateLocation(getMap());
+		notify(new GameEvent("collisionCheck", this));
+	}
 	
 	public static void main(String args[]) {
 		FroggerGame tempGame = new FroggerGame(); //create the game
