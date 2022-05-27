@@ -33,7 +33,7 @@ public abstract class GameFrame extends JFrame implements ActionListener{
 		this.gpanel = gpanel;
 		add(this.gpanel);
 		setJMenuBar(menuBar);
-		this.setSize( gpanel.getWidth()+50,gpanel.getHeight()+50);
+		this.setSize( gpanel.getWidth()+16,gpanel.getHeight()+60);
 		setVisible(true);
 
 	}
